@@ -1,4 +1,25 @@
+# UMAMI Robots.txt
+# Canonical Domain: https://umamifire.com
+
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://fire-burgers.vercel.app/sitemap.xml
+# AI and Generative Crawler Guidance
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://umamifire.com/sitemap.xml

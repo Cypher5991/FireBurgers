@@ -1,115 +1,388 @@
 import React from 'react';
-import BurgerHeroCanvas from '../components/home/BurgerHeroCanvas';
-import KineticMarquee from '../components/home/KineticMarquee';
-import CrossSectionSlider from '../components/home/CrossSectionSlider';
-import DipRadarVisualizer from '../components/home/DipRadarVisualizer';
-import FAQSection from '../components/home/FAQSection';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Flame, Clock, Car, MapPin, Award, Sparkles, Utensils } from 'lucide-react';
-import { TOP_FEATURED_BURGERS } from '../data/menuData';
+import { Flame, ArrowRight, Clock, MapPin, Sparkles, BookOpen, Compass, ShieldCheck } from 'lucide-react';
+import { UMAMI_BRAND_INFO, UMAMI_MENU_ITEMS, UMAMI_DIP_WALL } from '../data/umamiMenuData';
+import { UMAMI_JOURNAL_POSTS } from '../data/umamiJournalData';
+import KineticMarquee from '../components/home/KineticMarquee';
 
 export default function HomePage() {
+  const featuredBurgers = UMAMI_MENU_ITEMS.filter(i => i.sectionId === 'burgers');
+  const recentArticles = UMAMI_JOURNAL_POSTS.filter(p => p.status === 'published').slice(0, 3);
+
   return (
-    <div className="space-y-4">
-      {/* 1. 3D Exploded Burger Hero & Spec Inspector */}
-      <BurgerHeroCanvas />
+    <div className="space-y-16 sm:space-y-24">
+      
+      {/* 1. High-Impact Minimalist Swiss Editorial Photography Hero */}
+      <section className="relative pt-6 sm:pt-12 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Hero Content */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-widest uppercase border border-brand-ember/30 shadow-md">
+              <Flame className="w-4 h-4 text-brand-ember" />
+              <span>SECTOR 8B CHANDIGARH · 旨味 · OPENING 1 OCT 2026</span>
+            </div>
+
+            {/* H1 SEO Header as specified in Content Pack */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-syne tracking-tight text-brand-dark leading-[1.08]">
+              Japanese <span className="text-brand-ember">fire-grilled</span> burgers.
+            </h1>
+
+            {/* Opening Block from UMAMI_Website_Content_Pack.md */}
+            <div className="space-y-3.5 text-zinc-700 text-sm sm:text-base leading-relaxed font-sans">
+              <p className="font-medium text-brand-dark">
+                There's a fifth taste. Not sweet, sour, salt or bitter, but the deep savoury one underneath, the thing that makes you want the next bite before you've finished this one. A Japanese chemist named it in 1908. He called it umami.
+              </p>
+              <p>
+                It's the exact taste a great burger has been chasing for a hundred years. So we named the place after it, and then we had to earn the name.
+              </p>
+            </div>
+
+            {/* Quick CTAs */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                to="/menu"
+                className="px-6 sm:px-8 py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm flex items-center gap-2 shadow-xl shadow-brand-ember/30 hover:scale-[1.02] transition min-h-[48px]"
+              >
+                <span>See the full menu</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                to="/story"
+                className="px-6 sm:px-8 py-4 rounded-2xl bg-white border editorial-border hover:border-brand-ember text-brand-dark font-syne font-bold text-sm transition min-h-[48px] hover:shadow-md"
+              >
+                <span>Our 15-Year Story</span>
+              </Link>
+            </div>
+
+            {/* Micro Pillars */}
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t editorial-border-light font-mono text-xs text-zinc-600">
+              <div>
+                <div className="font-bold text-brand-dark font-syne text-sm">5:00 AM</div>
+                <div className="text-[11px] text-zinc-500">Hokkaido Milk Buns</div>
+              </div>
+              <div>
+                <div className="font-bold text-brand-dark font-syne text-sm">300°C</div>
+                <div className="text-[11px] text-zinc-500">Live Fire Char</div>
+              </div>
+              <div>
+                <div className="font-bold text-brand-dark font-syne text-sm">Booth 7</div>
+                <div className="text-[11px] text-zinc-500">Inner Market, Sec 8B</div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Hero Photography Card */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-3xl overflow-hidden editorial-border shadow-2xl bg-[#141416] group">
+              <img
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80"
+                alt="UMAMI Japanese Fire-Grilled Burger on fresh Hokkaido milk bun"
+                className="w-full h-[380px] sm:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+
+              {/* Badges on Image */}
+              <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-brand-dark/90 text-white border border-brand-ember/30 backdrop-blur-md">
+                  Firebird Signature
+                </span>
+                <span className="text-[11px] font-japanese font-bold text-brand-ember bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md">
+                  旨味
+                </span>
+              </div>
+
+              {/* Bottom Caption Card */}
+              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-brand-dark/95 text-white backdrop-blur-md border border-white/10 space-y-1">
+                <div className="text-[10px] font-mono uppercase text-brand-ember font-bold">
+                  The Fire Standard
+                </div>
+                <div className="font-syne font-bold text-sm text-white">
+                  Thick patty. Live flame char. Tangzhong milk bun.
+                </div>
+                <div className="text-xs text-zinc-400 font-sans">
+                  Not thin. Not pressed. Not an apology.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
 
       {/* 2. Kinetic Velocity Marquee */}
       <KineticMarquee />
 
-      {/* 3. Sensory Reveal: Volcano Cut & Pour Split Slider */}
-      <CrossSectionSlider />
-
-      {/* 4. The 7 Dip Wall Flavor Dynamics Radar */}
-      <DipRadarVisualizer />
-
-      {/* 5. Minimalist Luxury Pillars (Editorial Breadth) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* 3. Section: What we do */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="deep-slate-panel p-6 sm:p-12 rounded-3xl space-y-8 border-brand-ember/20 shadow-2xl">
           
-          <div className="deep-slate-panel p-8 rounded-3xl space-y-4 shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-white/[0.08] flex items-center justify-center text-brand-glaze text-2xl font-mono">
-              🍞
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] text-brand-ember text-xs font-mono font-bold uppercase border border-white/10">
+              <Flame className="w-3.5 h-3.5" />
+              <span>WHAT WE DO</span>
             </div>
-            <div className="text-xs font-mono font-bold text-brand-glaze uppercase tracking-widest">
-              PILLAR 01 · 5:00 AM BAKE
-            </div>
-            <h3 className="font-syne font-black text-2xl text-white">
-              Hokkaido Yudane Milk Buns
-            </h3>
-            <p className="text-sm text-zinc-300 font-sans leading-relaxed">
-              Every bun is hand-rolled daily at 5:00 AM using the traditional Japanese Yudane water-roux method, then toasted with clarified butter.
+            <h2 className="text-2xl sm:text-4xl font-black font-syne text-white tracking-tight">
+              Thick, fire-grilled, on a bun we bake at dawn.
+            </h2>
+            <p className="text-zinc-300 text-sm sm:text-base font-sans leading-relaxed">
+              Every patty is grilled over live fire until the edges char. Every bun is a Hokkaido milk bun, baked in-house each morning, soft enough to press and strong enough to hold. Every sauce is built here, not squeezed from a bottle.
+            </p>
+            <p className="text-brand-ember font-syne font-bold text-base sm:text-lg">
+              Not thin. Not pressed. Not an apology.
             </p>
           </div>
 
-          <div className="deep-slate-panel p-8 rounded-3xl space-y-4 shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-white/[0.08] flex items-center justify-center text-brand-ember text-2xl font-mono">
-              🔥
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/10">
+            <div className="bg-white/[0.04] p-5 rounded-2xl border border-white/5 space-y-2">
+              <div className="text-2xl">🍞</div>
+              <h3 className="font-syne font-bold text-white text-base">Hokkaido Yudane Bun</h3>
+              <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+                Baked at 5:00 AM using Japanese tangzhong water roux. Compresses easily without tearing or soaking through.
+              </p>
             </div>
-            <div className="text-xs font-mono font-bold text-brand-ember uppercase tracking-widest">
-              PILLAR 02 · 300°C SEAR
-            </div>
-            <h3 className="font-syne font-black text-2xl text-white">
-              Binchotan Robatayaki Fire
-            </h3>
-            <p className="text-sm text-zinc-300 font-sans leading-relaxed">
-              Kishu Binchotan white oak coals produce far-infrared heat for an intense crust while preserving juicy marbling inside.
-            </p>
-          </div>
 
-          <div className="deep-slate-panel p-8 rounded-3xl space-y-4 shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-white/[0.08] flex items-center justify-center text-brand-umami text-2xl font-mono">
-              ⚡
+            <div className="bg-white/[0.04] p-5 rounded-2xl border border-white/5 space-y-2">
+              <div className="text-2xl">🔥</div>
+              <h3 className="font-syne font-bold text-white text-base">300°C Live Fire Char</h3>
+              <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+                Real flame searing that renders fat into aromatic smoke and creates striped Maillard crusts.
+              </p>
             </div>
-            <div className="text-xs font-mono font-bold text-brand-umami uppercase tracking-widest">
-              PILLAR 03 · 6-MIN TIMING
+
+            <div className="bg-white/[0.04] p-5 rounded-2xl border border-white/5 space-y-2">
+              <div className="text-2xl">⚖️</div>
+              <h3 className="font-syne font-bold text-white text-base">The 144 Sq Ft Discipline</h3>
+              <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+                Upstream prep ensures the line executes without guesswork. Same weight, same cook, every single time.
+              </p>
             </div>
-            <h3 className="font-syne font-black text-2xl text-white">
-              Strict Counter-to-Hand
-            </h3>
-            <p className="text-sm text-zinc-300 font-sans leading-relaxed">
-              A synchronized 360-second kitchen sprint ensures the molten cheese core and crispy panko arrive at your hand at peak temperature.
-            </p>
           </div>
 
         </div>
+      </section>
 
-        {/* Quick App Route Callout Card */}
-        <div className="mt-12 p-8 sm:p-12 rounded-3xl bg-white editorial-border shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-2 max-w-xl">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-ember">
-              CHANDIGARH D2C APP
-            </span>
-            <h3 className="text-3xl sm:text-4xl font-black font-syne text-brand-dark">
-              Order Online or Build Your Custom Metal Fire Tray
-            </h3>
-            <p className="text-sm text-zinc-600 font-sans leading-relaxed">
-              Frictionless takeaway express, Sector 8 in-car curbside hop, and doorstep delivery across Chandigarh, Mohali, and Panchkula.
+      {/* 4. Section: Two kitchens, one fire */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-12 rounded-3xl editorial-border shadow-lg">
+          
+          <div className="lg:col-span-6 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase">
+              <Compass className="w-3.5 h-3.5 text-brand-ember" />
+              <span>TWO KITCHENS, ONE FIRE</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black font-syne text-brand-dark tracking-tight">
+              Japan gives us the bun and the discipline. Chandigarh gives us the heart.
+            </h2>
+            <p className="text-zinc-700 text-sm sm:text-base font-sans leading-relaxed">
+              Japan gives us the bun, the discipline and umami itself. Same weight, same cook, every time. Chandigarh gives us the heart and the reason. Fire is how the two meet.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/story"
+                className="inline-flex items-center gap-2 text-brand-ember hover:text-brand-dark font-syne font-bold text-sm transition"
+              >
+                <span>Read the complete story behind UMAMI</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 grid grid-cols-2 gap-4">
+            <img
+              src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80"
+              alt="Japanese fire grill craftsmanship"
+              className="w-full h-56 sm:h-64 object-cover rounded-2xl editorial-border"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80"
+              alt="Sector 8B evening dining atmosphere"
+              className="w-full h-56 sm:h-64 object-cover rounded-2xl editorial-border"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. Section: What's on the fire (The Menu Preview) */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b editorial-border-light pb-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase mb-1">
+              <Flame className="w-3.5 h-3.5 text-brand-ember" />
+              <span>THE MENU PREVIEW</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black font-syne text-brand-dark">
+              What's on the fire
+            </h2>
+            <p className="text-zinc-600 text-xs sm:text-sm font-sans mt-0.5">
+              Five burgers. Molten bombs that pour when you break them. Loaded fries, wings off the grill, and charred lemonade.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
-            <Link
-              to="/order"
-              className="flex-1 md:flex-initial px-8 py-4.5 rounded-2xl bg-brand-dark text-brand-canvas font-syne font-extrabold text-sm hover:bg-brand-ember transition flex items-center justify-center gap-2 shadow-lg"
-            >
-              <Utensils className="w-4 h-4 text-brand-glaze" />
-              <span>Open Online Menu</span>
-            </Link>
+          <Link
+            to="/menu"
+            className="px-5 py-3 rounded-xl bg-brand-dark text-white font-syne font-bold text-xs sm:text-sm hover:bg-brand-ember transition flex items-center gap-2 self-start md:self-auto min-h-[44px]"
+          >
+            <span>See the full menu</span>
+            <ArrowRight className="w-4 h-4 text-brand-ember" />
+          </Link>
+        </div>
 
-            <Link
-              to="/builder"
-              className="flex-1 md:flex-initial px-8 py-4.5 rounded-2xl bg-gradient-to-r from-brand-ember to-brand-glaze text-white font-syne font-extrabold text-sm hover:brightness-105 transition flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/25"
+        {/* Featured Burgers Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {featuredBurgers.slice(0, 3).map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-3xl overflow-hidden editorial-border shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
-              <span>Launch Tray Builder</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <div>
+                <div className="relative h-56 overflow-hidden bg-zinc-100">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full ${
+                      item.dietary === 'veg' ? 'bg-[#2D5A27] text-white' : 'bg-[#7A1C16] text-white'
+                    }`}>
+                      {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-5 space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase text-brand-ember">{item.protein}</span>
+                      <h3 className="font-syne font-bold text-lg text-brand-dark">{item.name}</h3>
+                    </div>
+                  </div>
+                  <p className="text-xs text-zinc-600 font-sans leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-5 pt-0">
+                <div className="p-2.5 rounded-xl bg-zinc-50 border editorial-border-light text-[11px] font-mono text-zinc-500 flex items-center justify-between">
+                  <span>Price Reveal at Opening</span>
+                  <span className="font-bold text-brand-ember">1 Oct 2026</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Dip Wall Marquee Strip */}
+        <div className="deep-slate-panel p-6 rounded-3xl border-brand-ember/20 shadow-xl space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono font-bold text-brand-ember uppercase">THE 7 DIP WALL</span>
+            <span className="text-[11px] font-mono text-zinc-400">Add any with your order</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-center">
+            {UMAMI_DIP_WALL.map(dip => (
+              <div key={dip.id} className="bg-white/[0.05] p-2.5 rounded-xl border border-white/5">
+                <div className="font-syne font-bold text-xs text-white truncate">{dip.name}</div>
+                <div className="text-[10px] text-brand-ember font-mono">{dip.subtitle}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 6. AEO FAQ Section */}
-      <FAQSection />
+      {/* 6. Section: Recent Journal Articles (Posts 1-3) */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b editorial-border-light pb-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase mb-1">
+              <BookOpen className="w-3.5 h-3.5 text-brand-ember" />
+              <span>THE UMAMI JOURNAL</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black font-syne text-brand-dark">
+              Writing on taste, fire, and Chandigarh food
+            </h2>
+          </div>
+
+          <Link
+            to="/journal"
+            className="text-xs font-mono font-bold text-brand-ember hover:underline self-start sm:self-auto"
+          >
+            <span>View all articles ↗</span>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {recentArticles.map(post => (
+            <Link
+              key={post.id}
+              to={`/journal/${post.slug}`}
+              className="bg-white rounded-3xl p-6 editorial-border hover:border-brand-ember shadow-sm hover:shadow-md transition flex flex-col justify-between group space-y-4"
+            >
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                  <span className="text-brand-ember font-bold">{post.category}</span>
+                  <span>{post.readingTime}</span>
+                </div>
+                <h3 className="font-syne font-bold text-base sm:text-lg text-brand-dark group-hover:text-brand-ember transition leading-snug">
+                  {post.title}
+                </h3>
+                <p className="text-xs text-zinc-600 font-sans line-clamp-3 leading-relaxed">
+                  {post.quickAnswer}
+                </p>
+              </div>
+
+              <div className="pt-2 border-t editorial-border-light flex items-center gap-1 text-xs font-mono font-bold text-brand-dark group-hover:text-brand-ember">
+                <span>Read article</span>
+                <span>→</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. Section: Find us (Booth No. 7) */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="bg-white p-6 sm:p-12 rounded-3xl editorial-border shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+          
+          <div className="space-y-3 max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase">
+              <MapPin className="w-3.5 h-3.5 text-brand-ember" />
+              <span>FIND US</span>
+            </div>
+            <h3 className="text-2xl sm:text-4xl font-black font-syne text-brand-dark">
+              Booth No. 7, Inner Market, Sector 8B, Chandigarh.
+            </h3>
+            <p className="text-sm text-zinc-600 font-sans leading-relaxed">
+              Counter kitchen with an open live fire grill. Opening 1 October 2026.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            <Link
+              to="/visit"
+              className="flex-1 md:flex-initial px-6 py-4 rounded-2xl bg-brand-dark text-white font-syne font-bold text-sm hover:bg-brand-ember transition flex items-center justify-center gap-2 shadow-lg min-h-[48px]"
+            >
+              <MapPin className="w-4 h-4 text-brand-ember" />
+              <span>Visit Us & Directions</span>
+            </Link>
+
+            <Link
+              to="/order"
+              className="flex-1 md:flex-initial px-6 py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm transition flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/25 min-h-[48px]"
+            >
+              <span>Get Launch VIP Pass</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }

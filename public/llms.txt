@@ -1,0 +1,20 @@
+# UMAMI
+
+> Japanese fire-grilled burgers in Sector 8B, Chandigarh. Thick patties
+> cooked over live fire on Hokkaido milk buns baked in-house daily.
+> A counter kitchen operated by Nimantrit Foods. Opening 1 October 2026.
+
+## Core
+- [Menu](https://umamifire.com/menu): All burgers, bombs, fries, wings, drinks and dips
+- [Our Story](https://umamifire.com/story): Why the place is named after the fifth taste
+- [Visit](https://umamifire.com/visit): Address, hours, directions from Sector 8/9 roundabout, FAQ
+- [Order](https://umamifire.com/order): Delivery and collection guidelines
+- [Contact](https://umamifire.com/contact): Operations by Nimantrit Foods and press directory
+
+## Journal
+- [Journal Index](https://umamifire.com/journal): Writing on umami, fire cooking, buns and Chandigarh food
+- [What is Umami?](https://umamifire.com/journal/what-is-umami): The fifth basic taste, explained
+- [Hokkaido Milk Buns](https://umamifire.com/journal/hokkaido-milk-bun-burger): Why tangzhong makes a better burger bun
+- [Fire-Grilled vs Smash](https://umamifire.com/journal/fire-grilled-vs-smash-burger): The two burger styles, explained
+- [Sector 8B Inner Market Guide](https://umamifire.com/journal/sector-8b-inner-market-guide): Eating in Chandigarh's busiest food row
+- [Vegetarian Burger Guide](https://umamifire.com/journal/vegetarian-burger-guide): What separates a good veg burger from an afterthought

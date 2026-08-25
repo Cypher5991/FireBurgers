@@ -1,50 +1,57 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CartProvider } from './context/CartContext';
 import SmoothScrollProvider from './components/layout/SmoothScrollProvider';
 import ScrollToTop from './components/layout/ScrollToTop';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+
+// Pages
 import HomePage from './pages/HomePage';
+import StoryPage from './pages/StoryPage';
+import MenuPage from './pages/MenuPage';
 import OrderPage from './pages/OrderPage';
-import ComboBuilderPage from './pages/ComboBuilderPage';
-import FlagshipPage from './pages/FlagshipPage';
-import CartDrawer from './components/CartDrawer';
-import OrderConfirmation from './components/OrderConfirmation';
+import VisitPage from './pages/VisitPage';
+import JournalIndexPage from './pages/JournalIndexPage';
+import JournalPostPage from './pages/JournalPostPage';
+import ContactPage from './pages/ContactPage';
+import LegalPage from './pages/LegalPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <CartProvider>
-        <SmoothScrollProvider>
-          <div className="min-h-screen text-brand-dark flex flex-col justify-between selection:bg-brand-ember selection:text-white font-sans">
-            {/* Global Minimalist Navbar */}
-            <Navbar />
+      <SmoothScrollProvider>
+        <div className="min-h-screen text-brand-dark flex flex-col justify-between selection:bg-brand-ember selection:text-white font-sans">
+          
+          {/* Global Minimalist Navbar */}
+          <Navbar />
 
-            {/* Main Multi-Route Views */}
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/order" element={<OrderPage />} />
-                <Route path="/builder" element={<ComboBuilderPage />} />
-                <Route path="/sector-8" element={<FlagshipPage />} />
-                {/* Fallback route */}
-                <Route path="*" element={<HomePage />} />
-              </Routes>
-            </main>
+          {/* Main Canonical Multi-Route Views */}
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/story" element={<StoryPage />} />
+              <Route path="/menu" element={<MenuPage />} />
+              <Route path="/order" element={<OrderPage />} />
+              <Route path="/visit" element={<VisitPage />} />
+              <Route path="/journal" element={<JournalIndexPage />} />
+              <Route path="/journal/:slug" element={<JournalPostPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy" element={<LegalPage />} />
+              <Route path="/terms" element={<LegalPage />} />
+              
+              {/* Fallback routes */}
+              <Route path="/builder" element={<MenuPage />} />
+              <Route path="/sector-8" element={<VisitPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </main>
 
-            {/* Global Omnichannel Cart Drawer */}
-            <CartDrawer />
-
-            {/* Live Kitchen Tracker Modal */}
-            <OrderConfirmation />
-
-            {/* Global Deep Slate Footer with GEO Citations */}
-            <Footer />
-          </div>
-        </SmoothScrollProvider>
-      </CartProvider>
+          {/* Global Deep Slate Footer with Canonical NAP */}
+          <Footer />
+        </div>
+      </SmoothScrollProvider>
     </Router>
   );
 }
