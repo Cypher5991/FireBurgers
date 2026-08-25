@@ -1,56 +1,48 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
-import Navbar from './components/Navbar';
-import HeroExplodedBurger from './components/HeroExplodedBurger';
-import MarqueeBanner from './components/MarqueeBanner';
-import VolcanoCutPour from './components/VolcanoCutPour';
-import MenuShowcase from './components/MenuShowcase';
-import DipWallRadar from './components/DipWallRadar';
-import ComboTrayBuilder from './components/ComboTrayBuilder';
-import StorySection from './components/StorySection';
+import SmoothScrollProvider from './components/layout/SmoothScrollProvider';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import HomePage from './pages/HomePage';
+import OrderPage from './pages/OrderPage';
+import ComboBuilderPage from './pages/ComboBuilderPage';
+import FlagshipPage from './pages/FlagshipPage';
 import CartDrawer from './components/CartDrawer';
 import OrderConfirmation from './components/OrderConfirmation';
-import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <CartProvider>
-      <div className="min-h-screen bg-[#FDFCF7] text-brand-dark selection:bg-brand-orange selection:text-white font-inter">
-        {/* Navigation */}
-        <Navbar />
+    <Router>
+      <CartProvider>
+        <SmoothScrollProvider>
+          <div className="min-h-screen text-brand-dark flex flex-col justify-between selection:bg-brand-ember selection:text-white font-sans">
+            {/* Global Minimalist Navbar */}
+            <Navbar />
 
-        <main>
-          {/* Hero Section with Signature Burger Image & 3D Exploded Layer Mode */}
-          <HeroExplodedBurger />
+            {/* Main Multi-Route Views */}
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/order" element={<OrderPage />} />
+                <Route path="/builder" element={<ComboBuilderPage />} />
+                <Route path="/sector-8" element={<FlagshipPage />} />
+                {/* Fallback route */}
+                <Route path="*" element={<HomePage />} />
+              </Routes>
+            </main>
 
-          {/* Kinetic Marquee Ticker */}
-          <MarqueeBanner />
+            {/* Global Omnichannel Cart Drawer */}
+            <CartDrawer />
 
-          {/* Module 2: The Volcano Cut & Pour Split-View Slider */}
-          <VolcanoCutPour />
+            {/* Live Kitchen Tracker Modal */}
+            <OrderConfirmation />
 
-          {/* Module 3: Full Category Menu Grid */}
-          <MenuShowcase />
-
-          {/* Module 4: The 7 Dip Wall & 5-Axis Tasting Radar */}
-          <DipWallRadar />
-
-          {/* Module 5: Tactile 3D Combo Tray Builder */}
-          <ComboTrayBuilder />
-
-          {/* Brand Craft, Sector 8 Curbside & 6-Minute Rule */}
-          <StorySection />
-        </main>
-
-        {/* Omnichannel Cart & Curbside Drawer */}
-        <CartDrawer />
-
-        {/* Live Kitchen Tracker Modal */}
-        <OrderConfirmation />
-
-        {/* Global Footer */}
-        <Footer />
-      </div>
-    </CartProvider>
+            {/* Global Deep Slate Footer with GEO Citations */}
+            <Footer />
+          </div>
+        </SmoothScrollProvider>
+      </CartProvider>
+    </Router>
   );
 }

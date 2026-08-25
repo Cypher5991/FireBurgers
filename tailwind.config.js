@@ -8,17 +8,19 @@ export default {
     extend: {
       colors: {
         brand: {
-          orange: '#FF5500',      // Electric Fire Tangerine
-          amber: '#FFC700',       // Solar Amber
-          dark: '#12141A',        // Deep Charcoal Slate
-          darker: '#0A0C10',      // Obsidian Black
-          slate: '#1E222B',       // Deep Slate Card
-          slateLight: '#2D323E',  // Elevated Slate
-          pearl: '#FBF9F5',       // Washi Paper Light Pearl
-          cream: '#F4F0E8',       // Light Linen Cream
-          muted: '#7A808C',       // Muted Editorial Gray
-          violet: '#8A2BE2',      // Electric Violet
-          mint: '#00F5A0',        // Fresh Mint
+          canvas: '#F6F2EA',      // Toasted Hokkaido milk bun canvas
+          dark: '#141416',        // Binchotan white oak charcoal
+          darker: '#0D0E10',      // Obsidian Black
+          ember: '#E23A0B',       // Hard-seared flame paprika (Primary)
+          glaze: '#F5A623',       // French butter & egg-yolk glaze
+          veg: '#2D5A27',         // Fresh Japanese shiso / wasabi
+          nonveg: '#7A1C16',      // Charred cured beef / smoke
+          umami: '#C89D7C',       // Toasted sesame & miso umami
+          beet: '#5B101E',        // Fermented beetroot balsamic
+          muted: '#8A8D93',       // Editorial Slate Gray
+          pearl: '#F6F2EA',       // Backward-compatible alias
+          orange: '#E23A0B',      // Backward-compatible alias
+          amber: '#F5A623',       // Backward-compatible alias
         }
       },
       fontFamily: {
