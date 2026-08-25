@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import SmoothScrollProvider from './components/layout/SmoothScrollProvider';
+import ScrollToTop from './components/layout/ScrollToTop';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
@@ -14,6 +15,7 @@ import OrderConfirmation from './components/OrderConfirmation';
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <CartProvider>
         <SmoothScrollProvider>
           <div className="min-h-screen text-brand-dark flex flex-col justify-between selection:bg-brand-ember selection:text-white font-sans">

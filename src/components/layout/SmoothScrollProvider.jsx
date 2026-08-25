@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import { useLocation } from 'react-router-dom';
 
 export default function SmoothScrollProvider({ children }) {
   const lenisRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     // Highly optimized lightweight Lenis configuration (Solid 60-120 FPS without drag or stutter)
@@ -31,6 +33,16 @@ export default function SmoothScrollProvider({ children }) {
       lenis.destroy();
     };
   }, []);
+
+  // When clicking any link or navigating between routes, always jump to the top of the page immediately
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [location.pathname, location.search]);
 
   return <div className="minimal-tile-bg w-full min-h-screen">{children}</div>;
 }
