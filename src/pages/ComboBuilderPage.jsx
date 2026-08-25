@@ -20,7 +20,6 @@ export default function ComboBuilderPage() {
   const [selectedSide, setSelectedSide] = useState(sides[3] || sides[0]);
   const [selectedDrink, setSelectedDrink] = useState(drinks[0]);
   const [selectedDip, setSelectedDip] = useState(DIP_OPTIONS[0]);
-  const [activeStep, setActiveStep] = useState(1);
   const [added, setAdded] = useState(false);
 
   const { addToCart } = useCart();
@@ -56,12 +55,12 @@ export default function ComboBuilderPage() {
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-brand-canvas text-xs font-mono font-bold tracking-widest uppercase">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-widest uppercase border border-brand-ember/30">
           <Utensils className="w-3.5 h-3.5 text-brand-ember" />
           <span>MEAL ARCHITECTURE · 3D TRAY BUILDER</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black font-syne tracking-tight text-brand-dark">
-          Engineered Sector 8 Fire Tray
+          Engineered Sector 8 <span className="text-brand-ember">Fire Tray</span>
         </h1>
         <p className="text-zinc-600 text-sm sm:text-base font-sans leading-relaxed">
           Curate your bespoke gastronomic meal tray: Select a Binchotan-seared burger, artisanal side, craft drink, and house emulsion. Bundle saves ₹{comboDiscount} instantly.
@@ -77,7 +76,7 @@ export default function ComboBuilderPage() {
           <div className="bg-white p-6 sm:p-7 rounded-3xl editorial-border shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b editorial-border-light pb-3">
               <div className="flex items-center gap-2">
-                <span className="w-7 h-7 rounded-xl bg-brand-dark text-brand-canvas text-xs font-mono font-bold flex items-center justify-center">
+                <span className="w-7 h-7 rounded-xl bg-brand-ember text-white text-xs font-mono font-bold flex items-center justify-center shadow-sm">
                   01
                 </span>
                 <h3 className="font-syne font-bold text-lg text-brand-dark">Select Your Fire Burger</h3>
@@ -92,14 +91,14 @@ export default function ComboBuilderPage() {
                   onClick={() => setSelectedBurger(b)}
                   className={`p-3.5 rounded-2xl border text-left transition-all flex items-center gap-3 ${
                     selectedBurger.id === b.id
-                      ? 'bg-brand-dark text-brand-canvas border-brand-dark shadow-md ring-2 ring-brand-ember'
-                      : 'bg-zinc-50 editorial-border-light hover:border-brand-ember'
+                      ? 'bg-brand-dark text-white border-brand-ember shadow-md ring-2 ring-brand-ember'
+                      : 'bg-zinc-50 editorial-border hover:border-brand-ember'
                   }`}
                 >
                   <img src={b.image} alt={b.name} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                   <div className="overflow-hidden">
                     <div className="font-syne font-bold text-xs sm:text-sm truncate">{b.name}</div>
-                    <div className="text-[11px] font-mono text-brand-glaze mt-0.5">₹{b.price}</div>
+                    <div className="text-[11px] font-mono text-brand-ember font-bold mt-0.5">₹{b.price}</div>
                   </div>
                 </button>
               ))}
@@ -110,7 +109,7 @@ export default function ComboBuilderPage() {
           <div className="bg-white p-6 sm:p-7 rounded-3xl editorial-border shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b editorial-border-light pb-3">
               <div className="flex items-center gap-2">
-                <span className="w-7 h-7 rounded-xl bg-brand-dark text-brand-canvas text-xs font-mono font-bold flex items-center justify-center">
+                <span className="w-7 h-7 rounded-xl bg-brand-ember text-white text-xs font-mono font-bold flex items-center justify-center shadow-sm">
                   02
                 </span>
                 <h3 className="font-syne font-bold text-lg text-brand-dark">Select Artisanal Side</h3>
@@ -125,14 +124,14 @@ export default function ComboBuilderPage() {
                   onClick={() => setSelectedSide(s)}
                   className={`p-3.5 rounded-2xl border text-left transition-all flex items-center gap-3 ${
                     selectedSide.id === s.id
-                      ? 'bg-brand-dark text-brand-canvas border-brand-dark shadow-md ring-2 ring-brand-ember'
-                      : 'bg-zinc-50 editorial-border-light hover:border-brand-ember'
+                      ? 'bg-brand-dark text-white border-brand-ember shadow-md ring-2 ring-brand-ember'
+                      : 'bg-zinc-50 editorial-border hover:border-brand-ember'
                   }`}
                 >
                   <img src={s.image} alt={s.name} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                   <div className="overflow-hidden">
                     <div className="font-syne font-bold text-xs sm:text-sm truncate">{s.name}</div>
-                    <div className="text-[11px] font-mono text-brand-glaze mt-0.5">₹{s.price}</div>
+                    <div className="text-[11px] font-mono text-brand-ember font-bold mt-0.5">₹{s.price}</div>
                   </div>
                 </button>
               ))}
@@ -145,7 +144,7 @@ export default function ComboBuilderPage() {
             {/* Drink */}
             <div className="bg-white p-5 rounded-3xl editorial-border shadow-sm space-y-3">
               <div className="flex items-center gap-2 border-b editorial-border-light pb-2">
-                <span className="w-6 h-6 rounded-lg bg-brand-dark text-brand-canvas text-xs font-mono font-bold flex items-center justify-center">03</span>
+                <span className="w-6 h-6 rounded-lg bg-brand-ember text-white text-xs font-mono font-bold flex items-center justify-center">03</span>
                 <h4 className="font-syne font-bold text-sm text-brand-dark">Craft Drink</h4>
               </div>
               <div className="space-y-2">
@@ -155,12 +154,12 @@ export default function ComboBuilderPage() {
                     onClick={() => setSelectedDrink(d)}
                     className={`w-full p-2.5 rounded-xl border text-left transition text-xs font-syne font-bold flex items-center justify-between ${
                       selectedDrink.id === d.id
-                        ? 'bg-brand-dark text-brand-canvas border-brand-dark'
-                        : 'bg-zinc-50 editorial-border-light hover:border-brand-ember text-brand-dark'
+                        ? 'bg-brand-dark text-white border-brand-ember ring-1 ring-brand-ember'
+                        : 'bg-zinc-50 editorial-border hover:border-brand-ember text-brand-dark'
                     }`}
                   >
                     <span className="truncate">{d.name}</span>
-                    <span className="font-mono text-brand-glaze shrink-0">₹{d.price}</span>
+                    <span className="font-mono text-brand-ember font-bold shrink-0">₹{d.price}</span>
                   </button>
                 ))}
               </div>
@@ -169,7 +168,7 @@ export default function ComboBuilderPage() {
             {/* Dip */}
             <div className="bg-white p-5 rounded-3xl editorial-border shadow-sm space-y-3">
               <div className="flex items-center gap-2 border-b editorial-border-light pb-2">
-                <span className="w-6 h-6 rounded-lg bg-brand-dark text-brand-canvas text-xs font-mono font-bold flex items-center justify-center">04</span>
+                <span className="w-6 h-6 rounded-lg bg-brand-ember text-white text-xs font-mono font-bold flex items-center justify-center">04</span>
                 <h4 className="font-syne font-bold text-sm text-brand-dark">House Dip</h4>
               </div>
               <div className="space-y-2">
@@ -179,15 +178,15 @@ export default function ComboBuilderPage() {
                     onClick={() => setSelectedDip(dip)}
                     className={`w-full p-2.5 rounded-xl border text-left transition text-xs font-syne font-bold flex items-center justify-between ${
                       selectedDip.id === dip.id
-                        ? 'bg-brand-dark text-brand-canvas border-brand-dark'
-                        : 'bg-zinc-50 editorial-border-light hover:border-brand-ember text-brand-dark'
+                        ? 'bg-brand-dark text-white border-brand-ember ring-1 ring-brand-ember'
+                        : 'bg-zinc-50 editorial-border hover:border-brand-ember text-brand-dark'
                     }`}
                   >
                     <span className="truncate flex items-center gap-1.5">
                       <span>{dip.icon}</span>
                       <span>{dip.name}</span>
                     </span>
-                    <span className="font-mono text-brand-glaze shrink-0">₹{dip.price}</span>
+                    <span className="font-mono text-brand-ember font-bold shrink-0">₹{dip.price}</span>
                   </button>
                 ))}
               </div>
@@ -199,19 +198,19 @@ export default function ComboBuilderPage() {
 
         {/* Right Column: 3D Metal Tray Visualizer & Live Price Engine (5 cols) */}
         <div className="lg:col-span-5 sticky top-24 space-y-5">
-          <div className="deep-slate-panel p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6">
+          <div className="deep-slate-panel p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 border-brand-ember/30">
             
             {/* Tray Header */}
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-brand-glaze">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-brand-ember font-bold">
                   TRAY BLUEPRINT SPEC
                 </span>
                 <h3 className="font-syne font-black text-xl text-white">
                   Sector 8 Master Combo
                 </h3>
               </div>
-              <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+              <span className="text-xs font-mono font-bold text-white bg-brand-ember px-3 py-1 rounded-full shadow-md shadow-brand-ember/30">
                 SAVE ₹{comboDiscount}
               </span>
             </div>
@@ -227,7 +226,7 @@ export default function ComboBuilderPage() {
                     <div className="font-syne font-bold text-sm text-white">{selectedBurger.name}</div>
                   </div>
                 </div>
-                <span className="font-mono text-brand-glaze">₹{selectedBurger.price}</span>
+                <span className="font-mono text-brand-ember font-bold">₹{selectedBurger.price}</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/5 flex items-center justify-between gap-3">
@@ -238,7 +237,7 @@ export default function ComboBuilderPage() {
                     <div className="font-syne font-bold text-sm text-white">{selectedSide.name}</div>
                   </div>
                 </div>
-                <span className="font-mono text-brand-glaze">₹{selectedSide.price}</span>
+                <span className="font-mono text-brand-ember font-bold">₹{selectedSide.price}</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/5 flex items-center justify-between gap-3">
@@ -249,7 +248,7 @@ export default function ComboBuilderPage() {
                     <div className="font-syne font-bold text-sm text-white">{selectedDrink.name}</div>
                   </div>
                 </div>
-                <span className="font-mono text-brand-glaze">₹{selectedDrink.price}</span>
+                <span className="font-mono text-brand-ember font-bold">₹{selectedDrink.price}</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/5 flex items-center justify-between gap-3">
@@ -260,7 +259,7 @@ export default function ComboBuilderPage() {
                     <div className="font-syne font-bold text-sm text-white">{selectedDip.name}</div>
                   </div>
                 </div>
-                <span className="font-mono text-brand-glaze">₹{selectedDip.price}</span>
+                <span className="font-mono text-brand-ember font-bold">₹{selectedDip.price}</span>
               </div>
 
             </div>
@@ -271,20 +270,20 @@ export default function ComboBuilderPage() {
                 <span>Individual Sum</span>
                 <span>₹{individualSum}</span>
               </div>
-              <div className="flex justify-between text-emerald-400 font-bold">
+              <div className="flex justify-between text-brand-ember font-bold">
                 <span>Combo Bundle Savings</span>
                 <span>-₹{comboDiscount}</span>
               </div>
               <div className="flex justify-between text-base font-syne font-black text-white pt-2 border-t border-white/10">
                 <span>Combo Total</span>
-                <span className="text-brand-glaze">₹{comboPrice}</span>
+                <span className="text-brand-ember">₹{comboPrice}</span>
               </div>
             </div>
 
             {/* Action CTA */}
             <button
               onClick={handleAddComboToCart}
-              className="w-full py-4.5 rounded-2xl bg-gradient-to-r from-brand-ember to-brand-glaze text-white font-syne font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/30 hover:brightness-105 transition active:scale-98"
+              className="w-full py-4.5 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/30 hover:brightness-105 transition active:scale-98"
             >
               {added ? (
                 <>

@@ -13,13 +13,13 @@ export default function Footer() {
           {/* Brand Col (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-white/[0.08] flex items-center justify-center text-white border border-white/10 shadow-lg">
-                <Flame className="w-5 h-5 text-brand-ember" />
+              <div className="w-10 h-10 rounded-xl bg-brand-ember flex items-center justify-center text-white shadow-lg shadow-brand-ember/25">
+                <Flame className="w-5 h-5 text-white" />
               </div>
               <span className="font-syne font-black text-2xl tracking-tight text-white">
                 TASTY <span className="text-brand-ember">CHANDIGARH</span>
               </span>
-              <span className="text-xs font-japanese font-bold text-zinc-500">美味しい</span>
+              <span className="text-xs font-japanese font-bold text-brand-ember">美味しい</span>
             </div>
 
             <p className="text-xs text-zinc-400 max-w-sm leading-relaxed font-sans">
@@ -71,11 +71,11 @@ export default function Footer() {
                 <span>#7, Inner Market, Sector 8-B, Chandigarh, 160009</span>
               </div>
               <div className="flex items-center gap-2 text-zinc-300">
-                <Clock className="w-4 h-4 text-brand-glaze flex-shrink-0" />
+                <Clock className="w-4 h-4 text-brand-ember flex-shrink-0" />
                 <span>11:00 AM – 11:00 PM Daily (Binchotan kitchen open till 10:45 PM)</span>
               </div>
               <div className="flex items-center gap-2 text-zinc-300">
-                <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <Phone className="w-4 h-4 text-brand-ember flex-shrink-0" />
                 <span>{BRAND_INFO.phone}</span>
               </div>
             </div>
@@ -91,15 +91,15 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Site Architecture Links (3 cols) */}
+          {/* Site Architecture Links (3 cols) - Clean Links without numbers */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-syne font-bold text-white text-base">Site Architecture</h4>
+            <h4 className="font-syne font-bold text-white text-base">Explore Navigation</h4>
             <ul className="space-y-2 text-xs font-mono text-zinc-400">
-              <li><Link to="/" className="hover:text-brand-ember transition">01 / Brand Showcase</Link></li>
-              <li><Link to="/order" className="hover:text-brand-ember transition">02 / Online Ordering (D2C)</Link></li>
-              <li><Link to="/builder" className="hover:text-brand-ember transition">03 / Combo Tray Builder</Link></li>
-              <li><Link to="/sector-8" className="hover:text-brand-ember transition">04 / Sector 8 Flagship & Hop</Link></li>
-              <li><a href="#faq-aeo" className="hover:text-brand-ember transition">05 / AEO FAQ Blueprint</a></li>
+              <li><Link to="/" className="hover:text-brand-ember transition">Brand Showcase</Link></li>
+              <li><Link to="/order" className="hover:text-brand-ember transition">Online Menu & D2C</Link></li>
+              <li><Link to="/builder" className="hover:text-brand-ember transition">Combo Tray Builder</Link></li>
+              <li><Link to="/sector-8" className="hover:text-brand-ember transition">Sector 8-B Flagship</Link></li>
+              <li><a href="#faq-aeo" className="hover:text-brand-ember transition">AEO FAQ Blueprint</a></li>
             </ul>
           </div>
 
@@ -111,7 +111,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Tasty Chandigarh. Handcrafted in Sector 8-B, Madhya Marg.
           </div>
           <div className="text-zinc-400 flex items-center gap-4">
-            <span>Fast Casual Gastronomy</span>
+            <span className="text-brand-ember font-bold">Fast Casual Gastronomy</span>
             <span>·</span>
             <span>6-Minute Rule</span>
           </div>
