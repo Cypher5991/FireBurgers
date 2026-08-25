@@ -1,248 +1,387 @@
 import React, { useState } from 'react';
-import { BURGER_LAYERS, MENU_ITEMS } from '../data/menuData';
+import { TOP_FEATURED_BURGERS } from '../data/menuData';
 import { useCart } from '../context/CartContext';
-import { Flame, Layers, ShoppingBag, Check, Eye } from 'lucide-react';
+import { 
+  Flame, 
+  Layers, 
+  ShoppingBag, 
+  Check, 
+  Eye, 
+  ChevronLeft, 
+  ChevronRight
+} from 'lucide-react';
 
 export default function HeroExplodedBurger() {
-  const [viewMode, setViewMode] = useState('showcase'); // 'showcase' | 'exploded'
+  const [activeBurgerIndex, setActiveBurgerIndex] = useState(0);
+  const [viewMode, setViewMode] = useState('exploded'); // 'exploded' | 'assembled'
   const [explosion, setExplosion] = useState(65);
-  const [selectedLayer, setSelectedLayer] = useState(BURGER_LAYERS[2]);
+  const [selectedLayerIndex, setSelectedLayerIndex] = useState(2);
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
 
-  const volcanoBurgerItem = MENU_ITEMS.find(item => item.id === 'volcano-burger') || MENU_ITEMS[0];
+  const currentBurger = TOP_FEATURED_BURGERS[activeBurgerIndex];
+  const currentLayers = currentBurger.layers;
+  const activeLayer = currentLayers[selectedLayerIndex] || currentLayers[0];
+
+  const handlePrevBurger = () => {
+    setActiveBurgerIndex((prev) => (prev === 0 ? TOP_FEATURED_BURGERS.length - 1 : prev - 1));
+    setSelectedLayerIndex(2);
+  };
+
+  const handleNextBurger = () => {
+    setActiveBurgerIndex((prev) => (prev === TOP_FEATURED_BURGERS.length - 1 ? 0 : prev + 1));
+    setSelectedLayerIndex(2);
+  };
+
+  const handleSelectBurger = (index) => {
+    setActiveBurgerIndex(index);
+    setSelectedLayerIndex(2);
+  };
 
   const handleAddToCart = () => {
-    addToCart(volcanoBurgerItem, 1);
+    addToCart(
+      {
+        id: currentBurger.id,
+        name: currentBurger.name,
+        price: currentBurger.price,
+        dietary: currentBurger.dietary,
+        image: currentBurger.heroImage,
+        description: currentBurger.description,
+        badge: currentBurger.badge
+      },
+      1
+    );
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
 
   return (
-    <section id="exploded-view" className="relative min-h-[90vh] pt-6 pb-20 px-4 sm:px-6 overflow-hidden flex flex-col justify-center bg-[#FDFCF7]">
-      {/* Light Background ambient glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-br from-amber-200/40 via-orange-100/30 to-transparent rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-100/50 rounded-full blur-[140px] pointer-events-none" />
+    <section 
+      id="exploded-view" 
+      className="relative min-h-[92vh] pt-4 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden flex flex-col justify-center bg-[#FBF9F5]"
+    >
+      {/* Subtle Japanese Minimalist Background Kanji Watermark */}
+      <div className="absolute right-6 top-20 text-[180px] lg:text-[260px] font-japanese text-[#12141A]/[0.03] select-none pointer-events-none leading-none z-0">
+        {currentBurger.kanji}
+      </div>
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
-        
-        {/* Left Column: Brand Hero Text & Action */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/25 text-brand-orange text-xs font-bold uppercase tracking-wider">
-            <Flame className="w-4 h-4 animate-bounce text-brand-orange" />
-            Japanese Fire Grill Craft · Binchotan Charcoal Soul
-          </div>
+      {/* Light Ambient Warmth Glows */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-br from-amber-100/60 via-orange-100/30 to-transparent rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-100/40 rounded-full blur-[120px] pointer-events-none" />
 
-          <h1 className="text-4xl sm:text-6xl font-black font-syne tracking-tight leading-[1.08] text-brand-dark">
-            FORGED IN FIRE. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-red-500 to-brand-amber">
-              MOLTEN CHEESE
-            </span> <br />
-            VOLCANO CORES.
-          </h1>
-
-          <p className="text-zinc-600 text-base sm:text-lg leading-relaxed max-w-lg">
-            Hokkaido Shokupan milk buns baked daily at <strong className="text-brand-orange font-bold">5:00 AM</strong>, 
-            thick prime patties seared over <strong className="text-brand-orange font-bold">300°C Binchotan charcoal</strong>, 
-            and explosive molten cheese centers. Handcrafted in Sector 8, Chandigarh.
-          </p>
-
-          {/* Quick Badges */}
-          <div className="grid grid-cols-3 gap-3 pt-2">
-            <div className="glass-panel p-3.5 rounded-2xl text-center border-black/5 shadow-sm">
-              <div className="font-syne font-black text-xl text-brand-orange">5:00 AM</div>
-              <div className="text-[11px] text-zinc-500 font-semibold">Hokkaido Buns</div>
-            </div>
-            <div className="glass-panel p-3.5 rounded-2xl text-center border-black/5 shadow-sm">
-              <div className="font-syne font-black text-xl text-brand-amber">300°C</div>
-              <div className="text-[11px] text-zinc-500 font-semibold">Binchotan Robata</div>
-            </div>
-            <div className="glass-panel p-3.5 rounded-2xl text-center border-black/5 shadow-sm">
-              <div className="font-syne font-black text-xl text-emerald-600">6-MIN</div>
-              <div className="text-[11px] text-zinc-500 font-semibold">Counter-to-Hand</div>
-            </div>
-          </div>
-
-          {/* Primary CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            <button
-              onClick={handleAddToCart}
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-2.5 bg-gradient-to-r from-brand-orange to-brand-amber text-white font-syne font-extrabold text-base px-7 py-4 rounded-2xl shadow-xl shadow-brand-orange/30 hover:scale-[1.03] active:scale-[0.98] transition"
-            >
-              {added ? (
-                <>
-                  <Check className="w-5 h-5 text-white" />
-                  <span>Added to Cart!</span>
-                </>
-              ) : (
-                <>
-                  <ShoppingBag className="w-5 h-5" />
-                  <span>Order The Volcano (₹399)</span>
-                </>
-              )}
-            </button>
-            <a
-              href="#menu"
-              className="px-6 py-4 rounded-2xl border border-black/10 hover:border-brand-orange/60 text-zinc-800 hover:text-brand-orange font-syne font-bold transition flex items-center gap-2 glass-panel"
-            >
-              Explore Menu
-            </a>
-          </div>
+      {/* Swiss Editorial Top Grid Bar */}
+      <div className="max-w-7xl mx-auto w-full mb-6 relative z-10 border-b border-brand-dark/10 pb-3 flex flex-wrap items-center justify-between gap-3 text-xs font-mono tracking-wider">
+        <div className="flex items-center gap-3">
+          <span className="px-2 py-0.5 bg-brand-dark text-white font-bold rounded">
+            SPEC ARCHIVE
+          </span>
+          <span className="text-brand-dark/70 font-semibold">
+            CHANDIGARH SECTOR 8 · ROBATAYAKI DECONSTRUCTION
+          </span>
         </div>
 
-        {/* Right Column: Hero Visualizer (Hero Burger Image + 3D Exploded Layer Mode) */}
-        <div className="lg:col-span-7 flex flex-col items-center">
-          
-          {/* Mode Switcher & Controls */}
-          <div className="w-full glass-panel-glow p-3.5 rounded-2xl mb-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
+        {/* Carousel Burger Selectors */}
+        <div className="flex items-center gap-2">
+          <span className="text-zinc-500 hidden sm:inline">FEATURED ROTATION:</span>
+          <div className="flex items-center gap-1 bg-white border border-brand-dark/10 p-1 rounded-xl shadow-sm">
+            {TOP_FEATURED_BURGERS.map((burger, idx) => (
               <button
-                onClick={() => setViewMode('showcase')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                  viewMode === 'showcase' 
-                    ? 'bg-brand-orange text-white shadow-md' 
-                    : 'text-zinc-600 hover:text-black'
+                key={burger.id}
+                onClick={() => handleSelectBurger(idx)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold font-syne transition ${
+                  activeBurgerIndex === idx
+                    ? 'bg-brand-dark text-white shadow-sm'
+                    : 'text-zinc-600 hover:text-brand-dark hover:bg-zinc-100'
                 }`}
               >
-                <Eye className="w-3.5 h-3.5" />
-                <span>Japanese Burger View</span>
+                {burger.specIndex}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+        
+        {/* Left Column: Swiss Editorial Spec Sheet & Burger Focus */}
+        <div className="lg:col-span-5 space-y-5">
+          
+          {/* Index & Badge */}
+          <div className="flex items-center justify-between">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-widest uppercase">
+              <Flame className="w-3.5 h-3.5 text-brand-orange" />
+              <span>{currentBurger.specIndex} · {currentBurger.kanji}</span>
+            </div>
+            
+            <div className="text-xs font-mono font-bold text-brand-orange bg-brand-orange/10 px-2.5 py-1 rounded-full border border-brand-orange/20">
+              {currentBurger.badge}
+            </div>
+          </div>
+
+          {/* Main Title & Subtitle */}
+          <div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-syne tracking-tight leading-[1.04] text-brand-dark">
+              {currentBurger.name.toUpperCase()}
+            </h1>
+            <p className="text-sm sm:text-base font-medium text-brand-orange tracking-wide uppercase mt-1 font-mono">
+              {currentBurger.tagline}
+            </p>
+          </div>
+
+          <p className="text-zinc-700 text-sm sm:text-base leading-relaxed">
+            {currentBurger.description}
+          </p>
+
+          {/* Deep Slate Editorial Spec Matrix */}
+          <div className="deep-slate-panel rounded-2xl p-4 border border-white/10 space-y-3">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] font-mono text-zinc-400">
+              <span className="uppercase tracking-wider">GASTRONOMY ARCHITECTURE</span>
+              <span className="text-brand-amber font-bold">{currentBurger.calories}</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2.5 text-xs">
+              {currentBurger.specs.map((spec, i) => (
+                <div key={i} className="bg-white/[0.04] p-2.5 rounded-xl border border-white/5">
+                  <div className="text-[10px] text-zinc-400 font-mono">{spec.label}</div>
+                  <div className="font-syne font-bold text-white mt-0.5">{spec.val}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Order & Carousel Quick Actions */}
+          <div className="pt-2 space-y-3">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 flex items-center justify-center gap-2.5 bg-gradient-to-r from-brand-orange to-brand-amber text-white font-syne font-extrabold text-base px-6 py-4 rounded-2xl shadow-xl shadow-brand-orange/25 hover:scale-[1.02] active:scale-[0.98] transition"
+              >
+                {added ? (
+                  <>
+                    <Check className="w-5 h-5 text-white" />
+                    <span>Added to Cart!</span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag className="w-5 h-5" />
+                    <span>Order {currentBurger.name} · ₹{currentBurger.price}</span>
+                  </>
+                )}
+              </button>
+
+              <a
+                href="#menu"
+                className="px-5 py-4 rounded-2xl border border-brand-dark/15 hover:border-brand-orange bg-white text-brand-dark font-syne font-bold text-sm transition hover:shadow-md"
+              >
+                Menu Grid
+              </a>
+            </div>
+
+            {/* Prev / Next Burger Carousel Buttons */}
+            <div className="flex items-center justify-between pt-1 text-xs font-mono text-zinc-600">
+              <button
+                onClick={handlePrevBurger}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-brand-dark/10 hover:border-brand-dark text-brand-dark font-bold transition shadow-sm"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>PREV BURGER</span>
+              </button>
+
+              <div className="flex items-center gap-1 font-bold text-brand-dark">
+                <span>0{activeBurgerIndex + 1}</span>
+                <span className="text-zinc-400">/</span>
+                <span className="text-zinc-400">0{TOP_FEATURED_BURGERS.length}</span>
+              </div>
+
+              <button
+                onClick={handleNextBurger}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-brand-dark/10 hover:border-brand-dark text-brand-dark font-bold transition shadow-sm"
+              >
+                <span>NEXT BURGER</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Right Column: 3D Deconstructed Layer Canvas / Rotating Showcase */}
+        <div className="lg:col-span-7 flex flex-col items-center">
+          
+          {/* Top Control Bar: View Toggle & Deconstruction Slider */}
+          <div className="w-full bg-white/95 backdrop-blur-md border border-brand-dark/10 p-3 rounded-2xl mb-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+            
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-1.5 bg-zinc-100 p-1 rounded-xl w-full sm:w-auto">
+              <button
+                onClick={() => setViewMode('exploded')}
+                className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold font-syne transition flex items-center justify-center gap-1.5 ${
+                  viewMode === 'exploded'
+                    ? 'bg-brand-dark text-white shadow'
+                    : 'text-zinc-600 hover:text-brand-dark'
+                }`}
+              >
+                <Layers className="w-3.5 h-3.5 text-brand-orange" />
+                <span>Deconstructed 3D Layers</span>
               </button>
 
               <button
-                onClick={() => setViewMode('exploded')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                  viewMode === 'exploded' 
-                    ? 'bg-brand-orange text-white shadow-md' 
-                    : 'text-zinc-600 hover:text-black'
+                onClick={() => setViewMode('assembled')}
+                className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold font-syne transition flex items-center justify-center gap-1.5 ${
+                  viewMode === 'assembled'
+                    ? 'bg-brand-dark text-white shadow'
+                    : 'text-zinc-600 hover:text-brand-dark'
                 }`}
               >
-                <Layers className="w-3.5 h-3.5" />
-                <span>3D Exploded Layers</span>
+                <Eye className="w-3.5 h-3.5 text-brand-amber" />
+                <span>Studio View</span>
               </button>
             </div>
 
+            {/* Deconstruction Intensity Slider */}
             {viewMode === 'exploded' && (
-              <div className="flex items-center gap-2 w-full sm:w-56">
-                <span className="text-[10px] font-bold text-zinc-500">Deconstruct</span>
+              <div className="flex items-center gap-2.5 w-full sm:w-60 bg-zinc-50 px-3 py-1.5 rounded-xl border border-black/5">
+                <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">Explode</span>
                 <input
                   type="range"
-                  min="10"
+                  min="20"
                   max="100"
                   value={explosion}
                   onChange={(e) => setExplosion(Number(e.target.value))}
-                  className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-brand-orange"
+                  className="w-full h-1.5 bg-zinc-300 rounded-lg appearance-none cursor-pointer accent-brand-orange"
                 />
-                <span className="text-[10px] font-bold text-brand-orange">{explosion}%</span>
+                <span className="text-xs font-mono font-bold text-brand-orange min-w-[32px] text-right">
+                  {explosion}%
+                </span>
               </div>
             )}
           </div>
 
-          {/* Main Showcase Canvas / Image Container */}
-          <div className="w-full h-[460px] sm:h-[520px] rounded-3xl relative flex items-center justify-center overflow-hidden border border-black/10 bg-gradient-to-b from-[#FFFDF9] to-[#F5F2E9] shadow-2xl">
+          {/* Interactive Visual Stage Canvas */}
+          <div className="w-full h-[500px] sm:h-[540px] rounded-3xl relative flex items-center justify-center overflow-hidden border border-brand-dark/10 bg-gradient-to-b from-[#FFFDF9] via-[#F6F2E8] to-[#EDE7D8] shadow-2xl">
             
-            {/* Ambient Radial Flame */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,199,0,0.18)_0%,transparent_70%)] pointer-events-none" />
+            {/* Studio Chiaroscuro Rim Flare */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,140,0,0.15)_0%,transparent_65%)] pointer-events-none" />
+            <div className="absolute -top-10 -right-10 w-72 h-72 bg-amber-200/30 rounded-full blur-3xl pointer-events-none" />
 
-            {viewMode === 'showcase' ? (
-              /* High-Quality Hero Burger Image Presentation */
+            {/* Corner Editorial Marks */}
+            <div className="absolute top-4 left-4 font-mono text-[10px] text-zinc-400 uppercase tracking-widest">
+              POS: 30° AXONOMETRIC · LAYER SPEC
+            </div>
+            <div className="absolute top-4 right-4 font-mono text-[10px] text-brand-orange font-bold">
+              {currentBurger.kanji}
+            </div>
+
+            {viewMode === 'assembled' ? (
+              /* High-End Studio Photography Mode */
               <div className="relative w-full h-full flex items-center justify-center p-6 animate-fade-in">
-                {/* Hero Burger Image with Shadow & Flare */}
                 <div className="relative group max-w-md">
                   <img
-                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=85"
-                    alt="The Volcano Burger Chandler Japanese Fire Grill"
-                    className="w-80 sm:w-96 h-80 sm:h-96 object-cover rounded-3xl shadow-2xl ring-4 ring-white filter contrast-105 group-hover:scale-102 transition duration-500"
+                    src={currentBurger.heroImage}
+                    alt={currentBurger.name}
+                    className="w-80 sm:w-96 h-80 sm:h-96 object-cover rounded-3xl shadow-2xl ring-4 ring-white rim-light transition duration-500 group-hover:scale-105"
                   />
-                  
-                  {/* Floating Badges */}
-                  <div className="absolute -top-3 -left-3 glass-panel-glow px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg animate-bounce">
+
+                  {/* Studio Spec Tags */}
+                  <div className="absolute -top-3 -left-3 slate-card px-3.5 py-2 rounded-2xl flex items-center gap-2.5 shadow-xl text-white">
                     <span className="text-xl">🔥</span>
                     <div>
-                      <div className="text-[9px] uppercase font-extrabold text-brand-orange">Binchotan Sear</div>
-                      <div className="text-xs font-syne font-black text-brand-dark">300°C Robata Fire</div>
+                      <div className="text-[9px] uppercase font-mono text-zinc-400">Sear Standard</div>
+                      <div className="text-xs font-syne font-bold text-brand-amber">{currentBurger.searTemp}</div>
                     </div>
                   </div>
 
-                  <div className="absolute -bottom-3 -right-3 glass-panel-glow px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg">
-                    <span className="text-xl">🧀</span>
+                  <div className="absolute -bottom-3 -right-3 slate-card px-3.5 py-2 rounded-2xl flex items-center gap-2.5 shadow-xl text-white">
+                    <span className="text-xl">🍞</span>
                     <div>
-                      <div className="text-[9px] uppercase font-extrabold text-amber-600">Molten Core</div>
-                      <div className="text-xs font-syne font-black text-brand-dark">Smoked Gouda Lava</div>
+                      <div className="text-[9px] uppercase font-mono text-zinc-400">Bake Protocol</div>
+                      <div className="text-xs font-syne font-bold text-white">{currentBurger.bakeTime}</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Card */}
-                <div className="absolute bottom-4 left-6 right-6 glass-panel p-3.5 rounded-2xl flex items-center justify-between gap-3">
-                  <div className="space-y-0.5">
-                    <div className="text-[10px] font-extrabold uppercase text-brand-orange">
-                      Signature Japanese Fire Burger
-                    </div>
-                    <div className="font-syne font-bold text-sm text-brand-dark">
-                      The Volcano Burger · ₹399
-                    </div>
+                {/* Bottom Snapshot Card */}
+                <div className="absolute bottom-4 left-6 right-6 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-brand-dark/10 flex items-center justify-between shadow-lg">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-brand-orange font-bold block">
+                      {currentBurger.specIndex} Assembled Profile
+                    </span>
+                    <span className="font-syne font-bold text-sm text-brand-dark">
+                      {currentBurger.name} · ₹{currentBurger.price}
+                    </span>
                   </div>
 
                   <button
                     onClick={() => setViewMode('exploded')}
-                    className="text-xs px-3 py-1.5 rounded-xl bg-brand-orange/10 hover:bg-brand-orange text-brand-orange hover:text-white font-bold transition flex items-center gap-1"
+                    className="text-xs px-3.5 py-2 rounded-xl bg-brand-dark text-white font-syne font-bold hover:bg-brand-orange transition flex items-center gap-1.5"
                   >
-                    <Layers className="w-3.5 h-3.5" />
-                    <span>Inspect 5 Layers</span>
+                    <Layers className="w-3.5 h-3.5 text-brand-orange" />
+                    <span>Deconstruct Layers</span>
                   </button>
                 </div>
               </div>
             ) : (
-              /* 3D Exploded Burger Layer Visualizer */
+              /* 3D Deconstructed Layer Stack */
               <div 
-                className="relative w-full h-full flex flex-col items-center justify-center p-4 animate-fade-in"
-                style={{ perspective: '1000px' }}
+                className="relative w-full h-full flex flex-col items-center justify-center p-4"
+                style={{ perspective: '1200px' }}
               >
+                {/* 3D Rotated Stack */}
                 <div 
-                  className="relative w-80 sm:w-96 h-96 flex flex-col items-center justify-center transition-all duration-300 ease-out"
+                  className="relative w-80 sm:w-96 h-96 flex flex-col items-center justify-center transition-all duration-500 ease-out"
                   style={{
-                    transform: 'rotateX(12deg) rotateY(-8deg)',
+                    transform: 'rotateX(14deg) rotateY(-10deg)',
                     transformStyle: 'preserve-3d'
                   }}
                 >
-                  {BURGER_LAYERS.map((layer, index) => {
-                    const isSelected = selectedLayer?.id === layer.id;
+                  {currentLayers.map((layer, index) => {
+                    const isSelected = selectedLayerIndex === index;
                     const separationFactor = (explosion / 50);
-                    const translateY = (layer.offset * separationFactor * -1.1);
+                    const translateY = (layer.offset * separationFactor * -1.05);
 
                     return (
                       <div
                         key={layer.id}
-                        onClick={() => setSelectedLayer(layer)}
+                        onClick={() => setSelectedLayerIndex(index)}
                         className={`absolute cursor-pointer transition-all duration-300 group ${
                           isSelected ? 'z-30 scale-105' : 'z-10 hover:scale-102'
                         }`}
                         style={{
-                          transform: `translateY(${translateY}px) translateZ(${index * 20}px)`,
+                          transform: `translateY(${translateY}px) translateZ(${index * 24}px)`,
                         }}
                       >
-                        <div className={`relative px-5 py-3.5 rounded-2xl flex items-center gap-3.5 transition-all duration-300 ${
+                        <div className={`relative px-4 sm:px-5 py-3 rounded-2xl flex items-center gap-3 transition-all duration-300 ${
                           isSelected 
-                            ? 'bg-gradient-to-r from-brand-orange to-brand-amber text-white shadow-2xl shadow-brand-orange/40 ring-2 ring-brand-orange'
-                            : 'bg-white/95 hover:bg-white border border-black/10 text-zinc-800 shadow-md'
+                            ? 'bg-brand-dark text-white shadow-2xl ring-2 ring-brand-orange shadow-brand-dark/50'
+                            : 'bg-white/95 hover:bg-white border border-brand-dark/10 text-brand-dark shadow-md'
                         }`}>
                           <span className="text-2xl filter drop-shadow-sm">{layer.icon}</span>
+                          
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="font-syne font-bold text-xs sm:text-sm tracking-tight">
                                 {layer.name}
                               </span>
-                              <span className={`text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded ${
-                                isSelected ? 'bg-black/30 text-white' : 'bg-brand-orange/15 text-brand-orange'
+                              <span className={`text-[8px] font-mono font-bold uppercase px-1.5 py-0.5 rounded ${
+                                isSelected ? 'bg-brand-orange text-white' : 'bg-brand-orange/15 text-brand-orange'
                               }`}>
                                 {layer.highlight}
                               </span>
                             </div>
-                            <span className={`text-[10px] block font-mono font-medium ${
-                              isSelected ? 'text-white/90' : 'text-zinc-500'
-                            }`}>
-                              {layer.temp}
-                            </span>
+
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <span className={`text-[10px] font-mono ${
+                                isSelected ? 'text-zinc-300' : 'text-zinc-500'
+                              }`}>
+                                {layer.sub}
+                              </span>
+                              <span className="text-zinc-400 text-[10px]">·</span>
+                              <span className={`text-[10px] font-mono font-semibold ${
+                                isSelected ? 'text-brand-amber' : 'text-brand-orange'
+                              }`}>
+                                {layer.temp}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -250,39 +389,69 @@ export default function HeroExplodedBurger() {
                   })}
                 </div>
 
-                {/* Selected Layer Info HUD Box */}
-                {selectedLayer && (
-                  <div className="absolute bottom-3 left-4 right-4 sm:left-6 sm:right-6 glass-panel-glow p-3.5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div className="space-y-0.5 max-w-lg">
+                {/* Layer Inspector Detail Drawer (Bottom Overlay) */}
+                <div className="absolute bottom-3 left-4 right-4 bg-brand-dark/95 text-white backdrop-blur-md p-3.5 rounded-2xl border border-white/10 shadow-2xl flex items-center justify-between gap-3 animate-fade-in">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl p-2 bg-white/10 rounded-xl">{activeLayer.icon}</span>
+                    <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-orange">
-                          {selectedLayer.tag}
+                        <span className="text-[10px] font-mono text-brand-orange font-bold uppercase">
+                          LAYER 0{selectedLayerIndex + 1} / 0{currentLayers.length}
                         </span>
-                        <span className="text-zinc-400">•</span>
-                        <span className="text-[11px] font-mono text-amber-600 font-bold">
-                          {selectedLayer.temp}
+                        <span className="text-[9px] px-1.5 py-0.2 bg-white/10 rounded text-zinc-300 font-mono">
+                          {activeLayer.temp}
                         </span>
                       </div>
-                      <h4 className="font-syne font-bold text-brand-dark text-sm">
-                        {selectedLayer.name}
-                      </h4>
-                      <p className="text-xs text-zinc-600 leading-snug">
-                        {selectedLayer.description}
+                      <div className="font-syne font-bold text-xs sm:text-sm text-white">
+                        {activeLayer.name}
+                      </div>
+                      <p className="text-[11px] text-zinc-300 line-clamp-1 max-w-sm sm:max-w-md mt-0.5">
+                        {activeLayer.desc}
                       </p>
                     </div>
-
-                    <button
-                      onClick={handleAddToCart}
-                      className="bg-brand-orange hover:bg-brand-orange/90 text-white text-xs font-syne font-bold px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-1.5 whitespace-nowrap self-end sm:self-center"
-                    >
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      Add (₹399)
-                    </button>
                   </div>
-                )}
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {currentLayers.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedLayerIndex(i)}
+                        className={`w-2.5 h-2.5 rounded-full transition ${
+                          selectedLayerIndex === i ? 'bg-brand-orange scale-125' : 'bg-white/30 hover:bg-white/60'
+                        }`}
+                        title={`Layer ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
               </div>
             )}
+          </div>
 
+          {/* Bottom Thumbnails Strip for Quick Burger Switch */}
+          <div className="w-full mt-3 grid grid-cols-4 gap-2">
+            {TOP_FEATURED_BURGERS.map((b, idx) => (
+              <button
+                key={b.id}
+                onClick={() => handleSelectBurger(idx)}
+                className={`p-2 rounded-xl text-left border transition flex items-center gap-2 ${
+                  activeBurgerIndex === idx
+                    ? 'bg-white border-brand-orange ring-2 ring-brand-orange/30 shadow-md'
+                    : 'bg-white/60 hover:bg-white border-brand-dark/10 opacity-70 hover:opacity-100'
+                }`}
+              >
+                <img
+                  src={b.heroImage}
+                  alt={b.name}
+                  className="w-8 h-8 rounded-lg object-cover shrink-0"
+                />
+                <div className="overflow-hidden hidden sm:block">
+                  <div className="text-[9px] font-mono font-bold text-brand-orange truncate">{b.specIndex}</div>
+                  <div className="text-[11px] font-syne font-bold text-brand-dark truncate">{b.name}</div>
+                </div>
+              </button>
+            ))}
           </div>
 
         </div>

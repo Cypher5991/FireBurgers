@@ -10,11 +10,13 @@ export default {
         brand: {
           orange: '#FF5500',      // Electric Fire Tangerine
           amber: '#FFC700',       // Solar Amber
-          dark: '#121214',        // Deep Charcoal Slate
-          darker: '#0A0A0C',      // Void Black
-          card: '#1A1A1E',        // Slate Card
-          pearl: '#FDFCF7',       // Crisp Warm Pearl
-          muted: '#8E8E93',       // Muted Gray
+          dark: '#12141A',        // Deep Charcoal Slate
+          darker: '#0A0C10',      // Obsidian Black
+          slate: '#1E222B',       // Deep Slate Card
+          slateLight: '#2D323E',  // Elevated Slate
+          pearl: '#FBF9F5',       // Washi Paper Light Pearl
+          cream: '#F4F0E8',       // Light Linen Cream
+          muted: '#7A808C',       // Muted Editorial Gray
           violet: '#8A2BE2',      // Electric Violet
           mint: '#00F5A0',        // Fresh Mint
         }
@@ -22,6 +24,14 @@ export default {
       fontFamily: {
         syne: ['Syne', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
+        editorial: ['"Inter Tight"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        japanese: ['"Shippori Mincho"', 'serif'],
+      },
+      boxShadow: {
+        'rim': '0 20px 40px -15px rgba(0, 0, 0, 0.15), 0 0 25px 2px rgba(255, 85, 0, 0.12)',
+        'slate-lg': '0 25px 50px -12px rgba(18, 20, 26, 0.25)',
+        'deep': '0 30px 60px -15px rgba(10, 12, 16, 0.35)',
       },
       animation: {
         'marquee': 'marquee 25s linear infinite',

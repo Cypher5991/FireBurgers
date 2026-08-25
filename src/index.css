@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-inter bg-brand-pearl text-brand-dark;
+    @apply font-sans bg-brand-pearl text-brand-dark;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-syne font-bold tracking-tight text-brand-dark;
@@ -18,11 +18,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #F4F2EA;
+  background: #F4F0E8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4D1C7;
+  background: #D4CEBF;
   border-radius: 4px;
 }
 
@@ -30,25 +30,51 @@
   background: #FF5500;
 }
 
-/* Light Theme Glassmorphism helpers */
+/* Swiss Editorial & Deep Slate helpers */
+.swiss-grid-border {
+  border-color: rgba(18, 20, 26, 0.12);
+}
+
+.deep-slate-panel {
+  background: #12141A;
+  color: #FBF9F5;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
+}
+
+.slate-card {
+  background: #181B22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
+}
+
 .glass-panel {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(18, 20, 26, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(18, 20, 26, 0.04);
 }
 
 .glass-panel-glow {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 85, 0, 0.25);
-  box-shadow: 0 10px 30px -4px rgba(255, 85, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 85, 0, 0.3);
+  box-shadow: 0 10px 30px -4px rgba(255, 85, 0, 0.12), 0 4px 12px -2px rgba(18, 20, 26, 0.04);
 }
 
 .card-light {
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(18, 20, 26, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(18, 20, 26, 0.05);
+}
+
+/* Studio Rim Lighting & Butter Glow */
+.rim-light {
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 35px rgba(255, 100, 0, 0.18));
+}
+
+.butter-gloss {
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(234, 179, 8, 0.25);
 }
 
 /* Text glow */
@@ -58,4 +84,11 @@
 
 .text-glow-amber {
   text-shadow: 0 0 20px rgba(255, 199, 0, 0.35);
+}
+
+/* Washi subtle grain */
+.bg-washi {
+  background-color: #FBF9F5;
+  background-image: radial-gradient(rgba(18, 20, 26, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
 }

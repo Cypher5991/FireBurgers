@@ -19,63 +19,322 @@ export const BRAND_INFO = {
   ]
 };
 
-export const BURGER_LAYERS = [
+export const TOP_FEATURED_BURGERS = [
   {
-    id: "top-bun",
-    name: "5:00 AM Hokkaido Shokupan Milk Bun (Crown)",
-    tag: "Japanese Shokupan Craft",
-    temp: "180°C Clarified Miso-Butter Glaze",
-    description: "Ultra-pillowy Hokkaido milk bun baked daily at 5:00 AM using the traditional Japanese Yudane water-roux technique & toasted golden sesame.",
-    color: "#E59866",
-    offset: 140,
-    icon: "🍞",
-    highlight: "Daily Yudane Bake"
+    id: "volcano-burger",
+    specIndex: "N° 01",
+    kanji: "火山バーガー",
+    name: "The Volcano Core",
+    tagline: "Molten Smoked Gouda & Robata Sear",
+    price: 399,
+    calories: "780 kcal",
+    searTemp: "300°C Robata",
+    bakeTime: "5:00 AM Yudane",
+    dietary: "non-veg",
+    badge: "Chef's Masterpiece",
+    heroImage: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=1000&q=85",
+    description: "Our crowning engineering triumph. A coarse-ground prime patty forged on 300°C Binchotan charcoal, concealing an explosive lava core of double-aged smoked gouda and cheddar that flows upon the first cut.",
+    specs: [
+      { label: "Sear Method", val: "Binchotan Charcoal" },
+      { label: "Baking Technique", val: "Japanese Yudane Roux" },
+      { label: "Molten Core", val: "Aged Smoked Gouda" },
+      { label: "Glaze", val: "4-Hr Mirin Onion Reduction" }
+    ],
+    layers: [
+      {
+        id: "v-top-bun",
+        name: "Hokkaido Shokupan Milk Crown",
+        sub: "5:00 AM Yudane Bake",
+        temp: "180°C Miso-Butter Glaze",
+        desc: "Pillowy Japanese milk bun made with scalded flour technique for extreme softness, toasted golden with clarified miso butter.",
+        icon: "🍞",
+        color: "#E59866",
+        offset: 140,
+        highlight: "Yudane Technique"
+      },
+      {
+        id: "v-sauce-top",
+        name: "Yuzu Tare & Hydroponic Tatsoi",
+        sub: "Robata Emulsion",
+        temp: "Chilled 4°C",
+        desc: "Velvety Big Bro house emulsion laced with Japanese Kochi yuzu zest and fresh hydroponic micro tatsoi.",
+        icon: "🥬",
+        color: "#E67E22",
+        offset: 95,
+        highlight: "Micro Greens"
+      },
+      {
+        id: "v-cheese-core",
+        name: "Molten Gouda Volcano Core",
+        sub: "Signature Lava Center",
+        temp: "88°C Flow State",
+        desc: "Double-aged smoked gouda and sharp cheddar center with 4-hour mirin and soy caramelized onions.",
+        icon: "🧀",
+        color: "#F39C12",
+        offset: 50,
+        highlight: "88°C Lava Flow"
+      },
+      {
+        id: "v-patty",
+        name: "300°C Binchotan Prime Patty",
+        sub: "Forged Over Charcoal",
+        temp: "300°C Charcoal Sear",
+        desc: "Coarse-ground prime beef-style blend seared over Japanese white oak Binchotan coals for deep umami crust.",
+        icon: "🥩",
+        color: "#784212",
+        offset: 5,
+        highlight: "Binchotan Char"
+      },
+      {
+        id: "v-pickles-bottom",
+        name: "Tsukemono Pickles & Shokupan Heel",
+        sub: "Toasted Base Foundation",
+        temp: "Toasted 160°C",
+        desc: "72-hour rice vinegar & ginger Tsukemono pickled cucumbers resting on the toasted Shokupan heel.",
+        icon: "🥒",
+        color: "#D35400",
+        offset: -40,
+        highlight: "Tsukemono Crunch"
+      }
+    ]
   },
   {
-    id: "sauce-top",
-    name: "Smoky Yuzu Umami Emulsion & Micro Greens",
-    tag: "Robata Dressing",
-    temp: "Chilled 4°C",
-    description: "Velvety Big Bro house emulsion laced with Japanese yuzu zest, charred scallions, and crisp hydroponic tatsoi & lettuce.",
-    color: "#E67E22",
-    offset: 95,
-    icon: "🥬",
-    highlight: "Hydroponic Crisp"
+    id: "tasty-umami",
+    specIndex: "N° 02",
+    kanji: "旨味バーガー",
+    name: "The Tasty Umami Wagyu",
+    tagline: "Binchotan Charcoal & Black Truffle Shoyu",
+    price: 329,
+    calories: "680 kcal",
+    searTemp: "300°C Robata",
+    bakeTime: "5:00 AM Yudane",
+    dietary: "non-veg",
+    badge: "Bestseller",
+    heroImage: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=85",
+    description: "The pure distillation of Japanese Robatayaki flavor. Flame-licked prime patty, black truffle shoyu glaze, aged sharp cheddar, and 5:00 AM Shokupan bun.",
+    specs: [
+      { label: "Sear Method", val: "Direct Flame Robata" },
+      { label: "Baking Technique", val: "Hokkaido Yudane" },
+      { label: "Umami Source", val: "Black Truffle Shoyu" },
+      { label: "Cheese", val: "Aged White Cheddar" }
+    ],
+    layers: [
+      {
+        id: "u-top-bun",
+        name: "Toasted Sesame Shokupan Crown",
+        sub: "5:00 AM Yudane Bake",
+        temp: "180°C Toasted",
+        desc: "Golden toasted crown dusted with organic white sesame seeds and clarified butter.",
+        icon: "🍞",
+        color: "#E59866",
+        offset: 140,
+        highlight: "Sesame Glaze"
+      },
+      {
+        id: "u-sauce-top",
+        name: "Black Truffle Shoyu Emulsion",
+        sub: "Truffle Glaze",
+        temp: "Chilled 4°C",
+        desc: "Rich emulsion crafted with aged Japanese dark shoyu, Italian black truffle oil, and egg yolk.",
+        icon: "✨",
+        color: "#E67E22",
+        offset: 95,
+        highlight: "Truffle Shoyu"
+      },
+      {
+        id: "u-cheese",
+        name: "Aged White Cheddar Melt",
+        sub: "Sharp Cheese Blanket",
+        temp: "75°C Melt",
+        desc: "18-month aged white cheddar melted directly over the fiery grill grate.",
+        icon: "🧀",
+        color: "#F39C12",
+        offset: 50,
+        highlight: "18-Mo Cheddar"
+      },
+      {
+        id: "u-patty",
+        name: "Charcoal Seared Wagyu-Style Patty",
+        sub: "Robata Fire Crust",
+        temp: "300°C Binchotan",
+        desc: "Prime coarse blend with 20% marbling seared on high-heat charcoal to lock in natural juices.",
+        icon: "🥩",
+        color: "#784212",
+        offset: 5,
+        highlight: "300°C Sear"
+      },
+      {
+        id: "u-heel",
+        name: "Pickled Daikon & Shokupan Base",
+        sub: "Foundation",
+        temp: "Crisp Toasted",
+        desc: "Sweet-sour pickled daikon radish slices with toasted base to maintain structural crunch.",
+        icon: "🥢",
+        color: "#D35400",
+        offset: -40,
+        highlight: "Daikon Crunch"
+      }
+    ]
   },
   {
-    id: "cheese-core",
-    name: "Molten Volcano Core & Teriyaki Caramelized Onions",
-    tag: "Signature Core",
-    temp: "88°C Molten Flow",
-    description: "Double-aged smoked cheese volcano core that erupts upon the first bite, infused with 4-hour mirin & soy-braised onions.",
-    color: "#F39C12",
-    offset: 50,
-    icon: "🧀",
-    highlight: "Explosive Lava Flow"
+    id: "the-firebird",
+    specIndex: "N° 03",
+    kanji: "火の鳥カツ",
+    name: "The Firebird Tori Katsu",
+    tagline: "Double Panko Crunch & Shichimi Dust",
+    price: 349,
+    calories: "710 kcal",
+    searTemp: "High-Heat Crisp",
+    bakeTime: "5:00 AM Yudane",
+    dietary: "non-veg",
+    badge: "Spicy High-Heat",
+    heroImage: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=1000&q=85",
+    description: "Shatter-crispy chicken breast coated in double Japanese panko crumbs, tossed in fiery 7-spice Shichimi Togarashi dust with cool purple cabbage slaw and whipped garlic aioli.",
+    specs: [
+      { label: "Crumb Type", val: "Coarse Japanese Panko" },
+      { label: "Spice Profile", val: "7-Spice Shichimi Togarashi" },
+      { label: "Slaw Base", val: "Purple Cabbage & Yuzu" },
+      { label: "Garlic Sauce", val: "Whipped Lil Bro Aioli" }
+    ],
+    layers: [
+      {
+        id: "fb-top-bun",
+        name: "Shokupan Brioche Crown",
+        sub: "5:00 AM Bake",
+        temp: "175°C Toasted",
+        desc: "Feather-light Japanese brioche crown with silky butter glaze.",
+        icon: "🍞",
+        color: "#E59866",
+        offset: 140,
+        highlight: "Brioche Crown"
+      },
+      {
+        id: "fb-slaw",
+        name: "Purple Cabbage & Yuzu Slaw",
+        sub: "Cooling Slaw",
+        temp: "Chilled 2°C",
+        desc: "Shredded organic purple cabbage tossed in light yuzu vinaigrette for instant palate cooling.",
+        icon: "🥗",
+        color: "#9B59B6",
+        offset: 95,
+        highlight: "Yuzu Slaw"
+      },
+      {
+        id: "fb-dust",
+        name: "7-Spice Shichimi Togarashi Dust",
+        sub: "Fiery Fire Dust",
+        temp: "Dry Rub",
+        desc: "Artisanal blend of red chili, sansho pepper, roasted orange peel, sesame, and ginger.",
+        icon: "🌶️",
+        color: "#E74C3C",
+        offset: 50,
+        highlight: "Shichimi Spice"
+      },
+      {
+        id: "fb-patty",
+        name: "Double Panko Tori Katsu Breast",
+        sub: "Shatter Crisp",
+        temp: "185°C Flash Fry",
+        desc: "Whole chicken fillet marinated in ginger shoyu, dredged in airy Japanese panko for maximum crunch.",
+        icon: "🍗",
+        color: "#D35400",
+        offset: 5,
+        highlight: "Panko Crunch"
+      },
+      {
+        id: "fb-heel",
+        name: "Whipped Garlic Aioli & Base",
+        sub: "Foundation",
+        temp: "Toasted Base",
+        desc: "Lil Bro roasted garlic aioli spread across the toasted Shokupan base.",
+        icon: "🧄",
+        color: "#F39C12",
+        offset: -40,
+        highlight: "Whipped Garlic"
+      }
+    ]
   },
   {
-    id: "patty",
-    name: "Binchotan Charcoal Flame-Seared Patty",
-    tag: "Forged in Fire",
-    temp: "300°C Binchotan Robata Sear",
-    description: "Thick, coarse-ground prime blend seared on high-heat Japanese Binchotan grill to lock in deep smoky crust while keeping the center tender and juicy.",
-    color: "#784212",
-    offset: 5,
-    icon: "🥩",
-    highlight: "300°C Robata Crust"
-  },
-  {
-    id: "pickles-bottom",
-    name: "Tsukemono Pickled Cucumbers & Shokupan Heel",
-    tag: "Foundation",
-    temp: "Toasted Base",
-    description: "72-hour rice vinegar & ginger Tsukemono pickled cucumbers resting on the toasted Shokupan base to preserve crispness.",
-    color: "#D35400",
-    offset: -40,
-    icon: "🥒",
-    highlight: "Tsukemono Crunch"
+    id: "magic-shroom",
+    specIndex: "N° 04",
+    kanji: "魔法のキノコ",
+    name: "Magic Shroom Robata Zen",
+    tagline: "Shiitake Umami & Black Truffle Emulsion",
+    price: 349,
+    calories: "590 kcal",
+    searTemp: "280°C Robata",
+    bakeTime: "5:00 AM Yudane",
+    dietary: "veg",
+    badge: "Vegetarian Hero",
+    heroImage: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=1000&q=85",
+    description: "Crafted for discerning palates. Hand-formed patty of king oyster and roasted shiitake mushrooms, crowned with black truffle emulsion, melted Swiss emmental, and crispy shoestring shallots.",
+    specs: [
+      { label: "Mushroom Blend", val: "King Oyster & Shiitake" },
+      { label: "Truffle Type", val: "Italian Black Truffle" },
+      { label: "Crunch Layer", val: "Shoestring Crispy Shallots" },
+      { label: "Cheese Melt", val: "Swiss Emmental" }
+    ],
+    layers: [
+      {
+        id: "ms-top-bun",
+        name: "Herb Butter Shokupan Crown",
+        sub: "5:00 AM Bake",
+        temp: "180°C Glazed",
+        desc: "Toasted milk bun with fine parsley and seaweed herb butter glaze.",
+        icon: "🍞",
+        color: "#E59866",
+        offset: 140,
+        highlight: "Herb Butter"
+      },
+      {
+        id: "ms-truffle",
+        name: "Black Truffle Aioli & Micro Greens",
+        sub: "Earth Emulsion",
+        temp: "Chilled 4°C",
+        desc: "Velvety black truffle emulsion with fresh baby arugula and micro greens.",
+        icon: "🌿",
+        color: "#27AE60",
+        offset: 95,
+        highlight: "Black Truffle"
+      },
+      {
+        id: "ms-shallots",
+        name: "Crispy Shoestring Shallot Nest",
+        sub: "Golden Crisps",
+        temp: "170°C Crisped",
+        desc: "Ultra-thin sliced shallots fried to golden crispness for textural contrast.",
+        icon: "🧅",
+        color: "#F39C12",
+        offset: 50,
+        highlight: "Shallot Crunch"
+      },
+      {
+        id: "ms-patty",
+        name: "Robata Shiitake & ShroomBean Patty",
+        sub: "Charred Mushrooms",
+        temp: "280°C Robata",
+        desc: "Roasted king oyster, shiitake mushrooms, and black beans seared over glowing charcoal.",
+        icon: "🍄",
+        color: "#784212",
+        offset: 5,
+        highlight: "Shiitake Blend"
+      },
+      {
+        id: "ms-heel",
+        name: "Melted Emmental & Shokupan Base",
+        sub: "Foundation",
+        temp: "Toasted 160°C",
+        desc: "Melted nutty Swiss emmental sealing the toasted Shokupan base.",
+        icon: "🧀",
+        color: "#D35400",
+        offset: -40,
+        highlight: "Swiss Emmental"
+      }
+    ]
   }
 ];
+
+export const BURGER_LAYERS = TOP_FEATURED_BURGERS[0].layers;
 
 export const MENU_CATEGORIES = [
   { id: "all", label: "All Items", icon: "✨" },

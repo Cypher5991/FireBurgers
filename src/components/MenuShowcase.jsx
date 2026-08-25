@@ -118,96 +118,139 @@ export default function MenuShowcase() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredItems.map(item => (
-            <div
-              key={item.id}
-              className="group card-light rounded-3xl overflow-hidden border border-black/5 hover:border-brand-orange/40 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand-orange/10 flex flex-col justify-between"
-            >
-              <div>
-                {/* Product Image & Badges */}
-                <div className="relative h-56 sm:h-64 overflow-hidden bg-zinc-100">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+          {filteredItems.map((item, idx) => {
+            const isBurger = item.category === 'burgers';
+            return (
+              <div
+                key={item.id}
+                className={`group rounded-3xl overflow-hidden border transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between ${
+                  isBurger && idx === 0
+                    ? 'deep-slate-panel border-white/10 hover:border-brand-orange/50 shadow-2xl'
+                    : 'bg-white border-brand-dark/10 hover:border-brand-orange/50 shadow-lg'
+                }`}
+              >
+                <div>
+                  {/* Product Image & Badges */}
+                  <div className="relative h-60 sm:h-64 overflow-hidden bg-zinc-100">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                    <span className={`text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full backdrop-blur-md shadow-md ${
-                      item.dietary === 'veg' 
-                        ? 'bg-emerald-600 text-white' 
-                        : 'bg-red-600 text-white'
-                    }`}>
-                      {item.dietary === 'veg' ? '🟢 Pure Veg' : '🔴 Non-Veg'}
-                    </span>
-
-                    {item.badge && (
-                      <span className="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-brand-orange text-white shadow-lg shadow-brand-orange/40">
-                        {item.badge}
+                    {/* Top Badges */}
+                    <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
+                      <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full backdrop-blur-md shadow-md ${
+                        item.dietary === 'veg' 
+                          ? 'bg-emerald-600/90 text-white border border-emerald-400/30' 
+                          : 'bg-brand-dark/90 text-white border border-white/20'
+                      }`}>
+                        {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
                       </span>
+
+                      {item.badge && (
+                        <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-orange text-white shadow-lg shadow-brand-orange/30">
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Prep Time & Calorie Tag */}
+                    <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-[11px] font-mono text-white">
+                      <span className="flex items-center gap-1 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/15">
+                        <Clock className="w-3.5 h-3.5 text-brand-amber" />
+                        <span>{item.prepTime} ready</span>
+                      </span>
+
+                      {item.calories && (
+                        <span className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/15 text-zinc-300">
+                          {item.calories}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 space-y-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-orange mb-0.5">
+                          {item.tagline}
+                        </div>
+                        <h3 className={`font-syne font-bold text-xl tracking-tight transition ${
+                          isBurger && idx === 0 ? 'text-white group-hover:text-brand-orange' : 'text-brand-dark group-hover:text-brand-orange'
+                        }`}>
+                          {item.name}
+                        </h3>
+                      </div>
+                      <div className={`font-syne font-black text-2xl whitespace-nowrap ${
+                        isBurger && idx === 0 ? 'text-brand-amber' : 'text-brand-dark'
+                      }`}>
+                        ₹{item.price}
+                      </div>
+                    </div>
+
+                    <p className={`text-xs leading-relaxed line-clamp-2 ${
+                      isBurger && idx === 0 ? 'text-zinc-300' : 'text-zinc-600'
+                    }`}>
+                      {item.description}
+                    </p>
+
+                    {/* Ingredient Spec Tags */}
+                    {item.ingredients && item.ingredients.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {item.ingredients.slice(0, 3).map((ing, i) => (
+                          <span 
+                            key={i} 
+                            className={`text-[10px] font-mono px-2 py-0.5 rounded-md border ${
+                              isBurger && idx === 0
+                                ? 'bg-white/[0.06] border-white/10 text-zinc-300'
+                                : 'bg-zinc-100 border-black/5 text-zinc-600'
+                            }`}
+                          >
+                            {ing}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Pairing Recommendation */}
+                    {item.pairWith && (
+                      <div className="pt-2 flex items-center gap-1.5 text-[11px] text-zinc-400">
+                        <Sparkles className="w-3 h-3 text-brand-orange flex-shrink-0" />
+                        <span className="truncate">Pair: <strong className={isBurger && idx === 0 ? 'text-zinc-200' : 'text-zinc-700'}>{item.pairWith}</strong></span>
+                      </div>
                     )}
                   </div>
-
-                  {/* Prep Time Tag */}
-                  <div className="absolute bottom-3 left-4 flex items-center gap-1.5 text-[11px] font-semibold text-white glass-panel px-2.5 py-1 rounded-lg border-white/20">
-                    <Clock className="w-3.5 h-3.5 text-brand-amber" />
-                    <span>{item.prepTime} ready</span>
-                  </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 space-y-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="font-syne font-black text-xl text-brand-dark group-hover:text-brand-orange transition">
-                        {item.name}
-                      </h3>
-                      <p className="text-xs text-brand-orange font-bold">
-                        {item.tagline}
-                      </p>
-                    </div>
-                    <div className="font-syne font-black text-2xl text-brand-dark whitespace-nowrap">
-                      ₹{item.price}
-                    </div>
-                  </div>
+                {/* Action Buttons Footer */}
+                <div className="p-6 pt-0 flex items-center gap-3">
+                  <button
+                    onClick={() => handleOpenCustomize(item)}
+                    className={`p-3 rounded-xl border transition ${
+                      isBurger && idx === 0
+                        ? 'bg-white/10 border-white/15 text-zinc-300 hover:text-white hover:border-brand-orange'
+                        : 'bg-zinc-50 border-brand-dark/10 hover:border-brand-orange text-zinc-600 hover:text-brand-orange'
+                    }`}
+                    title="Customize Ingredients"
+                  >
+                    <SlidersHorizontal className="w-4 h-4" />
+                  </button>
 
-                  <p className="text-xs text-zinc-600 leading-relaxed line-clamp-2">
-                    {item.description}
-                  </p>
-
-                  {/* Pairing Recommendation */}
-                  {item.pairWith && (
-                    <div className="pt-2 flex items-center gap-1.5 text-[11px] text-zinc-500">
-                      <Sparkles className="w-3 h-3 text-brand-orange flex-shrink-0" />
-                      <span className="truncate">Pair: <strong className="text-zinc-700 font-semibold">{item.pairWith}</strong></span>
-                    </div>
-                  )}
+                  <button
+                    onClick={() => addToCart(item, 1)}
+                    className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-brand-orange to-brand-amber hover:brightness-105 text-white font-syne font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-orange/20 transition transform active:scale-98"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Add to Order · ₹{item.price}</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Action Buttons Footer */}
-              <div className="p-6 pt-0 flex items-center gap-3">
-                <button
-                  onClick={() => handleOpenCustomize(item)}
-                  className="p-3 rounded-xl border border-black/10 hover:border-brand-orange text-zinc-600 hover:text-brand-orange glass-panel transition"
-                  title="Customize Ingredients"
-                >
-                  <SlidersHorizontal className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={() => addToCart(item, 1)}
-                  className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-brand-orange to-brand-amber hover:brightness-105 text-white font-syne font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-orange/20 transition transform active:scale-98"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Add to Order · ₹{item.price}</span>
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
       </div>

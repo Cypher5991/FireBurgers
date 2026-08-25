@@ -30,16 +30,16 @@ export default function VolcanoCutPour() {
       <div className="max-w-7xl mx-auto space-y-12">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/25 text-brand-orange text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            Module 02 · Interactive Dual-View Cut & Pour
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
+            <span>INDEX 02 · 断面カット · DUAL-VIEW CUT & POUR</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black font-syne tracking-tight text-brand-dark">
             THE VOLCANO <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-amber">"CUT & POUR"</span> SLIDER
           </h2>
-          <p className="text-zinc-600 text-base sm:text-lg">
-            Drag the split-slider to reveal what lies inside: a pressurized core of molten smoked gouda erupting through 4-hour mirin & soy caramelized onions.
+          <p className="text-zinc-600 text-sm sm:text-base font-sans leading-relaxed">
+            Drag the split-slider to reveal the core: a pressurized volcano of molten smoked gouda erupting through 4-hour mirin & soy caramelized onions.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export default function VolcanoCutPour() {
               ref={containerRef}
               onMouseMove={handleMouseMove}
               onTouchMove={handleTouchMove}
-              className="relative w-full h-[380px] sm:h-[480px] rounded-3xl overflow-hidden cursor-ew-resize border border-black/10 select-none shadow-xl group bg-black"
+              className="relative w-full h-[380px] sm:h-[480px] rounded-3xl overflow-hidden cursor-ew-resize border border-brand-dark/10 select-none shadow-2xl group bg-black"
             >
               {/* Layer 1: Flame-Seared Exterior Crust */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -61,9 +61,9 @@ export default function VolcanoCutPour() {
                   alt="Binchotan Charcoal Seared Exterior Crust"
                   className="w-full h-full object-cover filter contrast-125 brightness-95"
                 />
-                <div className="absolute top-6 left-6 glass-panel px-4 py-2 rounded-xl text-left border-black/5 pointer-events-none shadow-md">
-                  <div className="text-[10px] uppercase font-bold text-zinc-500">Exterior View</div>
-                  <div className="font-syne font-bold text-sm text-brand-dark">300°C Binchotan Robata Crust</div>
+                <div className="absolute top-6 left-6 slate-card px-4 py-2 rounded-xl text-left border-white/10 pointer-events-none shadow-xl text-white">
+                  <div className="text-[10px] uppercase font-mono text-zinc-400">EXTERIOR VIEW</div>
+                  <div className="font-syne font-bold text-sm text-white">300°C Binchotan Charcoal Crust</div>
                 </div>
               </div>
 
@@ -77,9 +77,9 @@ export default function VolcanoCutPour() {
                   alt="Molten Cheese Lava Interior"
                   className="w-full h-full object-cover filter contrast-125 saturate-125"
                 />
-                <div className="absolute top-6 right-6 glass-panel-glow px-4 py-2 rounded-xl text-right pointer-events-none shadow-md">
-                  <div className="text-[10px] uppercase font-bold text-brand-orange">Cross Section</div>
-                  <div className="font-syne font-bold text-sm text-amber-600">88°C Molten Gouda Volcano</div>
+                <div className="absolute top-6 right-6 deep-slate-panel px-4 py-2 rounded-xl text-right pointer-events-none shadow-xl border-brand-orange/40">
+                  <div className="text-[10px] uppercase font-mono font-bold text-brand-orange">CROSS SECTION</div>
+                  <div className="font-syne font-bold text-sm text-brand-amber">88°C Molten Gouda Volcano</div>
                 </div>
               </div>
 
@@ -88,106 +88,106 @@ export default function VolcanoCutPour() {
                 className="absolute top-0 bottom-0 w-1 bg-brand-orange shadow-[0_0_20px_#FF5500] pointer-events-none flex items-center justify-center"
                 style={{ left: `${sliderPos}%` }}
               >
-                <div className="w-10 h-10 -ml-[19px] rounded-full bg-brand-orange border-2 border-white shadow-2xl flex items-center justify-center text-white">
-                  <Eye className="w-4 h-4" />
+                <div className="w-10 h-10 -ml-[19px] rounded-full bg-brand-dark border-2 border-brand-orange shadow-2xl flex items-center justify-center text-white">
+                  <Eye className="w-4 h-4 text-brand-orange" />
                 </div>
               </div>
 
               {/* Bottom Instructions */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-4 py-1.5 rounded-full text-xs text-zinc-800 font-semibold pointer-events-none flex items-center gap-2 shadow-md">
-                <span>◀ Drag across to inspect molten core ▶</span>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-dark/90 text-white backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-mono font-bold pointer-events-none flex items-center gap-2 shadow-md border border-white/10">
+                <span>◀ DRAG TO INSPECT MOLTEN CORE ▶</span>
               </div>
             </div>
 
             {/* Quick Slider Shortcuts */}
-            <div className="flex items-center gap-3 mt-4">
+            <div className="flex items-center gap-2 mt-4 font-mono">
               <button
                 onClick={() => setSliderPos(20)}
-                className={`text-xs px-3.5 py-1.5 rounded-xl border font-semibold transition ${
-                  sliderPos < 35 ? 'bg-brand-orange text-white border-brand-orange shadow-md' : 'glass-panel text-zinc-600 border-black/5 hover:text-black'
+                className={`text-xs px-3 py-1.5 rounded-lg border font-bold transition ${
+                  sliderPos < 35 ? 'bg-brand-dark text-white border-brand-dark shadow-md' : 'bg-white text-zinc-600 border-brand-dark/10 hover:text-black'
                 }`}
               >
-                Show 80% Interior
+                80% Interior
               </button>
               <button
                 onClick={() => setSliderPos(50)}
-                className={`text-xs px-3.5 py-1.5 rounded-xl border font-semibold transition ${
-                  sliderPos >= 35 && sliderPos <= 65 ? 'bg-brand-orange text-white border-brand-orange shadow-md' : 'glass-panel text-zinc-600 border-black/5 hover:text-black'
+                className={`text-xs px-3 py-1.5 rounded-lg border font-bold transition ${
+                  sliderPos >= 35 && sliderPos <= 65 ? 'bg-brand-dark text-white border-brand-dark shadow-md' : 'bg-white text-zinc-600 border-brand-dark/10 hover:text-black'
                 }`}
               >
-                50/50 Split View
+                50/50 Split
               </button>
               <button
                 onClick={() => setSliderPos(80)}
-                className={`text-xs px-3.5 py-1.5 rounded-xl border font-semibold transition ${
-                  sliderPos > 65 ? 'bg-brand-orange text-white border-brand-orange shadow-md' : 'glass-panel text-zinc-600 border-black/5 hover:text-black'
+                className={`text-xs px-3 py-1.5 rounded-lg border font-bold transition ${
+                  sliderPos > 65 ? 'bg-brand-dark text-white border-brand-dark shadow-md' : 'bg-white text-zinc-600 border-brand-dark/10 hover:text-black'
                 }`}
               >
-                Show 80% Exterior
+                80% Exterior
               </button>
             </div>
           </div>
 
-          {/* Telemetry & Specs HUD (4 cols) */}
+          {/* Telemetry & Specs HUD (4 cols) - Deep Slate Panel */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="glass-panel-glow p-6 sm:p-7 rounded-3xl space-y-6">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-brand-orange">
-                  Live Thermal Telemetry
+            <div className="deep-slate-panel p-6 sm:p-7 rounded-3xl space-y-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-orange">
+                  THERMAL TELEMETRY · 遠隔測定
                 </span>
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="w-2.5 h-2.5 rounded-full bg-brand-mint animate-pulse" />
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 font-mono text-xs">
                 {/* Metric 1 */}
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-xs text-zinc-700 font-medium">
+                  <div className="flex justify-between text-zinc-300">
                     <span className="flex items-center gap-1.5">
                       <Thermometer className="w-3.5 h-3.5 text-brand-orange" />
                       Core Molten Flow Temp
                     </span>
-                    <span className="font-mono font-bold text-amber-600">88.4°C</span>
+                    <span className="font-bold text-brand-amber">88.4°C</span>
                   </div>
-                  <div className="w-full h-2 bg-zinc-200 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-brand-orange to-brand-amber w-[88%]" />
                   </div>
                 </div>
 
                 {/* Metric 2 */}
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-xs text-zinc-700 font-medium">
+                  <div className="flex justify-between text-zinc-300">
                     <span className="flex items-center gap-1.5">
                       <Flame className="w-3.5 h-3.5 text-brand-orange" />
                       Binchotan Charcoal Sear
                     </span>
-                    <span className="font-mono font-bold text-brand-orange">300°C Robata</span>
+                    <span className="font-bold text-brand-orange">300°C</span>
                   </div>
-                  <div className="w-full h-2 bg-zinc-200 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-red-600 to-brand-orange w-[96%]" />
                   </div>
                 </div>
 
                 {/* Metric 3 */}
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-xs text-zinc-700 font-medium">
+                  <div className="flex justify-between text-zinc-300">
                     <span className="flex items-center gap-1.5">
-                      <Zap className="w-3.5 h-3.5 text-emerald-600" />
+                      <Zap className="w-3.5 h-3.5 text-brand-mint" />
                       Umami Density Score
                     </span>
-                    <span className="font-mono font-bold text-emerald-600">99.4 / 100</span>
+                    <span className="font-bold text-brand-mint">99.4 / 100</span>
                   </div>
-                  <div className="w-full h-2 bg-zinc-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-500 w-[99%]" />
+                  <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full bg-brand-mint w-[99%]" />
                   </div>
                 </div>
               </div>
 
               {/* Japanese Technique Note */}
-              <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/60 space-y-1">
-                <div className="text-[11px] font-bold text-amber-800 uppercase tracking-wide">
+              <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 space-y-1">
+                <div className="text-[10px] font-mono font-bold text-brand-amber uppercase tracking-wider">
                   The Japanese Fire Technique
                 </div>
-                <p className="text-xs text-zinc-700 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed font-sans">
                   We freeze the smoked gouda core before encasing it in prime ground beef. Searing over Kishu Binchotan charcoal liquefies the center precisely at the 6-minute mark.
                 </p>
               </div>
@@ -195,10 +195,10 @@ export default function VolcanoCutPour() {
               {/* Action Button */}
               <button
                 onClick={() => addToCart(volcanoItem, 1)}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-orange to-brand-amber text-white font-syne font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-orange/25 hover:brightness-105 transition"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-orange to-brand-amber text-white font-syne font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-orange/25 hover:brightness-105 transition"
               >
                 <ShoppingBag className="w-4 h-4" />
-                Add Volcano Burger (₹399)
+                <span>Order Volcano Burger · ₹399</span>
               </button>
             </div>
           </div>

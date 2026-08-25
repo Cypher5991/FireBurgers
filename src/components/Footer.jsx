@@ -4,23 +4,24 @@ import { Flame, MapPin, Clock, Phone, MessageSquare } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#121214] text-zinc-400 border-t border-black/10 pt-16 pb-12 px-4 sm:px-6 relative text-sm">
+    <footer className="bg-[#12141A] text-zinc-400 border-t border-white/10 pt-16 pb-12 px-4 sm:px-6 relative text-sm font-sans">
       <div className="max-w-7xl mx-auto space-y-12">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           
           {/* Brand Col (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-orange to-brand-amber flex items-center justify-center text-white shadow-lg shadow-brand-orange/30">
-                <Flame className="w-6 h-6" />
+            <div className="flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-xl bg-brand-dark flex items-center justify-center text-white border border-white/10 shadow-lg">
+                <Flame className="w-5 h-5 text-brand-orange" />
               </div>
               <span className="font-syne font-black text-2xl tracking-tight text-white">
                 TASTY <span className="text-brand-orange">CHANDIGARH</span>
               </span>
+              <span className="text-xs font-japanese font-bold text-zinc-500">美味しい</span>
             </div>
 
-            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
+            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed font-sans">
               The Modern Japanese Fire Grill & Burger House. Hokkaido Shokupan milk buns baked at 5:00 AM, steak patties flame-seared over 300°C Binchotan charcoal, and molten cheese volcano cores.
             </p>
 
