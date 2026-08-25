@@ -62,7 +62,7 @@ export default function DipRadarVisualizer() {
   // Convert 0-100 scores into 5-point radar polygon coordinates
   const getRadarPoints = (scores) => {
     const center = 150;
-    const radius = 105;
+    const radius = 100;
     const keys = ['umami', 'heat', 'sweet', 'smoke', 'acid'];
     
     return keys.map((key, i) => {
@@ -88,25 +88,25 @@ export default function DipRadarVisualizer() {
   };
 
   return (
-    <section id="dip-radar" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
-      <div className="text-center max-w-3xl mx-auto space-y-3">
+    <section id="dip-radar" className="py-16 sm:py-24 px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 sm:space-y-12">
+      <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-widest uppercase border border-brand-ember/30">
           <Sparkles className="w-3.5 h-3.5 text-brand-ember" />
           <span>FLAVOR DYNAMICS · 7つの特製ソース</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-black font-syne tracking-tight text-brand-dark">
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-syne tracking-tight text-brand-dark">
           The 7 <span className="text-brand-ember">Proprietary</span> House Emulsions
         </h2>
-        <p className="text-zinc-600 text-sm sm:text-base font-sans leading-relaxed">
+        <p className="text-zinc-600 text-xs sm:text-base font-sans leading-relaxed">
           Every burger is engineered to pair with a specific sauce profile. Inspect our 5-axis tasting radar to discover your ideal balance of umami, heat, acid, sweetness, and wood smoke.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center">
         
-        {/* Radar SVG Panel (6 cols) */}
-        <div className="lg:col-span-6 relative flex flex-col justify-center items-center bg-brand-dark p-8 sm:p-10 rounded-3xl border border-brand-ember/30 shadow-2xl overflow-hidden">
-          <div className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+        {/* Radar SVG Panel (6 cols) with Responsive Widths */}
+        <div className="lg:col-span-6 relative flex flex-col justify-center items-center bg-brand-dark p-4 sm:p-8 rounded-3xl border border-brand-ember/30 shadow-2xl overflow-hidden w-full">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
             <svg viewBox="0 0 300 300" className="w-full h-full">
               {/* Concentric Reference Webs */}
               {[0.25, 0.5, 0.75, 1].map((r, idx) => (
@@ -123,8 +123,8 @@ export default function DipRadarVisualizer() {
               {/* Axis Spoke Lines */}
               {[0, 1, 2, 3, 4].map((i) => {
                 const angle = (Math.PI * 2 * i) / 5 - Math.PI / 2;
-                const x = 150 + 105 * Math.cos(angle);
-                const y = 150 + 105 * Math.sin(angle);
+                const x = 150 + 100 * Math.cos(angle);
+                const y = 150 + 100 * Math.sin(angle);
                 return (
                   <line
                     key={i}
@@ -152,47 +152,47 @@ export default function DipRadarVisualizer() {
             </svg>
 
             {/* Radar Metric Axis Labels */}
-            <span className="absolute top-1 text-[11px] font-mono font-bold text-brand-ember">UMAMI</span>
-            <span className="absolute right-1 top-1/3 text-[11px] font-mono font-bold text-brand-ember">HEAT</span>
-            <span className="absolute right-6 bottom-3 text-[11px] font-mono font-bold text-zinc-300">SWEET</span>
-            <span className="absolute left-6 bottom-3 text-[11px] font-mono font-bold text-brand-ember">SMOKE</span>
-            <span className="absolute left-1 top-1/3 text-[11px] font-mono font-bold text-zinc-300">ACID</span>
+            <span className="absolute top-1 text-[10px] sm:text-[11px] font-mono font-bold text-brand-ember">UMAMI</span>
+            <span className="absolute right-1 top-1/3 text-[10px] sm:text-[11px] font-mono font-bold text-brand-ember">HEAT</span>
+            <span className="absolute right-5 bottom-2 text-[10px] sm:text-[11px] font-mono font-bold text-zinc-300">SWEET</span>
+            <span className="absolute left-5 bottom-2 text-[10px] sm:text-[11px] font-mono font-bold text-brand-ember">SMOKE</span>
+            <span className="absolute left-1 top-1/3 text-[10px] sm:text-[11px] font-mono font-bold text-zinc-300">ACID</span>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-white/10 w-full flex items-center justify-between text-xs font-mono text-zinc-400">
-            <span>SELECTED: <strong className="text-white">{activeSauce.name}</strong></span>
+          <div className="mt-3 pt-3 sm:mt-4 sm:pt-4 border-t border-white/10 w-full flex items-center justify-between text-xs font-mono text-zinc-400">
+            <span>SELECTED: <strong className="text-white truncate max-w-[150px] sm:max-w-none inline-block align-bottom">{activeSauce.name}</strong></span>
             <span className="text-brand-ember font-bold bg-brand-ember/20 px-2 py-0.5 rounded text-white">₹{activeSauce.price}</span>
           </div>
         </div>
 
         {/* Sauce Selection List (6 cols) */}
-        <div className="lg:col-span-6 space-y-5">
-          <div className="space-y-2">
+        <div className="lg:col-span-6 space-y-4 sm:space-y-5 w-full">
+          <div className="space-y-1.5 sm:space-y-2">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-ember">
               The Dip Matrix · 7 Flavors
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black font-syne text-brand-dark">
+            <h3 className="text-xl sm:text-3xl font-black font-syne text-brand-dark">
               {activeSauce.name}
             </h3>
-            <p className="text-sm text-zinc-700 font-sans leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
               {activeSauce.notes}
             </p>
           </div>
 
-          {/* Grid of Sauce Selection Buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2.5">
+          {/* Grid of Sauce Selection Buttons (44px min height) */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-2.5">
             {SAUCES.map((sauce) => (
               <button
                 key={sauce.name}
                 onClick={() => setActiveSauce(sauce)}
-                className={`p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
+                className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between min-h-[64px] ${
                   activeSauce.name === sauce.name
                     ? 'bg-brand-dark text-white border-brand-ember shadow-lg ring-2 ring-brand-ember'
                     : 'bg-white text-brand-dark editorial-border-light hover:border-brand-ember shadow-sm'
                 }`}
               >
-                <div className="font-syne font-bold text-xs sm:text-sm">{sauce.name}</div>
-                <div className="flex items-center justify-between mt-2 font-mono text-[11px]">
+                <div className="font-syne font-bold text-xs sm:text-sm truncate">{sauce.name}</div>
+                <div className="flex items-center justify-between mt-1.5 font-mono text-[11px]">
                   <span className={activeSauce.name === sauce.name ? 'text-brand-ember font-bold' : 'text-zinc-500'}>
                     ₹{sauce.price}
                   </span>
@@ -205,10 +205,10 @@ export default function DipRadarVisualizer() {
           </div>
 
           {/* Add Dip Button */}
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               onClick={handleAddDip}
-              className="w-full py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/25 hover:brightness-105 transition"
+              className="w-full py-3.5 sm:py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/25 hover:brightness-105 transition min-h-[48px]"
             >
               {added ? (
                 <>
@@ -218,7 +218,7 @@ export default function DipRadarVisualizer() {
               ) : (
                 <>
                   <Plus className="w-4 h-4" />
-                  <span>Add {activeSauce.name} to Order (₹{activeSauce.price})</span>
+                  <span>Add {activeSauce.name} (₹{activeSauce.price})</span>
                 </>
               )}
             </button>

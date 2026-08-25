@@ -66,20 +66,20 @@ export default function OrderPage() {
   };
 
   return (
-    <div className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10 pb-32">
+    <div className="py-8 sm:py-10 px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 sm:space-y-10 pb-36 lg:pb-32">
       
       {/* Top Header & Search Banner */}
       <div className="space-y-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b editorial-border-light pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 border-b editorial-border-light pb-5 sm:pb-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-widest uppercase mb-2 border border-brand-ember/30">
               <Flame className="w-3.5 h-3.5 text-brand-ember" />
               <span>ONLINE ORDERING · D2C KITCHEN</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black font-syne tracking-tight text-brand-dark">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black font-syne tracking-tight text-brand-dark">
               Signature <span className="text-brand-ember">Flame-Seared</span> Burgers & Craft Dips
             </h1>
-            <p className="text-zinc-600 text-sm sm:text-base font-sans mt-1">
+            <p className="text-zinc-600 text-xs sm:text-base font-sans mt-1">
               Sector 8-B Flagship pickup, Curbside Hop, and Tricity doorstep delivery.
             </p>
           </div>
@@ -92,12 +92,12 @@ export default function OrderPage() {
               placeholder="Search burgers, sides, shakes..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white pl-10 pr-4 py-3 rounded-2xl border editorial-border text-xs sm:text-sm font-sans focus:outline-none focus:border-brand-ember shadow-sm"
+              className="w-full bg-white pl-10 pr-4 py-3 rounded-2xl border editorial-border text-xs sm:text-sm font-sans focus:outline-none focus:border-brand-ember shadow-sm min-h-[44px]"
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-brand-ember text-xs"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-brand-ember text-xs p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -106,15 +106,15 @@ export default function OrderPage() {
         </div>
 
         {/* Categories & Dietary Filters */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pt-2">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 pt-1">
           
-          {/* Category Tabs with Red Highlights */}
+          {/* Category Tabs with 44px touch targets */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
             {MENU_CATEGORIES.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-4.5 py-2.5 rounded-xl text-xs sm:text-sm font-syne font-bold whitespace-nowrap transition-all duration-200 border ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-syne font-bold whitespace-nowrap transition-all duration-200 border min-h-[44px] ${
                   selectedCategory === cat.id
                     ? 'bg-brand-ember text-white border-brand-ember shadow-md shadow-brand-ember/25'
                     : 'bg-white text-zinc-700 editorial-border-light hover:border-brand-ember hover:text-brand-ember'
@@ -127,10 +127,10 @@ export default function OrderPage() {
           </div>
 
           {/* Dietary Filters Pill */}
-          <div className="flex items-center gap-2 bg-white p-1 rounded-2xl border editorial-border self-start lg:self-auto shadow-sm font-mono text-xs">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-white p-1 rounded-2xl border editorial-border self-start lg:self-auto shadow-sm font-mono text-xs">
             <button
               onClick={() => setDietaryFilter('all')}
-              className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
+              className={`px-3 sm:px-3.5 py-2 min-h-[40px] rounded-xl font-bold transition ${
                 dietaryFilter === 'all' ? 'bg-brand-dark text-white shadow-sm' : 'text-zinc-500 hover:text-brand-ember'
               }`}
             >
@@ -138,7 +138,7 @@ export default function OrderPage() {
             </button>
             <button
               onClick={() => setDietaryFilter('veg')}
-              className={`px-3.5 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 sm:px-3.5 py-2 min-h-[40px] rounded-xl font-bold transition flex items-center gap-1.5 ${
                 dietaryFilter === 'veg' ? 'bg-[#2D5A27] text-white shadow-sm' : 'text-zinc-600 hover:text-[#2D5A27]'
               }`}
             >
@@ -147,7 +147,7 @@ export default function OrderPage() {
             </button>
             <button
               onClick={() => setDietaryFilter('non-veg')}
-              className={`px-3.5 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 sm:px-3.5 py-2 min-h-[40px] rounded-xl font-bold transition flex items-center gap-1.5 ${
                 dietaryFilter === 'non-veg' ? 'bg-[#7A1C16] text-white shadow-sm' : 'text-zinc-600 hover:text-[#7A1C16]'
               }`}
             >
@@ -159,7 +159,7 @@ export default function OrderPage() {
       </div>
 
       {/* Menu Item Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
         {filteredItems.map((item, idx) => {
           const isBurger = item.category === 'burgers';
           return (
@@ -173,7 +173,7 @@ export default function OrderPage() {
             >
               <div>
                 {/* Product Image & Badges */}
-                <div className="relative h-60 sm:h-64 overflow-hidden bg-zinc-100">
+                <div className="relative h-56 sm:h-64 overflow-hidden bg-zinc-100">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -215,19 +215,19 @@ export default function OrderPage() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 space-y-3">
+                <div className="p-5 sm:p-6 space-y-2.5 sm:space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-ember mb-0.5">
                         {item.tagline}
                       </div>
-                      <h3 className={`font-syne font-bold text-xl tracking-tight transition ${
+                      <h3 className={`font-syne font-bold text-lg sm:text-xl tracking-tight transition ${
                         isBurger && idx === 0 ? 'text-white group-hover:text-brand-ember' : 'text-brand-dark group-hover:text-brand-ember'
                       }`}>
                         {item.name}
                       </h3>
                     </div>
-                    <div className={`font-syne font-black text-2xl whitespace-nowrap ${
+                    <div className={`font-syne font-black text-xl sm:text-2xl whitespace-nowrap ${
                       isBurger && idx === 0 ? 'text-brand-ember' : 'text-brand-dark'
                     }`}>
                       ₹{item.price}
@@ -260,7 +260,7 @@ export default function OrderPage() {
 
                   {/* Pairing Recommendation */}
                   {item.pairWith && (
-                    <div className="pt-2 flex items-center gap-1.5 text-[11px] text-zinc-400">
+                    <div className="pt-1.5 flex items-center gap-1.5 text-[11px] text-zinc-400">
                       <Sparkles className="w-3 h-3 text-brand-ember flex-shrink-0" />
                       <span className="truncate font-sans">Pair: <strong className={isBurger && idx === 0 ? 'text-zinc-200' : 'text-zinc-700'}>{item.pairWith}</strong></span>
                     </div>
@@ -268,11 +268,11 @@ export default function OrderPage() {
                 </div>
               </div>
 
-              {/* Action Buttons Footer with Red Highlight Buttons */}
-              <div className="p-6 pt-0 flex items-center gap-3">
+              {/* Action Buttons Footer with 48px touch targets */}
+              <div className="p-5 sm:p-6 pt-0 flex items-center gap-2.5 sm:gap-3">
                 <button
                   onClick={() => handleOpenCustomize(item)}
-                  className={`p-3 rounded-xl border transition ${
+                  className={`p-3 rounded-xl border transition min-h-[48px] min-w-[48px] flex items-center justify-center ${
                     isBurger && idx === 0
                       ? 'bg-white/10 border-white/15 text-zinc-300 hover:text-white hover:border-brand-ember'
                       : 'bg-zinc-50 editorial-border hover:border-brand-ember text-zinc-600 hover:text-brand-ember'
@@ -284,7 +284,7 @@ export default function OrderPage() {
 
                 <button
                   onClick={() => addToCart(item, 1)}
-                  className="flex-1 py-3.5 px-4 rounded-xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-ember/25 transition transform active:scale-98"
+                  className="flex-1 py-3.5 px-4 rounded-xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-ember/25 transition transform active:scale-98 min-h-[48px]"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add to Order · ₹{item.price}</span>
@@ -295,25 +295,25 @@ export default function OrderPage() {
         })}
       </div>
 
-      {/* Sticky Bottom Cart Bar if items in cart */}
+      {/* Sticky Bottom Cart Bar (Positioned above mobile tab bar on small screens) */}
       {totalItemsCount > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-full max-w-xl px-4 animate-fade-in">
-          <div className="bg-brand-dark text-white p-4 rounded-3xl border border-brand-ember/40 shadow-2xl flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-ember flex items-center justify-center text-white font-mono font-bold">
+        <div className="fixed bottom-20 lg:bottom-6 left-1/2 -translate-x-1/2 z-40 w-full max-w-xl px-3 sm:px-4 animate-fade-in">
+          <div className="bg-brand-dark text-white p-3.5 sm:p-4 rounded-3xl border border-brand-ember/40 shadow-2xl flex items-center justify-between gap-3 sm:gap-4">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-ember flex items-center justify-center text-white font-mono font-bold text-sm">
                 {totalItemsCount}
               </div>
               <div>
-                <div className="text-xs font-mono text-zinc-400 uppercase">Tray Subtotal</div>
-                <div className="font-syne font-black text-xl text-white">₹{cartTotal}</div>
+                <div className="text-[10px] sm:text-xs font-mono text-zinc-400 uppercase">Tray Subtotal</div>
+                <div className="font-syne font-black text-lg sm:text-xl text-white">₹{cartTotal}</div>
               </div>
             </div>
 
             <button
               onClick={() => setIsCartOpen(true)}
-              className="px-6 py-3 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm flex items-center gap-2 shadow-lg shadow-brand-ember/30 transition"
+              className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 shadow-lg shadow-brand-ember/30 transition min-h-[44px]"
             >
-              <span>View Tray & Checkout</span>
+              <span>View Tray</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -322,24 +322,24 @@ export default function OrderPage() {
 
       {/* Customization Modal */}
       {customizingItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white w-full max-w-lg rounded-3xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl editorial-border">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white w-full max-w-lg rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl editorial-border">
             <div className="flex items-start justify-between">
               <div>
                 <span className="text-xs uppercase tracking-widest text-brand-ember font-mono font-bold">CUSTOMIZE SPEC</span>
-                <h3 className="font-syne font-black text-2xl text-brand-dark">{customizingItem.name}</h3>
+                <h3 className="font-syne font-black text-xl sm:text-2xl text-brand-dark">{customizingItem.name}</h3>
                 <p className="text-xs text-zinc-500 font-mono mt-0.5">{customizingItem.tagline}</p>
               </div>
               <button 
                 onClick={() => setCustomizingItem(null)}
-                className="w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600"
+                className="w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 min-h-[36px]"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Addon checkboxes */}
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               <div className="text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">
                 Select Upgrades & Extras:
               </div>
@@ -349,21 +349,21 @@ export default function OrderPage() {
                   <div
                     key={addon.id}
                     onClick={() => toggleAddon(addon)}
-                    className={`p-3.5 rounded-2xl border flex items-center justify-between cursor-pointer transition ${
+                    className={`p-3 sm:p-3.5 rounded-2xl border flex items-center justify-between cursor-pointer transition min-h-[48px] ${
                       isSelected 
                         ? 'bg-red-50 border-brand-ember text-brand-dark' 
                         : 'bg-zinc-50 editorial-border text-zinc-700 hover:border-brand-ember'
                     }`}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5 sm:gap-3">
                       <div className={`w-5 h-5 rounded-md border flex items-center justify-center ${
                         isSelected ? 'bg-brand-ember border-brand-ember text-white' : 'border-zinc-300 bg-white'
                       }`}>
                         {isSelected && <Check className="w-3.5 h-3.5" />}
                       </div>
-                      <span className="text-sm font-semibold">{addon.name}</span>
+                      <span className="text-xs sm:text-sm font-semibold">{addon.name}</span>
                     </div>
-                    <span className="font-mono text-sm font-bold text-brand-ember">+₹{addon.price}</span>
+                    <span className="font-mono text-xs sm:text-sm font-bold text-brand-ember">+₹{addon.price}</span>
                   </div>
                 );
               })}
@@ -372,15 +372,15 @@ export default function OrderPage() {
             {/* Total & Submit */}
             <div className="pt-4 border-t border-black/10 flex items-center justify-between gap-4">
               <div>
-                <div className="text-[11px] text-zinc-500 uppercase font-mono font-bold">Custom Total</div>
-                <div className="font-syne font-black text-2xl text-brand-dark">
+                <div className="text-[10px] sm:text-[11px] text-zinc-500 uppercase font-mono font-bold">Custom Total</div>
+                <div className="font-syne font-black text-xl sm:text-2xl text-brand-dark">
                   ₹{customizingItem.price + selectedAddons.reduce((acc, a) => acc + a.price, 0)}
                 </div>
               </div>
 
               <button
                 onClick={handleAddCustomizedToCart}
-                className="flex-1 py-3.5 px-6 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm shadow-xl shadow-brand-ember/25 transition"
+                className="flex-1 py-3.5 px-5 sm:px-6 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-xs sm:text-sm shadow-xl shadow-brand-ember/25 transition min-h-[48px]"
               >
                 Add Customized to Tray
               </button>
