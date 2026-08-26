@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Flame, MapPin, Clock, Menu, X, BookOpen, Compass, Utensils, Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
 import { UMAMI_BRAND_INFO } from '../../data/umamiMenuData';
 import AnimatedBrandLogo from '../common/AnimatedBrandLogo';
+import BrandLogo from '../common/BrandLogo';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,32 +90,18 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           
-          {/* Left: Animated Brand Logo & Typography */}
+          {/* Left: Upscaled Vector Brand Logo */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-h-[44px] shrink-0 pointer-events-auto">
-            <AnimatedBrandLogo 
+            <BrandLogo 
+              variant="light"
               size={isScrolled ? 'sm' : 'md'} 
-              className={`rounded-2xl shadow-md transition-all duration-300 border border-brand-gold/30 ${
-                isScrolled ? 'w-10 h-10 sm:w-11 sm:h-11' : 'w-11 h-11 sm:w-14 sm:h-14'
+              className={`transition-all duration-300 ${
+                isScrolled ? 'h-8 sm:h-9' : 'h-10 sm:h-12'
               }`} 
             />
-            <div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className={`font-syne font-black tracking-tight text-brand-vert group-hover:text-brand-ember transition-all leading-none ${
-                  isScrolled ? 'text-xl sm:text-2xl' : 'text-xl sm:text-2xl md:text-3xl'
-                }`}>
-                  UMAMI
-                </span>
-                <span className="text-xs sm:text-sm font-japanese font-bold text-brand-ember">
-                  旨味
-                </span>
-                <span className={`hidden sm:inline-block text-[9px] font-mono uppercase font-bold tracking-widest rounded bg-brand-vert text-brand-creme border border-brand-gold/40 overflow-hidden transition-all duration-300 ${isScrolled ? 'max-w-0 opacity-0 px-0 py-0 border-transparent' : 'max-w-xs opacity-100 px-1.5 py-0.5'}`}>
-                  SEC 8B · CHD
-                </span>
-              </div>
-              <p className={`text-[9px] text-brand-char-soft tracking-wider uppercase font-mono hidden sm:block mt-0.5 transition-all duration-300 overflow-hidden ${isScrolled ? 'max-h-0 opacity-0 mt-0' : 'max-h-10 opacity-100'}`}>
-                Japanese Fire-Grilled Burgers
-              </p>
-            </div>
+            <span className={`hidden sm:inline-block text-[9px] font-mono uppercase font-bold tracking-widest rounded bg-brand-vert text-brand-creme border border-brand-gold/40 overflow-hidden transition-all duration-300 ${isScrolled ? 'max-w-0 opacity-0 px-0 py-0 border-transparent' : 'max-w-xs opacity-100 px-2 py-0.5'}`}>
+              SEC 8B · CHD
+            </span>
           </Link>
 
           {/* Center-Right: Desktop Navigation Links (Smooth collapse) */}
@@ -188,14 +175,8 @@ export default function Navbar() {
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-brand-gold/20 pb-5">
                 <div className="flex items-center gap-2.5">
-                  <AnimatedBrandLogo size="sm" className="w-9 h-9 rounded-xl border border-brand-gold/30" />
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-syne font-black text-xl text-brand-creme">UMAMI</span>
-                      <span className="text-xs font-japanese font-bold text-brand-ember">旨味</span>
-                    </div>
-                    <div className="text-[9px] font-mono text-brand-creme/60">Sector 8B · Chandigarh</div>
-                  </div>
+                  <BrandLogo variant="dark" size="sm" className="h-8" />
+                  <div className="text-[9px] font-mono text-brand-creme/60 pl-1 border-l border-brand-gold/30">Sector 8B · Chandigarh</div>
                 </div>
 
                 {/* Close Button */}

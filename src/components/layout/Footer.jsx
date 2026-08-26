@@ -2,7 +2,7 @@ import React from 'react';
 import { UMAMI_BRAND_INFO } from '../../data/umamiMenuData';
 import { Flame, MapPin, Clock, Mail, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AnimatedBrandLogo from '../common/AnimatedBrandLogo';
+import BrandLogo from '../common/BrandLogo';
 
 export default function Footer() {
   return (
@@ -14,13 +14,7 @@ export default function Footer() {
           {/* Brand Col (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <AnimatedBrandLogo size="md" className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl border border-brand-gold/30" />
-              <div>
-                <span className="font-syne font-black text-2xl sm:text-3xl tracking-tight text-brand-creme block leading-none">
-                  UMAMI
-                </span>
-                <span className="text-xs font-japanese font-bold text-brand-ember mt-1 block">旨味 · SECTOR 8B</span>
-              </div>
+              <BrandLogo variant="dark" size="lg" className="h-12 sm:h-14" />
             </div>
 
             <p className="text-xs text-brand-creme/70 max-w-sm leading-relaxed font-sans">

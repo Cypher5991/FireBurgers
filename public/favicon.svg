@@ -1,31 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="fireGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#E23A0B"/>
-      <stop offset="50%" stop-color="#FF5722"/>
-      <stop offset="100%" stop-color="#FFC107"/>
-    </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E1E22"/>
-      <stop offset="100%" stop-color="#0F0F11"/>
-    </linearGradient>
-  </defs>
-  
-  <!-- Outer Rounded Badge -->
-  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
-  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="#E23A0B" stroke-width="12" stroke-opacity="0.6"/>
-  
-  <!-- Japanese Kanji '旨' (Umami) in Bold Calligraphic Style -->
-  <g fill="#FFFFFF" text-anchor="middle" font-family="'Syne', 'Shippori Mincho', 'Noto Sans JP', sans-serif">
-    <!-- Flame Motif Behind Kanji -->
-    <path d="M256 90 C220 160 170 200 170 270 C170 330 205 380 256 400 C307 380 342 330 342 270 C342 210 292 160 256 90 Z" fill="url(#fireGrad)" opacity="0.95"/>
-    <path d="M256 180 C235 225 205 250 205 295 C205 330 225 360 256 375 C287 360 307 330 307 295 C307 260 277 225 256 180 Z" fill="#FFF275"/>
-    
-    <!-- Central Kanji -->
-    <text x="256" y="325" font-size="160" font-weight="900" fill="#FFFFFF" letter-spacing="2">旨</text>
-  </g>
-  
-  <!-- Subtitle pill -->
-  <rect x="136" y="415" width="240" height="44" rx="22" fill="#E23A0B"/>
-  <text x="256" y="445" font-family="'Syne', sans-serif" font-size="22" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">UMAMI</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="22" fill="#1B4D3E"/>
+  <rect x="3" y="3" width="94" height="94" rx="19" fill="none" stroke="#9A7B2D" stroke-width="2.5" stroke-opacity="0.6"/>
+  <!-- Flame Orange Squiggle -->
+  <path d="M22 36 C30 20, 44 20, 52 36 S74 52, 82 36" stroke="#E25822" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+  <!-- Japanese Kanji 旨 (Umami) & Letter U -->
+  <text x="50" y="78" font-family="'Georgia', 'Spectral', serif" font-size="38" font-weight="900" fill="#F5EFE3" text-anchor="middle">U</text>
 </svg>
