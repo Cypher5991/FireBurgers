@@ -96,6 +96,25 @@
   animation-play-state: paused;
 }
 
+/* Animations for Floating Sidebar and Overlays */
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
 /* Safe area padding for modern mobile devices (iOS / Android) */
 .safe-area-pb {
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));

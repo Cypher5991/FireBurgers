@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Flame, MapPin, Clock, Menu, X, BookOpen, Compass, Utensils, Sparkles, ShoppingBag } from 'lucide-react';
+import { Flame, MapPin, Clock, Menu, X, BookOpen, Compass, Utensils, Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
 import { UMAMI_BRAND_INFO } from '../../data/umamiMenuData';
 import AnimatedBrandLogo from '../common/AnimatedBrandLogo';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,22 +17,35 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close sidebar on route change
   useEffect(() => {
-    setIsMobileMenuOpen(false);
+    setIsSidebarOpen(false);
   }, [location.pathname]);
 
+  // Lock body scroll when floating sidebar is open
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isSidebarOpen]);
+
   const navLinks = [
+    { to: '/', label: 'HOME SHOWCASE', icon: <Flame className="w-4 h-4" /> },
     { to: '/story', label: 'THE STORY', icon: <Compass className="w-4 h-4" /> },
     { to: '/menu', label: 'THE MENU', icon: <Utensils className="w-4 h-4" /> },
     { to: '/visit', label: 'VISIT US', icon: <MapPin className="w-4 h-4" /> },
     { to: '/journal', label: 'JOURNAL', icon: <BookOpen className="w-4 h-4" /> },
-    { to: '/order', label: 'ORDER', icon: <ShoppingBag className="w-4 h-4" /> },
+    { to: '/order', label: 'ORDER VIP PASS', icon: <ShoppingBag className="w-4 h-4" /> },
   ];
 
   return (
     <>
-      {/* Top Swiss Editorial Micro-Bar */}
+      {/* Top Editorial Micro-Bar */}
       <div className="bg-brand-dark text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 text-zinc-300 border-b border-white/10 font-mono w-full overflow-hidden">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 truncate">
@@ -60,7 +73,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Main Sticky Navbar */}
+      {/* Main Sticky Navbar with Left Animated Logo & Right Floating Actions */}
       <header
         className={`sticky top-0 z-40 transition-all duration-200 w-full ${
           isScrolled
@@ -70,9 +83,9 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           
-          {/* Logo & Brand Name */}
+          {/* Left: Floating Animated Brand Logo & Typography */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-h-[44px] shrink-0">
-            <AnimatedBrandLogo size="md" className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl" />
+            <AnimatedBrandLogo size="md" className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl shadow-md" />
             <div>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <span className="font-syne font-black text-xl sm:text-2xl md:text-3xl tracking-tight text-brand-dark group-hover:text-brand-ember transition leading-none">
@@ -91,9 +104,9 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
+          {/* Center-Right: Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-5 text-xs font-mono font-bold text-brand-dark/80">
-            {navLinks.map(link => {
+            {navLinks.slice(1).map(link => {
               const isActive = location.pathname === link.to;
               return (
                 <Link
@@ -111,7 +124,7 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Action Area */}
+          {/* Right: Floating Trigger & Sidebar Toggle Button */}
           <div className="flex items-center gap-2">
             {/* VIP Pass Button - Desktop & Tablet */}
             <Link
@@ -122,75 +135,116 @@ export default function Navbar() {
               <span className="text-xs font-bold tracking-wide">LAUNCH VIP PASS</span>
             </Link>
 
-            {/* Mobile Menu Hamburger Button */}
+            {/* Floating Right Sidebar Menu Toggle Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-brand-dark border editorial-border-light min-h-[44px] min-w-[44px] flex items-center justify-center transition active:scale-95"
-              aria-label="Toggle Navigation Menu"
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 sm:p-2.5 rounded-2xl bg-brand-dark hover:bg-black text-white border border-white/10 shadow-lg min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 transition active:scale-95 group"
+              aria-label="Open Floating Navigation Sidebar"
             >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-brand-ember" />
-              ) : (
-                <Menu className="w-5 h-5 text-brand-dark" />
-              )}
+              <Menu className="w-5 h-5 text-brand-ember group-hover:text-white transition" />
+              <span className="text-xs font-mono font-bold tracking-wider hidden xs:inline pr-1">
+                MENU
+              </span>
             </button>
           </div>
 
         </div>
+      </header>
 
-        {/* Mobile Navigation Drawer / Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden border-t editorial-border-light bg-white/98 backdrop-blur-xl px-4 py-4 space-y-2 animate-fade-in shadow-2xl">
-            <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest px-2 pb-1">
-              NAVIGATION DIRECTORY
-            </div>
-            <Link
-              to="/"
-              className={`flex items-center justify-between p-3 rounded-2xl text-sm font-syne font-bold transition min-h-[48px] ${
-                location.pathname === '/'
-                  ? 'bg-brand-ember text-white shadow-md shadow-brand-ember/25'
-                  : 'bg-zinc-50 hover:bg-red-50 text-brand-dark hover:text-brand-ember'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <Flame className={location.pathname === '/' ? 'text-white w-4 h-4' : 'text-brand-ember w-4 h-4'} />
-                <span>HOME SHOWCASE</span>
-              </div>
-            </Link>
-            {navLinks.map(link => {
-              const isActive = location.pathname === link.to;
-              return (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`flex items-center justify-between p-3 rounded-2xl text-sm font-syne font-bold transition min-h-[48px] ${
-                    isActive
-                      ? 'bg-brand-ember text-white shadow-md shadow-brand-ember/25'
-                      : 'bg-zinc-50 hover:bg-red-50 text-brand-dark hover:text-brand-ember'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className={isActive ? 'text-white' : 'text-brand-ember'}>{link.icon}</span>
-                    <span>{link.label}</span>
+      {/* Floating Right-Side Navigation Sidebar Drawer */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          
+          {/* Dimmed Backdrop Overlay */}
+          <div 
+            onClick={() => setIsSidebarOpen(false)}
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 animate-fade-in"
+          />
+
+          {/* Floating Sidebar Container (Slides in from the right) */}
+          <div className="absolute top-0 right-0 bottom-0 w-80 sm:w-96 max-w-[88vw] bg-[#141416] text-white border-l border-white/15 shadow-2xl p-6 sm:p-8 flex flex-col justify-between z-50 animate-slide-left overflow-y-auto">
+            
+            {/* Sidebar Top Header */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-5">
+                <div className="flex items-center gap-2.5">
+                  <AnimatedBrandLogo size="sm" className="w-9 h-9 rounded-xl" />
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-syne font-black text-xl text-white">UMAMI</span>
+                      <span className="text-xs font-japanese font-bold text-brand-ember">旨味</span>
+                    </div>
+                    <div className="text-[9px] font-mono text-zinc-400">Sector 8B · Chandigarh</div>
                   </div>
-                </Link>
-              );
-            })}
+                </div>
 
-            <div className="pt-2 border-t editorial-border-light">
+                {/* Close Button */}
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="p-2 rounded-xl bg-white/10 hover:bg-brand-ember text-white transition min-h-[40px] min-w-[40px] flex items-center justify-center active:scale-95"
+                  aria-label="Close Sidebar"
+                >
+                  <X className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="space-y-1.5">
+                <div className="text-[10px] font-mono uppercase text-brand-ember font-bold tracking-widest px-2 pb-1">
+                  EXPLORE ARCHIVE
+                </div>
+                {navLinks.map((link) => {
+                  const isActive = location.pathname === link.to;
+                  return (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setIsSidebarOpen(false)}
+                      className={`flex items-center justify-between p-3.5 rounded-2xl text-sm font-syne font-bold transition min-h-[48px] group ${
+                        isActive
+                          ? 'bg-brand-ember text-white shadow-lg shadow-brand-ember/30'
+                          : 'bg-white/[0.04] hover:bg-white/[0.08] text-zinc-200 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={isActive ? 'text-white' : 'text-brand-ember group-hover:scale-110 transition-transform'}>
+                          {link.icon}
+                        </span>
+                        <span>{link.label}</span>
+                      </div>
+                      <ArrowRight className={`w-4 h-4 transition-transform ${isActive ? 'text-white' : 'text-zinc-500 group-hover:translate-x-1'}`} />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Sidebar Bottom Footer Info */}
+            <div className="pt-6 border-t border-white/10 space-y-4">
+              <div className="bg-white/[0.04] p-4 rounded-2xl border border-white/5 space-y-1.5 font-mono text-xs">
+                <div className="text-brand-ember font-bold flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Booth No. 7, Inner Market</span>
+                </div>
+                <div className="text-zinc-400">Sector 8B, Chandigarh 160018</div>
+                <div className="text-[10px] text-zinc-500 pt-1">Operated by Nimantrit Foods</div>
+              </div>
+
               <Link
                 to="/order"
-                className="w-full flex items-center justify-center gap-2 bg-brand-ember text-white font-syne font-bold p-3.5 rounded-2xl shadow-lg shadow-brand-ember/30 text-sm min-h-[48px]"
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-full flex items-center justify-center gap-2 bg-brand-ember hover:bg-red-700 text-white font-syne font-bold p-4 rounded-2xl shadow-xl shadow-brand-ember/30 text-sm min-h-[48px] transition active:scale-98"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>CLAIM LAUNCH VIP PASS</span>
               </Link>
             </div>
-          </div>
-        )}
-      </header>
 
-      {/* Mobile App Bottom Tab Bar (lg:hidden) */}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Bottom Tab Dock (lg:hidden) */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-xl border-t editorial-border-light shadow-2xl flex items-center justify-around py-1 px-1 safe-area-pb w-full">
         <Link
           to="/"
