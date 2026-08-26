@@ -160,42 +160,45 @@ export default function BurgerShowcaseStage() {
           
           {/* Left Col: High-Impact Photography Showcase (7 Cols) */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="relative rounded-3xl overflow-hidden bg-brand-creme-3 border editorial-border shadow-2xl group">
+            <div className="rounded-3xl overflow-hidden bg-brand-creme-3 border editorial-border shadow-2xl group flex flex-col">
               
-              <img
-                src={activeImg}
-                alt={`${current.name} - UMAMI Japanese Burger`}
-                className="w-full h-[320px] sm:h-[440px] lg:h-[480px] object-cover transition-all duration-700 filter brightness-95 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+              {/* Image Container */}
+              <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[440px] shrink-0 overflow-hidden">
+                <img
+                  src={activeImg}
+                  alt={`${current.name} - UMAMI Japanese Burger`}
+                  className="w-full h-full object-cover transition-all duration-700 filter brightness-95 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
 
-              {/* Top Overlay Badges */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                <span className={`text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md ${
-                  current.dietary === 'veg' ? 'bg-brand-veg text-white' : 'bg-brand-nonveg text-white'
-                }`}>
-                  {current.dietary === 'veg' ? '🌿 Pure Vegetarian' : '🥩 Non-Veg Masterwork'}
-                </span>
+                {/* Top Overlay Badges */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                  <span className={`text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md ${
+                    current.dietary === 'veg' ? 'bg-brand-veg text-white' : 'bg-brand-nonveg text-white'
+                  }`}>
+                    {current.dietary === 'veg' ? '🌿 Pure Vegetarian' : '🥩 Non-Veg Masterwork'}
+                  </span>
 
-                <span className="text-xs font-mono font-bold bg-brand-vert-d/90 text-brand-creme border border-brand-gold/40 px-3 py-1 rounded-full backdrop-blur-md">
-                  {current.eyebrow}
-                </span>
+                  <span className="text-xs font-mono font-bold bg-brand-vert-d/90 text-brand-creme border border-brand-gold/40 px-3 py-1 rounded-full backdrop-blur-md">
+                    {current.eyebrow}
+                  </span>
+                </div>
               </div>
 
-              {/* Bottom Angle Switcher Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2 p-2 rounded-2xl bg-brand-vert-d/90 backdrop-blur-md border border-brand-gold/30">
-                <div className="flex items-center gap-1.5 pl-2 font-mono text-xs text-brand-creme">
+              {/* Bottom Angle Switcher (Normal Flow) */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-brand-vert-d text-brand-creme z-10">
+                <div className="flex items-center gap-1.5 pl-1 font-mono text-xs">
                   <Eye className="w-4 h-4 text-brand-ember" />
-                  <span className="hidden sm:inline font-bold">Photo Angle:</span>
+                  <span className="font-bold">Photo Angle:</span>
                 </div>
 
-                <div className="flex items-center gap-1.5 font-mono text-xs">
+                <div className="flex items-center gap-1.5 font-mono text-xs w-full sm:w-auto">
                   <button
                     onClick={() => setViewMode('hero')}
-                    className={`px-3.5 py-1.5 rounded-xl font-bold transition min-h-[36px] ${
+                    className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold transition min-h-[40px] ${
                       viewMode === 'hero'
                         ? 'bg-brand-ember text-white shadow-sm'
-                        : 'text-brand-creme/70 hover:text-white'
+                        : 'bg-white/10 text-brand-creme hover:bg-white/20'
                     }`}
                   >
                     Full View
@@ -203,10 +206,10 @@ export default function BurgerShowcaseStage() {
 
                   <button
                     onClick={() => setViewMode('macro')}
-                    className={`px-3.5 py-1.5 rounded-xl font-bold transition min-h-[36px] ${
+                    className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold transition min-h-[40px] ${
                       viewMode === 'macro'
                         ? 'bg-brand-ember text-white shadow-sm'
-                        : 'text-brand-creme/70 hover:text-white'
+                        : 'bg-white/10 text-brand-creme hover:bg-white/20'
                     }`}
                   >
                     Grill Macro Close-Up
