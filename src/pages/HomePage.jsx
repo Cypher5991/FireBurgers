@@ -80,7 +80,7 @@ export default function HomePage() {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden editorial-border shadow-2xl bg-[#141416] group">
               <img
-                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80"
+                src="/web/firebird.webp"
                 alt="UMAMI Japanese Fire-Grilled Burger on fresh Hokkaido milk bun"
                 className="w-full h-[380px] sm:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
               />
