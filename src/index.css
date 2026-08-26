@@ -3,8 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html, body {
     @apply font-sans bg-white text-brand-dark;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-syne font-bold tracking-tight text-brand-dark;
@@ -17,7 +30,7 @@
   background-image: 
     linear-gradient(to right, rgba(20, 20, 22, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(20, 20, 22, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-size: 28px 28px;
 }
 
 .canvas-texture {
@@ -25,13 +38,13 @@
   background-image: 
     linear-gradient(to right, rgba(20, 20, 22, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(20, 20, 22, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-size: 28px 28px;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -56,10 +69,6 @@
   border: 1.5px solid rgba(20, 20, 22, 0.12);
 }
 
-.double-rule {
-  border-top: 3px double #141416;
-}
-
 .deep-slate-panel {
   background: #141416;
   color: #F6F2EA;
@@ -73,31 +82,21 @@
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
 }
 
-.glass-panel {
-  background: rgba(246, 242, 234, 0.92);
-  backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(20, 20, 22, 0.1);
-  box-shadow: 0 4px 20px -2px rgba(20, 20, 22, 0.04);
+/* Kinetic Marquee Keyframe */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
-.glass-panel-glow {
-  background: rgba(246, 242, 234, 0.96);
-  backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(226, 58, 11, 0.35);
-  box-shadow: 0 10px 30px -4px rgba(226, 58, 11, 0.12);
+.animate-marquee {
+  animation: marquee 28s linear infinite;
 }
 
-.card-light {
-  background: #FFFFFF;
-  border: 1.5px solid rgba(20, 20, 22, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(20, 20, 22, 0.04);
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
-/* Studio Rim Lighting & Butter Glow */
-.rim-light {
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 35px rgba(226, 58, 11, 0.18));
-}
-
-.butter-gloss {
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(245, 166, 35, 0.25);
+/* Safe area padding for modern mobile devices (iOS / Android) */
+.safe-area-pb {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }

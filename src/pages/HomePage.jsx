@@ -41,10 +41,10 @@ export default function HomePage() {
             </div>
 
             {/* Quick CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full">
               <Link
                 to="/menu"
-                className="px-6 sm:px-8 py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm flex items-center gap-2 shadow-xl shadow-brand-ember/30 hover:scale-[1.02] transition min-h-[48px]"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-ember/30 hover:scale-[1.02] transition min-h-[48px]"
               >
                 <span>See the full menu</span>
                 <ArrowRight className="w-4 h-4" />
@@ -52,7 +52,7 @@ export default function HomePage() {
 
               <Link
                 to="/story"
-                className="px-6 sm:px-8 py-4 rounded-2xl bg-white border editorial-border hover:border-brand-ember text-brand-dark font-syne font-bold text-sm transition min-h-[48px] hover:shadow-md"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-white border editorial-border hover:border-brand-ember text-brand-dark font-syne font-bold text-sm transition min-h-[48px] hover:shadow-md flex items-center justify-center"
               >
                 <span>Our 15-Year Story</span>
               </Link>
