@@ -8,19 +8,28 @@ export default {
     extend: {
       colors: {
         brand: {
-          canvas: '#F6F2EA',      // Toasted Hokkaido milk bun canvas
-          dark: '#141416',        // Binchotan white oak charcoal
-          darker: '#0D0E10',      // Obsidian Black
-          ember: '#E23A0B',       // Hard-seared flame paprika (Primary)
-          glaze: '#F5A623',       // French butter & egg-yolk glaze
-          veg: '#2D5A27',         // Fresh Japanese shiso / wasabi
-          nonveg: '#7A1C16',      // Charred cured beef / smoke
-          umami: '#C89D7C',       // Toasted sesame & miso umami
-          beet: '#5B101E',        // Fermented beetroot balsamic
-          muted: '#8A8D93',       // Editorial Slate Gray
-          pearl: '#F6F2EA',       // Backward-compatible alias
-          orange: '#E23A0B',      // Backward-compatible alias
-          amber: '#F5A623',       // Backward-compatible alias
+          vert: '#1B4D3E',        // Café Vert Forest Green (Primary Brand)
+          'vert-d': '#123528',    // Deep Forest Shadow Green (Dark Panels & Hero)
+          'vert-l': '#2C6650',    // Sage Forest Green
+          dark: '#123528',        // Deep Forest Vert (Replaces old gray/black)
+          darker: '#0B231A',      // Ultra Deep Forest Night
+          creme: '#F5EFE3',       // Warm Editorial Biscuit Crème (Canvas background)
+          'creme-2': '#FBF8F1',   // Light Warm Off-White (Card background)
+          'creme-3': '#ECE3D2',   // Deep Biscuit Accent
+          canvas: '#F5EFE3',      // Primary Canvas
+          gold: '#9A7B2D',        // Burnished Antique Gold Ink
+          'gold-l': '#B89A4F',    // Light Warm Gold
+          'gold-text': '#7E6525', // High-contrast Gold Text
+          ember: '#E25822',       // Live Flame Orange Ember (Primary Accent)
+          'ember-d': '#C8461A',   // Deep Charred Ember
+          char: '#2B2B2B',        // Charcoal Ink
+          'char-soft': '#4A4A45', // Soft Charcoal Body
+          veg: '#1F7A34',         // Fresh Shiso / Pure Veg Green
+          nonveg: '#9C2A1F',      // Charred Cured Smoke Non-Veg
+          muted: '#7E857C',       // Muted Sage Slate Gray
+          pearl: '#F5EFE3',       // Backward-compatible alias
+          orange: '#E25822',      // Backward-compatible alias
+          amber: '#9A7B2D',       // Backward-compatible alias
         }
       },
       fontFamily: {

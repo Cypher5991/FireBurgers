@@ -135,10 +135,11 @@ async function runDesignAudit() {
 
     // Initial Navbar State
     const navInitial = await navPage.evaluate(() => {
+      const stickyEl = document.querySelector('div.sticky') || document.querySelector('header');
       const header = document.querySelector('header');
       const menuBtn = document.querySelector('button[aria-label="Open Floating Navigation Sidebar"]');
       const logo = document.querySelector('a[href="/"]');
-      const rect = header?.getBoundingClientRect();
+      const rect = stickyEl?.getBoundingClientRect();
       const style = header ? window.getComputedStyle(header) : null;
       
       return {
@@ -156,9 +157,10 @@ async function runDesignAudit() {
 
     // Scrolled Navbar State
     const navScrolled = await navPage.evaluate(() => {
+      const stickyEl = document.querySelector('div.sticky') || document.querySelector('header');
       const header = document.querySelector('header');
       const menuBtn = document.querySelector('button[aria-label="Open Floating Navigation Sidebar"]');
-      const rect = header?.getBoundingClientRect();
+      const rect = stickyEl?.getBoundingClientRect();
       const style = header ? window.getComputedStyle(header) : null;
       
       return {
