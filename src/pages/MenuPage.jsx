@@ -32,28 +32,31 @@ export default function MenuPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b editorial-border-light pb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase mb-2 border border-brand-ember/30">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-vert text-brand-creme text-xs font-mono font-bold uppercase mb-2 border border-brand-gold/30">
             <Flame className="w-3.5 h-3.5 text-brand-ember" />
             <span>GASTRONOMY ARCHIVE · 献立表</span>
           </div>
           
           {/* H1 as specified in Content Pack */}
-          <h1 className="text-3xl sm:text-5xl font-black font-syne tracking-tight text-brand-dark">
+          <h1 className="text-3xl sm:text-5xl font-black font-sans tracking-tight text-brand-vert">
             The Menu
           </h1>
-          <p className="text-zinc-600 text-sm sm:text-base font-sans mt-1">
-            There's a fifth taste. The Japanese named it umami. We named the place after it.
+          <div className="font-script text-2xl sm:text-3xl text-brand-gold pt-1">
+            "There's a fifth taste. We named the place after it."
+          </div>
+          <p className="text-brand-char-soft text-xs sm:text-sm font-sans mt-1">
+            Thick patties, live binchotan charcoal fire, and Hokkaido milk buns baked in-house daily.
           </p>
         </div>
 
         {/* Pre-launch Notification Badge */}
-        <div className="bg-red-50 border border-brand-ember/30 p-4 rounded-2xl space-y-1 max-w-sm">
+        <div className="bg-brand-creme-2 border border-brand-gold/30 p-4 rounded-2xl space-y-1 max-w-sm shadow-sm">
           <div className="text-[11px] font-mono font-bold uppercase text-brand-ember flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Pre-Launch Costing Mode</span>
           </div>
-          <p className="text-xs text-zinc-700 font-sans leading-relaxed">
-            Menu pricing is in final costing. Official prices unlock at our counter opening on <strong>1 October 2026</strong>.
+          <p className="text-xs text-brand-char font-sans leading-relaxed">
+            Menu pricing is in final costing. Official prices unlock at our counter opening on <strong className="text-brand-vert">1 October 2026</strong>.
           </p>
         </div>
       </div>

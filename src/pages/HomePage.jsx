@@ -5,6 +5,8 @@ import { UMAMI_BRAND_INFO, UMAMI_MENU_ITEMS, UMAMI_DIP_WALL } from '../data/umam
 import { UMAMI_JOURNAL_POSTS } from '../data/umamiJournalData';
 import KineticMarquee from '../components/home/KineticMarquee';
 import LazyVideoGif from '../components/common/LazyVideoGif';
+import BurgerShowcaseStage from '../components/home/BurgerShowcaseStage';
+import FlagshipDuoFeature from '../components/home/FlagshipDuoFeature';
 
 export default function HomePage() {
   const featuredBurgers = UMAMI_MENU_ITEMS.filter(i => i.sectionId === 'burgers');
@@ -210,95 +212,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Section: What's on the fire (The Menu Preview) */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b editorial-border-light pb-4">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase mb-1">
-              <Flame className="w-3.5 h-3.5 text-brand-ember" />
-              <span>THE MENU PREVIEW</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black font-syne text-brand-dark">
-              What's on the fire
-            </h2>
-            <p className="text-zinc-600 text-xs sm:text-sm font-sans mt-0.5">
-              Five burgers. Molten bombs that pour when you break them. Loaded fries, wings off the grill, and charred lemonade.
-            </p>
-          </div>
+      {/* 5. Highlight Showcase: Flagship Burgers Interactive Stage */}
+      <BurgerShowcaseStage />
 
-          <Link
-            to="/menu"
-            className="px-5 py-3 rounded-xl bg-brand-dark text-white font-syne font-bold text-xs sm:text-sm hover:bg-brand-ember transition flex items-center gap-2 self-start md:self-auto min-h-[44px]"
-          >
-            <span>See the full menu</span>
-            <ArrowRight className="w-4 h-4 text-brand-ember" />
-          </Link>
-        </div>
+      {/* 6. Highlight Showcase: The Pinnacle Duo (The Firebird & The Volcano) */}
+      <FlagshipDuoFeature />
 
-        {/* Featured Burgers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredBurgers.slice(0, 3).map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-3xl overflow-hidden editorial-border shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="relative h-56 overflow-hidden bg-zinc-100">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full ${
-                      item.dietary === 'veg' ? 'bg-[#2D5A27] text-white' : 'bg-[#7A1C16] text-white'
-                    }`}>
-                      {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 space-y-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] font-mono font-bold uppercase text-brand-ember">{item.protein}</span>
-                      <h3 className="font-syne font-bold text-lg text-brand-dark">{item.name}</h3>
-                    </div>
-                  </div>
-                  <p className="text-xs text-zinc-600 font-sans leading-relaxed line-clamp-2">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-5 pt-0">
-                <div className="p-2.5 rounded-xl bg-zinc-50 border editorial-border-light text-[11px] font-mono text-zinc-500 flex items-center justify-between">
-                  <span>Price Reveal at Opening</span>
-                  <span className="font-bold text-brand-ember">1 Oct 2026</span>
-                </div>
+      {/* 7. Dip Wall Section */}
+      <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="deep-slate-panel p-6 sm:p-8 rounded-3xl border-brand-gold/30 shadow-2xl space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span className="text-xs font-mono font-bold text-brand-gold uppercase tracking-widest">
+                THE 7 DIP WALL · ディップ
+              </span>
+              <div className="font-script text-2xl text-brand-ember">
+                "Big Brother & Little Brother flavor pairings"
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Dip Wall Marquee Strip */}
-        <div className="deep-slate-panel p-6 rounded-3xl border-brand-ember/20 shadow-xl space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold text-brand-ember uppercase">THE 7 DIP WALL</span>
-            <span className="text-[11px] font-mono text-zinc-400">Add any with your order</span>
+            <span className="text-xs font-mono text-brand-creme/70">Pair any dip with your order</span>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 text-center">
             {UMAMI_DIP_WALL.map(dip => (
-              <div key={dip.id} className="bg-white/[0.05] p-2.5 rounded-xl border border-white/5">
-                <div className="font-syne font-bold text-xs text-white truncate">{dip.name}</div>
-                <div className="text-[10px] text-brand-ember font-mono">{dip.subtitle}</div>
+              <div key={dip.id} className="bg-white/[0.06] p-3 rounded-2xl border border-brand-gold/20 hover:border-brand-ember transition">
+                <div className="font-sans font-bold text-xs text-brand-creme truncate">{dip.name}</div>
+                <div className="text-[10px] text-brand-gold font-mono pt-0.5">{dip.subtitle}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. Section: Recent Journal Articles (Posts 1-3) */}
+      {/* 8. Section: Recent Journal Articles (Posts 1-3) */}
       <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b editorial-border-light pb-4">
           <div>

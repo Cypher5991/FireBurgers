@@ -33,11 +33,14 @@ export default {
         }
       },
       fontFamily: {
-        syne: ['Syne', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-        editorial: ['"Inter Tight"', 'sans-serif'],
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
+        syne: ['Montserrat', 'sans-serif'], // Backward-compatible alias
+        inter: ['Montserrat', 'sans-serif'], // Backward-compatible alias
+        script: ['"Great Vibes"', 'cursive'],
+        accent: ['"Great Vibes"', 'cursive'],
         japanese: ['"Shippori Mincho"', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
         'rim': '0 20px 40px -15px rgba(0, 0, 0, 0.15), 0 0 25px 2px rgba(255, 85, 0, 0.12)',

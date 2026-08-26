@@ -40,8 +40,15 @@
     box-sizing: border-box;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-syne font-bold tracking-tight text-brand-vert;
+    @apply font-sans font-black tracking-tight text-brand-vert;
   }
+}
+
+/* Great Vibes Decorative Script Helper */
+.script-accent {
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 /* Minimalist Soft Warm Tile Grid Pattern on Crème */

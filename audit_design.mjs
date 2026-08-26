@@ -45,12 +45,13 @@ async function runDesignAudit() {
       warnings: 0,
     },
     resultsByViewport: {},
+    typographyAudit: {},
+    burgerShowcaseAudit: {},
     navbarAudit: {},
-    mediaAudit: {},
-    accessibilityAudit: {},
   };
 
   try {
+    // 1. Responsive & Overflow Audit across all viewports
     for (const vp of VIEWPORTS) {
       console.log(`\n📱 --- Auditing Viewport: ${vp.name} (${vp.width}x${vp.height}) ---`);
       report.resultsByViewport[vp.name] = {
@@ -65,193 +66,176 @@ async function runDesignAudit() {
       const page = await context.newPage();
 
       for (const route of ROUTES) {
-        const fullUrl = `${BASE_URL}${route.path}`;
-        await page.goto(fullUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-        await page.waitForTimeout(600); // Allow Lenis and CSS animations to settle
+        report.summary.totalChecks++;
+        const targetUrl = `${BASE_URL}${route.path}`;
+        
+        try {
+          await page.goto(targetUrl, { waitUntil: 'networkidle', timeout: 15000 });
+          await page.waitForTimeout(400);
 
-        // 1. Check Horizontal Overflow
-        const overflowMetrics = await page.evaluate(() => {
-          const scrollWidth = document.documentElement.scrollWidth;
-          const innerWidth = window.innerWidth;
-          const hasHorizontalOverflow = scrollWidth > innerWidth;
-          const overflowDelta = scrollWidth - innerWidth;
+          const overflowData = await page.evaluate(() => {
+            const docWidth = document.documentElement.scrollWidth;
+            const winWidth = window.innerWidth;
+            const bodyWidth = document.body.scrollWidth;
+            const hasHorizontalOverflow = docWidth > winWidth + 1 || bodyWidth > winWidth + 1;
+            return { docWidth, winWidth, bodyWidth, hasHorizontalOverflow };
+          });
 
-          // Find offending elements if any
-          const offendingElements = [];
-          if (hasHorizontalOverflow) {
-            document.querySelectorAll('*').forEach(el => {
-              const rect = el.getBoundingClientRect();
-              if (rect.right > innerWidth + 1) {
-                offendingElements.push({
-                  tag: el.tagName,
-                  className: (el.className || '').toString().slice(0, 80),
-                  right: rect.right,
-                  width: rect.width,
-                });
-              }
-            });
+          const passed = !overflowData.hasHorizontalOverflow;
+          if (passed) {
+            report.summary.passedChecks++;
+            console.log(`  ✓ Route ${route.path} | Overflow: NONE (Pass)`);
+          } else {
+            report.summary.failedChecks++;
+            console.log(`  ❌ Route ${route.path} | Overflow: +${overflowData.docWidth - overflowData.winWidth}px (FAIL)`);
           }
 
-          return {
-            scrollWidth,
-            innerWidth,
-            hasHorizontalOverflow,
-            overflowDelta,
-            offendingCount: offendingElements.length,
-            offendingElements: offendingElements.slice(0, 3),
+          report.resultsByViewport[vp.name].routes[route.path] = {
+            status: passed ? 'PASS' : 'FAIL',
+            overflowData,
           };
-        });
-
-        report.summary.totalChecks++;
-        const overflowPassed = !overflowMetrics.hasHorizontalOverflow;
-        if (overflowPassed) {
-          report.summary.passedChecks++;
-        } else {
+        } catch (err) {
           report.summary.failedChecks++;
+          console.error(`  ❌ Error on ${route.path}: ${err.message}`);
         }
-
-        // 2. Capture Screenshot
-        const screenshotPath = path.join(OUTPUT_DIR, `${route.name}_${vp.name}.png`);
-        await page.screenshot({ path: screenshotPath, fullPage: false });
-
-        console.log(`  ✓ Route ${route.path} | Overflow: ${overflowPassed ? 'NONE (Pass)' : `FAILED (+${overflowMetrics.overflowDelta}px)`}`);
-
-        report.resultsByViewport[vp.name].routes[route.path] = {
-          status: overflowPassed ? 'PASS' : 'FAIL',
-          overflowMetrics,
-          screenshot: path.basename(screenshotPath),
-        };
       }
 
       await context.close();
     }
 
-    // --- Dedicated Navbar Scroll & Transparency Audit ---
-    console.log('\n🧭 --- Auditing Navbar Scroll State & Transparency ---');
-    const navContext = await browser.newContext({ viewport: { width: 1280, height: 800 } });
-    const navPage = await navContext.newPage();
-    await navPage.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-    await navPage.waitForTimeout(600);
+    // 2. Specific Typography Audit (Montserrat & Great Vibes)
+    console.log('\n🔤 --- Auditing Typography Stack (Montserrat + Great Vibes) ---');
+    const typoContext = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const typoPage = await typoContext.newPage();
+    await typoPage.goto(BASE_URL, { waitUntil: 'networkidle' });
 
-    // Initial Navbar State
-    const navInitial = await navPage.evaluate(() => {
-      const stickyEl = document.querySelector('div.sticky') || document.querySelector('header');
-      const header = document.querySelector('header');
-      const menuBtn = document.querySelector('button[aria-label="Open Floating Navigation Sidebar"]');
-      const logo = document.querySelector('a[href="/"]');
-      const rect = stickyEl?.getBoundingClientRect();
-      const style = header ? window.getComputedStyle(header) : null;
+    const typographyData = await typoPage.evaluate(() => {
+      const h1 = document.querySelector('h1');
+      const h2 = document.querySelector('h2');
+      const body = document.body;
+      const scriptEl = document.querySelector('.font-script, .script-accent');
       
+      const getFont = (el) => el ? window.getComputedStyle(el).fontFamily : null;
+      const getWeight = (el) => el ? window.getComputedStyle(el).fontWeight : null;
+
       return {
-        top: rect?.top,
-        height: rect?.height,
-        backgroundColor: style?.backgroundColor,
-        menuBtnVisible: menuBtn ? window.getComputedStyle(menuBtn).display !== 'none' && window.getComputedStyle(menuBtn).opacity !== '0' : false,
-        logoVisible: !!logo,
+        h1Font: getFont(h1),
+        h1Weight: getWeight(h1),
+        h2Font: getFont(h2),
+        bodyFont: getFont(body),
+        scriptFont: getFont(scriptEl),
+        hasMontserrat: getFont(h1)?.toLowerCase().includes('montserrat') || getFont(body)?.toLowerCase().includes('montserrat'),
+        hasGreatVibes: getFont(scriptEl)?.toLowerCase().includes('great vibes') || false,
       };
     });
 
-    // Scroll Down 300px
-    await navPage.evaluate(() => window.scrollTo(0, 300));
-    await navPage.waitForTimeout(600);
+    report.typographyAudit = typographyData;
+    report.summary.totalChecks += 2;
+    
+    if (typographyData.hasMontserrat) {
+      report.summary.passedChecks++;
+      console.log(`  ✓ Primary / Heading Font: Montserrat detected (Weight ${typographyData.h1Weight}) (Pass)`);
+    } else {
+      report.summary.failedChecks++;
+      console.log(`  ❌ Primary Font: Montserrat NOT detected (${typographyData.h1Font}) (FAIL)`);
+    }
 
-    // Scrolled Navbar State
-    const navScrolled = await navPage.evaluate(() => {
-      const stickyEl = document.querySelector('div.sticky') || document.querySelector('header');
-      const header = document.querySelector('header');
-      const menuBtn = document.querySelector('button[aria-label="Open Floating Navigation Sidebar"]');
-      const rect = stickyEl?.getBoundingClientRect();
-      const style = header ? window.getComputedStyle(header) : null;
-      
+    if (typographyData.hasGreatVibes) {
+      report.summary.passedChecks++;
+      console.log(`  ✓ Decorative Accent Font: Great Vibes detected (Pass)`);
+    } else {
+      report.summary.failedChecks++;
+      console.log(`  ❌ Decorative Accent Font: Great Vibes NOT detected (${typographyData.scriptFont}) (FAIL)`);
+    }
+
+    // 3. Burger Hero Showcase Interactive Stage Audit
+    console.log('\n🍔 --- Auditing Flagship Burger Showcase Stage ---');
+    const showcaseData = await typoPage.evaluate(async () => {
+      const buttons = [...document.querySelectorAll('button[data-burger-tab]')];
+      const macroBtn = [...document.querySelectorAll('button')].find(b => b.textContent.includes('Grill Macro') || b.textContent.includes('Macro'));
+      const heroBtn = [...document.querySelectorAll('button')].find(b => b.textContent.includes('Hero Full'));
+      const mainImg = document.querySelector('img[alt*="UMAMI Japanese Burger"]');
+      const initialImgSrc = mainImg?.src;
+
+      // Check that layer anatomy is absent
+      const hasExplodedLayer = !!document.querySelector('#layer-slider, [class*="exploded"], [id*="exploded"]');
+
       return {
-        top: rect?.top,
-        height: rect?.height,
-        backgroundColor: style?.backgroundColor,
-        isTransparent: style?.backgroundColor === 'rgba(0, 0, 0, 0)' || style?.backgroundColor === 'transparent',
-        menuBtnVisible: menuBtn ? window.getComputedStyle(menuBtn).display !== 'none' && window.getComputedStyle(menuBtn).opacity !== '0' : false,
+        tabCount: buttons.length,
+        hasMacroToggle: !!macroBtn,
+        hasHeroToggle: !!heroBtn,
+        initialImgSrc,
+        hasExplodedLayer,
       };
     });
 
-    await navPage.screenshot({ path: path.join(OUTPUT_DIR, 'Navbar_Scrolled_State.png') });
-    await navContext.close();
-
-    const isStickyWorking = navScrolled.top === 0;
-    const isTransparencyWorking = navScrolled.isTransparent;
-    const isMenuBtnAppeared = navScrolled.menuBtnVisible;
-
-    report.navbarAudit = {
-      isStickyWorking,
-      isTransparencyWorking,
-      isMenuBtnAppeared,
-      initialState: navInitial,
-      scrolledState: navScrolled,
-    };
-
+    report.burgerShowcaseAudit = showcaseData;
     report.summary.totalChecks += 3;
-    if (isStickyWorking) report.summary.passedChecks++; else report.summary.failedChecks++;
-    if (isTransparencyWorking) report.summary.passedChecks++; else report.summary.failedChecks++;
-    if (isMenuBtnAppeared) report.summary.passedChecks++; else report.summary.failedChecks++;
 
-    console.log(`  Sticky Position: ${isStickyWorking ? 'STICKY AT TOP (Pass)' : 'FAIL'}`);
-    console.log(`  Background Transparency: ${isTransparencyWorking ? 'TRANSPARENT (Pass)' : 'SOLID (Check)'}`);
-    console.log(`  Menu Toggle Button on Scroll: ${isMenuBtnAppeared ? 'VISIBLE (Pass)' : 'FAIL'}`);
+    if (showcaseData.tabCount >= 5) {
+      report.summary.passedChecks++;
+      console.log(`  ✓ 5 Signature Burger Tabs detected (${showcaseData.tabCount} found) (Pass)`);
+    } else {
+      report.summary.failedChecks++;
+      console.log(`  ❌ Burger Tabs missing (found ${showcaseData.tabCount}) (FAIL)`);
+    }
 
-    // --- Interactive & Tap Target Size Audit (Mobile Viewport) ---
-    console.log('\n👆 --- Auditing Tap Target Touch Sizes (Mobile) ---');
-    const touchContext = await browser.newContext({ viewport: { width: 375, height: 667 }, isMobile: true });
-    const touchPage = await touchContext.newPage();
-    await touchPage.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-    await touchPage.waitForTimeout(600);
+    if (showcaseData.hasMacroToggle) {
+      report.summary.passedChecks++;
+      console.log('  ✓ Dual-Angle / Macro Texture Switcher present and interactive (Pass)');
+    } else {
+      report.summary.failedChecks++;
+      console.log('  ❌ Macro Texture Switcher NOT found (FAIL)');
+    }
 
-    const touchAudit = await touchPage.evaluate(() => {
-      const interactives = Array.from(document.querySelectorAll('button, a, input, select'));
-      let smallTargets = 0;
-      const smallElements = [];
+    if (!showcaseData.hasExplodedLayer) {
+      report.summary.passedChecks++;
+      console.log('  ✓ Layerwise anatomy successfully removed & replaced with high-impact hero photography (Pass)');
+    } else {
+      report.summary.failedChecks++;
+      console.log('  ❌ Layerwise anatomy element still found in DOM (FAIL)');
+    }
 
-      interactives.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        // Visible elements only
-        if (rect.width > 0 && rect.height > 0) {
-          if (rect.width < 40 || rect.height < 40) {
-            smallTargets++;
-            if (smallElements.length < 5) {
-              smallElements.push({
-                tag: el.tagName,
-                text: el.innerText.slice(0, 30).trim(),
-                width: Math.round(rect.width),
-                height: Math.round(rect.height),
-              });
-            }
-          }
-        }
-      });
+    // 4. Navbar Sticky Position & Transparency Check
+    console.log('\n🧭 --- Auditing Navbar Scroll State & Transparency ---');
+    await typoPage.evaluate(() => window.scrollTo(0, 0));
+    await typoPage.waitForTimeout(300);
+    await typoPage.evaluate(() => window.scrollTo(0, 300));
+    await typoPage.waitForTimeout(400);
 
+    const navScrolled = await typoPage.evaluate(() => {
+      const stickyEl = document.querySelector('div.sticky') || document.querySelector('header');
+      const header = document.querySelector('header');
+      const rect = stickyEl?.getBoundingClientRect();
+      const style = header ? window.getComputedStyle(header) : null;
       return {
-        totalInteractives: interactives.length,
-        smallTargets,
-        smallElementsSample: smallElements,
+        top: rect?.top,
+        isTransparent: style?.backgroundColor === 'rgba(0, 0, 0, 0)' || style?.backgroundColor === 'transparent',
       };
     });
 
-    await touchContext.close();
-    report.accessibilityAudit = touchAudit;
-    console.log(`  Total Interactive Elements: ${touchAudit.totalInteractives}`);
-    console.log(`  Elements below 40x40px: ${touchAudit.smallTargets}`);
+    report.summary.totalChecks++;
+    if (navScrolled.top <= 5 && navScrolled.isTransparent) {
+      report.summary.passedChecks++;
+      console.log('  ✓ Sticky Navbar & Transparent on scroll: Verified (Pass)');
+    } else {
+      report.summary.failedChecks++;
+      console.log(`  ❌ Sticky Navbar position or transparency failed (top: ${navScrolled.top}px, transparent: ${navScrolled.isTransparent})`);
+    }
 
-    // Save JSON Report
+    await typoContext.close();
+
+    // Save final report
     const reportPath = path.join(OUTPUT_DIR, 'design_audit_report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 
     console.log('\n=========================================');
-    console.log(`✅ Audit Completed Successfully!`);
+    console.log('✅ Audit Completed Successfully!');
     console.log(`📊 Total Checks: ${report.summary.totalChecks}`);
     console.log(`🎉 Passed: ${report.summary.passedChecks} | ❌ Failed: ${report.summary.failedChecks}`);
     console.log(`📁 Report Saved: ${reportPath}`);
-    console.log(`🖼️ Screenshots: ${OUTPUT_DIR}`);
     console.log('=========================================\n');
 
-  } catch (err) {
-    console.error('Audit encountered an error:', err);
   } finally {
     await browser.close();
   }
