@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Flame, MapPin, Clock, Menu, X, BookOpen, Compass, Utensils, Sparkles, ShoppingBag } from 'lucide-react';
 import { UMAMI_BRAND_INFO } from '../../data/umamiMenuData';
+import AnimatedBrandLogo from '../common/AnimatedBrandLogo';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,9 +75,7 @@ export default function Navbar() {
           
           {/* Logo & Brand Name */}
           <Link to="/" className="flex items-center gap-2 sm:gap-2.5 group min-h-[44px] shrink-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-ember flex items-center justify-center text-white shadow-lg shadow-brand-ember/30 group-hover:scale-105 transition transform">
-              <Flame className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            </div>
+            <AnimatedBrandLogo size="md" className="w-9 h-9 sm:w-10 sm:h-10" />
             <div>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <span className="font-syne font-black text-xl sm:text-2xl tracking-tight text-brand-dark group-hover:text-brand-ember transition">

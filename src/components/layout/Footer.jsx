@@ -2,6 +2,7 @@ import React from 'react';
 import { UMAMI_BRAND_INFO } from '../../data/umamiMenuData';
 import { Flame, MapPin, Clock, Mail, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AnimatedBrandLogo from '../common/AnimatedBrandLogo';
 
 export default function Footer() {
   return (
@@ -13,9 +14,7 @@ export default function Footer() {
           {/* Brand Col (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-brand-ember flex items-center justify-center text-white shadow-lg shadow-brand-ember/25">
-                <Flame className="w-5 h-5 text-white" />
-              </div>
+              <AnimatedBrandLogo size="md" className="w-10 h-10" />
               <span className="font-syne font-black text-2xl tracking-tight text-white">
                 UMAMI
               </span>

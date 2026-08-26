@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Flame, Utensils, MapPin, ArrowRight } from 'lucide-react';
+import { Utensils, MapPin, ArrowRight } from 'lucide-react';
+import AnimatedBrandLogo from '../components/common/AnimatedBrandLogo';
 
 export default function NotFoundPage() {
   return (
     <div className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-2xl mx-auto text-center space-y-8">
-      <div className="w-16 h-16 rounded-3xl bg-brand-dark text-brand-ember flex items-center justify-center mx-auto border border-brand-ember/30 shadow-xl">
-        <Flame className="w-8 h-8" />
+      <div className="flex justify-center">
+        <AnimatedBrandLogo size="lg" className="w-16 h-16 rounded-3xl" />
       </div>
 
       <div className="space-y-3">
