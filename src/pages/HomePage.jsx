@@ -4,6 +4,7 @@ import { Flame, ArrowRight, Clock, MapPin, Sparkles, BookOpen, Compass, ShieldCh
 import { UMAMI_BRAND_INFO, UMAMI_MENU_ITEMS, UMAMI_DIP_WALL } from '../data/umamiMenuData';
 import { UMAMI_JOURNAL_POSTS } from '../data/umamiJournalData';
 import KineticMarquee from '../components/home/KineticMarquee';
+import LazyVideoGif from '../components/common/LazyVideoGif';
 
 export default function HomePage() {
   const featuredBurgers = UMAMI_MENU_ITEMS.filter(i => i.sectionId === 'burgers');
@@ -192,11 +193,13 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
-            <img
-              src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80"
-              alt="Japanese fire grill craftsmanship"
-              className="w-full h-56 sm:h-64 object-cover rounded-2xl editorial-border"
-            />
+            <div className="rounded-2xl overflow-hidden editorial-border shadow-sm">
+              <LazyVideoGif
+                className="w-full h-56 sm:h-64 rounded-2xl"
+                aspectRatio="auto"
+                alt="UMAMI Live Fire Charcoal Grilling"
+              />
+            </div>
             <img
               src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80"
               alt="Sector 8B evening dining atmosphere"

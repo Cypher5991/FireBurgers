@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Compass, Flame, Clock, MapPin, ArrowRight, ShieldCheck } from 'lucide-react';
 import { UMAMI_BRAND_INFO } from '../data/umamiMenuData';
+import LazyVideoGif from '../components/common/LazyVideoGif';
 
 export default function StoryPage() {
   return (
@@ -44,12 +45,12 @@ export default function StoryPage() {
           </p>
         </div>
 
-        {/* Feature Image */}
+        {/* Feature Lazy Loaded Fire Video / GIF */}
         <div className="rounded-3xl overflow-hidden editorial-border shadow-xl bg-zinc-900 my-8">
-          <img
-            src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80"
-            alt="UMAMI Japanese Fire Grill Craft in Sector 8B Chandigarh"
-            className="w-full h-72 sm:h-96 object-cover"
+          <LazyVideoGif
+            className="w-full h-72 sm:h-96"
+            alt="UMAMI Japanese Live Fire Charcoal Craft in Sector 8B Chandigarh"
+            aspectRatio="16/9"
           />
         </div>
 
