@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { Flame } from 'lucide-react';
 
 export default function AnimatedBrandLogo({ 
   size = 'md', 
   className = '', 
-  showIconOverlay = true 
 }) {
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const sizeClasses = {
-    sm: 'w-8 h-8 rounded-lg',
-    md: 'w-10 h-10 rounded-xl',
-    lg: 'w-14 h-14 rounded-2xl',
+    sm: 'w-10 h-10 rounded-xl',
+    md: 'w-13 h-13 sm:w-16 sm:h-16 rounded-2xl',
+    lg: 'w-20 h-20 rounded-3xl',
+    xl: 'w-24 h-24 rounded-3xl',
   };
 
   const selectedSize = sizeClasses[size] || sizeClasses.md;
 
   return (
     <div 
-      className={`relative overflow-hidden shrink-0 bg-brand-dark flex items-center justify-center border border-brand-ember/40 shadow-lg shadow-brand-ember/30 group-hover:scale-105 group-hover:border-brand-ember transition transform duration-300 ${selectedSize} ${className}`}
+      className={`relative overflow-hidden shrink-0 bg-brand-dark flex items-center justify-center border-2 border-brand-ember/50 shadow-xl shadow-brand-ember/25 group-hover:scale-105 group-hover:border-brand-ember transition transform duration-300 ${selectedSize} ${className}`}
     >
       {/* Fallback & Poster */}
       <img
@@ -37,7 +36,7 @@ export default function AnimatedBrandLogo({
         playsInline
         preload="auto"
         onCanPlay={() => setHasLoaded(true)}
-        className={`w-full h-full object-cover filter brightness-110 contrast-125 transition-opacity duration-500 ${
+        className={`w-full h-full object-cover filter brightness-105 contrast-115 transition-opacity duration-500 ${
           hasLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         aria-hidden="true"
@@ -46,14 +45,7 @@ export default function AnimatedBrandLogo({
         <source src="/videos/umami-fire.webm" type="video/webm" />
       </video>
 
-      {/* Subtle Ember Flare & Flame Silhouette Overlay */}
-      {showIconOverlay && (
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 flex items-center justify-center pointer-events-none">
-          <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-90 group-hover:scale-110 transition-transform" />
-        </div>
-      )}
-
-      {/* Inner Rim Glow */}
+      {/* Clean Edge Rim Accent */}
       <div className="absolute inset-0 rounded-[inherit] border border-white/20 pointer-events-none" />
     </div>
   );

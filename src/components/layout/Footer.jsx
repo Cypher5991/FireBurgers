@@ -13,12 +13,14 @@ export default function Footer() {
           
           {/* Brand Col (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <AnimatedBrandLogo size="md" className="w-10 h-10" />
-              <span className="font-syne font-black text-2xl tracking-tight text-white">
-                UMAMI
-              </span>
-              <span className="text-xs font-japanese font-bold text-brand-ember">旨味</span>
+            <div className="flex items-center gap-3">
+              <AnimatedBrandLogo size="md" className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl" />
+              <div>
+                <span className="font-syne font-black text-2xl sm:text-3xl tracking-tight text-white block leading-none">
+                  UMAMI
+                </span>
+                <span className="text-xs font-japanese font-bold text-brand-ember mt-1 block">旨味 · SECTOR 8B</span>
+              </div>
             </div>
 
             <p className="text-xs text-zinc-400 max-w-sm leading-relaxed font-sans">

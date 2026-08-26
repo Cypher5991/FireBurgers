@@ -74,21 +74,21 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
           {/* Logo & Brand Name */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-2.5 group min-h-[44px] shrink-0">
-            <AnimatedBrandLogo size="md" className="w-9 h-9 sm:w-10 sm:h-10" />
+          <Link to="/" className="flex items-center gap-3 sm:gap-3.5 group min-h-[48px] shrink-0">
+            <AnimatedBrandLogo size="md" className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl" />
             <div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-syne font-black text-xl sm:text-2xl tracking-tight text-brand-dark group-hover:text-brand-ember transition">
+              <div className="flex items-center gap-2">
+                <span className="font-syne font-black text-2xl sm:text-3xl tracking-tight text-brand-dark group-hover:text-brand-ember transition leading-none">
                   UMAMI
                 </span>
-                <span className="text-[11px] font-japanese font-bold text-brand-ember">
+                <span className="text-xs sm:text-sm font-japanese font-bold text-brand-ember">
                   旨味
                 </span>
-                <span className="text-[8px] sm:text-[9px] font-mono uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-brand-dark text-white border border-brand-ember/30">
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-brand-dark text-white border border-brand-ember/30">
                   SEC 8B · CHD
                 </span>
               </div>
-              <p className="text-[8px] sm:text-[9px] text-brand-muted tracking-wider uppercase font-mono hidden sm:block">
+              <p className="text-[9px] sm:text-[10px] text-brand-muted tracking-wider uppercase font-mono hidden sm:block mt-1">
                 Japanese Fire-Grilled Burgers
               </p>
             </div>
