@@ -83,14 +83,14 @@ export default function Navbar() {
       <header
         className={`transition-all duration-300 w-full ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md border-b editorial-border-light shadow-md py-2 sm:py-2.5'
-            : 'bg-white/95 backdrop-blur-sm py-2.5 sm:py-3.5'
+            ? 'bg-transparent border-transparent shadow-none py-2 sm:py-2.5 pointer-events-none'
+            : 'bg-white/95 backdrop-blur-sm py-2.5 sm:py-3.5 pointer-events-auto'
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           
           {/* Left: Animated Brand Logo & Typography */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-h-[44px] shrink-0">
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-h-[44px] shrink-0 pointer-events-auto">
             <AnimatedBrandLogo 
               size={isScrolled ? 'sm' : 'md'} 
               className={`rounded-2xl shadow-md transition-all duration-300 ${
@@ -118,7 +118,7 @@ export default function Navbar() {
           </Link>
 
           {/* Center-Right: Desktop Navigation Links (Smooth collapse) */}
-          <nav className={`hidden lg:flex items-center font-mono font-bold text-brand-dark/80 transition-all duration-300 ease-in-out overflow-hidden ${isScrolled ? 'max-w-0 opacity-0 gap-0 scale-95' : 'max-w-[800px] opacity-100 gap-5 text-xs'}`}>
+          <nav className={`hidden lg:flex items-center font-mono font-bold text-brand-dark/80 transition-all duration-300 ease-in-out overflow-hidden pointer-events-auto ${isScrolled ? 'max-w-0 opacity-0 gap-0 scale-95' : 'max-w-[800px] opacity-100 gap-5 text-xs'}`}>
             {navLinks.slice(1).map(link => {
               const isActive = location.pathname === link.to;
               return (
@@ -138,7 +138,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Actions Area */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 pointer-events-auto">
             {/* VIP Pass Button - Desktop & Tablet (Smooth collapse) */}
             <div className={`transition-all duration-300 ease-in-out overflow-hidden flex items-center ${isScrolled ? 'max-w-0 opacity-0' : 'max-w-[200px] opacity-100'}`}>
               <Link
