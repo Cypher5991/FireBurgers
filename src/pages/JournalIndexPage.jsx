@@ -66,7 +66,7 @@ export default function JournalIndexPage() {
             className="bg-white rounded-3xl overflow-hidden editorial-border shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
-              {/* Image */}
+              {/* Image (Clean Canvas) */}
               <div className="relative h-52 sm:h-56 overflow-hidden bg-zinc-900">
                 <img
                   src={post.image}
@@ -74,18 +74,17 @@ export default function JournalIndexPage() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute top-3 left-3">
-                  <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-dark/90 text-white backdrop-blur-md border border-white/10">
-                    {post.category}
-                  </span>
-                </div>
               </div>
 
               {/* Card Body */}
               <div className="p-6 space-y-3">
                 <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
-                  <span>{post.datePublished}</span>
-                  <span>{post.readingTime}</span>
+                  <span className="font-bold text-brand-ember uppercase tracking-wider">{post.category}</span>
+                  <div className="flex items-center gap-2">
+                    <span>{post.datePublished}</span>
+                    <span>·</span>
+                    <span>{post.readingTime}</span>
+                  </div>
                 </div>
 
                 <h2 className="font-syne font-bold text-lg sm:text-xl text-brand-dark group-hover:text-brand-ember transition leading-snug">

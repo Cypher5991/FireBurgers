@@ -44,17 +44,17 @@ export default function FlagshipDuoFeature() {
                 alt="The Firebird Japanese Fried Chicken Burger"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
               />
-              <div className="absolute top-4 left-4 flex items-center gap-2">
-                <span className="text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full bg-brand-nonveg text-white shadow-md">
-                  🥩 Non-Veg Flagship
-                </span>
-                <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-vert-d/90 text-brand-gold border border-brand-gold/40 backdrop-blur-sm">
-                  300°C Fire Glaze
-                </span>
-              </div>
             </div>
 
             <div className="p-6 sm:p-8 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full bg-brand-nonveg text-white shadow-sm">
+                  🥩 Non-Veg Flagship
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-vert-d text-brand-gold border border-brand-gold/40">
+                  300°C Fire Glaze
+                </span>
+              </div>
               <div className="font-script text-2xl text-brand-gold">
                 "Potato starch shatter & fermented chili glaze"
               </div>
@@ -87,17 +87,17 @@ export default function FlagshipDuoFeature() {
                 alt="The Volcano Molten Core Burger"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
               />
-              <div className="absolute top-4 left-4 flex items-center gap-2">
-                <span className="text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full bg-brand-nonveg text-white shadow-md">
-                  🥩 Molten Center
-                </span>
-                <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-vert-d/90 text-brand-gold border border-brand-gold/40 backdrop-blur-sm">
-                  Aged Gouda Lava
-                </span>
-              </div>
             </div>
 
             <div className="p-6 sm:p-8 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full bg-brand-nonveg text-white shadow-sm">
+                  🥩 Molten Center
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-vert-d text-brand-gold border border-brand-gold/40">
+                  Aged Gouda Lava
+                </span>
+              </div>
               <div className="font-script text-2xl text-brand-gold">
                 "Molten Gouda core pours when sliced"
               </div>

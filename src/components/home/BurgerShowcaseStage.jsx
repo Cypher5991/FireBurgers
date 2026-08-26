@@ -162,37 +162,30 @@ export default function BurgerShowcaseStage() {
           <div className="lg:col-span-7 space-y-4">
             <div className="rounded-3xl overflow-hidden bg-brand-creme-3 border editorial-border shadow-2xl group flex flex-col">
               
-              {/* Image Container */}
-              <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[440px] shrink-0 overflow-hidden">
+              {/* Image Container (100% Clean Photography) */}
+              <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[440px] shrink-0 overflow-hidden bg-brand-creme-3">
                 <img
                   src={activeImg}
                   alt={`${current.name} - UMAMI Japanese Burger`}
                   className="w-full h-full object-cover transition-all duration-700 filter brightness-95 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+              </div>
 
-                {/* Top Overlay Badges */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                  <span className={`text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md ${
+              {/* Bottom Angle Switcher & Dietary Metadata (Normal Flow) */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-brand-vert-d text-brand-creme z-10">
+                <div className="flex items-center gap-2 pl-1 font-mono text-xs">
+                  <span className={`text-[9px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm ${
                     current.dietary === 'veg' ? 'bg-brand-veg text-white' : 'bg-brand-nonveg text-white'
                   }`}>
                     {current.dietary === 'veg' ? '🌿 Pure Vegetarian' : '🥩 Non-Veg Masterwork'}
                   </span>
-
-                  <span className="text-xs font-mono font-bold bg-brand-vert-d/90 text-brand-creme border border-brand-gold/40 px-3 py-1 rounded-full backdrop-blur-md">
-                    {current.eyebrow}
+                  <span className="text-xs font-japanese font-bold text-brand-ember hidden sm:inline">
+                    {current.japanese}
                   </span>
-                </div>
-              </div>
-
-              {/* Bottom Angle Switcher (Normal Flow) */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-brand-vert-d text-brand-creme z-10">
-                <div className="flex items-center gap-1.5 pl-1 font-mono text-xs">
-                  <Eye className="w-4 h-4 text-brand-ember" />
-                  <span className="font-bold">Photo Angle:</span>
                 </div>
 
                 <div className="flex items-center gap-1.5 font-mono text-xs w-full sm:w-auto">
+                  <span className="hidden md:inline text-brand-gold text-[11px] font-bold mr-1">View:</span>
                   <button
                     onClick={() => setViewMode('hero')}
                     className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold transition min-h-[40px] ${

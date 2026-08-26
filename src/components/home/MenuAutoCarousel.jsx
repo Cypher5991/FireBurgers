@@ -47,21 +47,6 @@ export default function MenuAutoCarousel({ onSelectImage }) {
           />
         ))}
 
-        {/* Ambient Gradient Overlay (Reduced height since banner is moved) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-20 pointer-events-none" />
-
-        {/* Top Badges */}
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-30 pointer-events-none">
-          <span className={`text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md ${
-            current.dietary === 'veg' ? 'bg-brand-veg text-white' : 'bg-brand-nonveg text-white'
-          }`}>
-            {current.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
-          </span>
-          <span className="text-xs font-japanese font-bold text-brand-ember bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md border border-brand-gold/30">
-            旨味 · SEC 8B
-          </span>
-        </div>
-
         {/* Navigation Arrows (Visible on Hover) */}
         <button
           onClick={handlePrev}
@@ -82,14 +67,26 @@ export default function MenuAutoCarousel({ onSelectImage }) {
 
       {/* Bottom Caption Card & Slide Progress (Normal Flow) */}
       <div className="p-4 sm:p-5 bg-brand-vert-d text-brand-creme space-y-3 z-30">
-        <div className="space-y-1">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase text-brand-gold font-bold tracking-widest">
-              {current.categoryName || 'Menu Selection'}
-            </span>
-            <span className="text-[10px] font-mono text-brand-ember font-bold">
-              {currentIndex + 1} / {featuredItems.length}
-            </span>
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className={`text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                current.dietary === 'veg' ? 'bg-brand-veg text-white' : 'bg-brand-nonveg text-white'
+              }`}>
+                {current.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
+              </span>
+              <span className="text-[10px] font-mono uppercase text-brand-gold font-bold tracking-widest">
+                {current.categoryName || 'Menu Selection'}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-japanese font-bold text-brand-ember">
+                旨味 · SEC 8B
+              </span>
+              <span className="text-[10px] font-mono text-brand-gold font-bold">
+                {currentIndex + 1} / {featuredItems.length}
+              </span>
+            </div>
           </div>
           <div className="font-sans font-bold text-base sm:text-lg text-brand-creme leading-tight">
             {current.name}

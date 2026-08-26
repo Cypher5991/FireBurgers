@@ -130,7 +130,7 @@ export default function MenuShowcase() {
                 }`}
               >
                 <div>
-                  {/* Product Image & Badges */}
+                  {/* Product Image (Clean Canvas) */}
                   <div className="relative h-60 sm:h-64 overflow-hidden bg-zinc-100">
                     <img
                       src={item.image}
@@ -138,42 +138,25 @@ export default function MenuShowcase() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-
-                    {/* Top Badges */}
-                    <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
-                      <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full backdrop-blur-md shadow-md ${
-                        item.dietary === 'veg' 
-                          ? 'bg-emerald-600/90 text-white border border-emerald-400/30' 
-                          : 'bg-brand-dark/90 text-white border border-white/20'
-                      }`}>
-                        {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
-                      </span>
-
-                      {item.badge && (
-                        <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-orange text-white shadow-lg shadow-brand-orange/30">
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Prep Time & Calorie Tag */}
-                    <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-[11px] font-mono text-white">
-                      <span className="flex items-center gap-1 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/15">
-                        <Clock className="w-3.5 h-3.5 text-brand-amber" />
-                        <span>{item.prepTime} ready</span>
-                      </span>
-
-                      {item.calories && (
-                        <span className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/15 text-zinc-300">
-                          {item.calories}
-                        </span>
-                      )}
-                    </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-6 space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full ${
+                        item.dietary === 'veg' 
+                          ? 'bg-emerald-100 text-emerald-800' 
+                          : 'bg-red-100 text-red-800'
+                      }`}>
+                        {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
+                      </span>
+                      {item.prepTime && (
+                        <span className="text-[11px] font-mono text-zinc-500 flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-brand-amber" />
+                          <span>{item.prepTime}</span>
+                        </span>
+                      )}
+                    </div>
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-orange mb-0.5">
