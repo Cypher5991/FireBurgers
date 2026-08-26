@@ -121,12 +121,18 @@ export default function VisitPage() {
 
           {/* Quick Contact & Entity Card */}
           <div className="bg-zinc-50 p-6 rounded-3xl border editorial-border-light space-y-3 font-mono text-xs">
-            <div className="text-zinc-500 uppercase font-bold text-[10px]">OPERATIONS</div>
-            <div className="text-zinc-800 space-y-1">
+            <div className="text-zinc-500 uppercase font-bold text-[10px] flex items-center justify-between">
+              <span>OPERATIONS & COMPLIANCE</span>
+              <span className="text-emerald-600 font-bold">FSSAI VERIFIED</span>
+            </div>
+            <div className="text-zinc-800 space-y-1.5">
               <div><strong>Brand:</strong> UMAMI (旨味)</div>
-              <div><strong>Operating Entity:</strong> Nimantrit Foods</div>
-              <div><strong>Launch Date:</strong> 1 October 2026</div>
-              <div><strong>Hours:</strong> 11:00 AM – 11:00 PM Daily</div>
+              <div><strong>Operating Entity:</strong> {UMAMI_BRAND_INFO.entity}</div>
+              <div><strong>FSSAI License:</strong> {UMAMI_BRAND_INFO.fssaiLicense}</div>
+              <div><strong>Launch Hotline:</strong> <a href={`tel:${UMAMI_BRAND_INFO.phone.replace(/\s+/g, '')}`} className="text-brand-ember hover:underline font-bold">{UMAMI_BRAND_INFO.phone}</a></div>
+              <div><strong>Instagram:</strong> <a href={UMAMI_BRAND_INFO.instagram} target="_blank" rel="noopener noreferrer" className="text-brand-ember hover:underline font-bold">@umamifirechd ↗</a></div>
+              <div><strong>Launch Date:</strong> {UMAMI_BRAND_INFO.openingDateFormatted}</div>
+              <div><strong>Hours:</strong> {UMAMI_BRAND_INFO.openingHours}</div>
             </div>
           </div>
 

@@ -1,0 +1,493 @@
+{
+  "timestamp": "2026-08-26T09:03:40.726Z",
+  "baseUrl": "http://localhost:5173",
+  "routesAudited": [
+    "/",
+    "/story",
+    "/menu",
+    "/visit",
+    "/order",
+    "/journal"
+  ],
+  "viewportsTested": [
+    "Mobile_Small_375px (375x667)",
+    "Mobile_Large_414px (414x896)",
+    "Tablet_768px (768x1024)",
+    "Desktop_1280px (1280x800)",
+    "Desktop_Large_1920px (1920x1080)"
+  ],
+  "summary": {
+    "totalChecks": 33,
+    "passedChecks": 33,
+    "failedChecks": 0,
+    "warnings": 0
+  },
+  "resultsByViewport": {
+    "Mobile_Small_375px": {
+      "viewport": {
+        "name": "Mobile_Small_375px",
+        "width": 375,
+        "height": 667,
+        "isMobile": true
+      },
+      "routes": {
+        "/": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "HomePage_Mobile_Small_375px.png"
+        },
+        "/story": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "StoryPage_Mobile_Small_375px.png"
+        },
+        "/menu": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "MenuPage_Mobile_Small_375px.png"
+        },
+        "/visit": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "VisitPage_Mobile_Small_375px.png"
+        },
+        "/order": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "OrderPage_Mobile_Small_375px.png"
+        },
+        "/journal": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "JournalIndexPage_Mobile_Small_375px.png"
+        }
+      }
+    },
+    "Mobile_Large_414px": {
+      "viewport": {
+        "name": "Mobile_Large_414px",
+        "width": 414,
+        "height": 896,
+        "isMobile": true
+      },
+      "routes": {
+        "/": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 414,
+            "innerWidth": 414,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "HomePage_Mobile_Large_414px.png"
+        },
+        "/story": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 414,
+            "innerWidth": 414,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "StoryPage_Mobile_Large_414px.png"
+        },
+        "/menu": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 414,
+            "innerWidth": 414,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "MenuPage_Mobile_Large_414px.png"
+        },
+        "/visit": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 414,
+            "innerWidth": 414,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "VisitPage_Mobile_Large_414px.png"
+        },
+        "/order": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 414,
+            "innerWidth": 414,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "OrderPage_Mobile_Large_414px.png"
+        },
+        "/journal": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 414,
+            "innerWidth": 414,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "JournalIndexPage_Mobile_Large_414px.png"
+        }
+      }
+    },
+    "Tablet_768px": {
+      "viewport": {
+        "name": "Tablet_768px",
+        "width": 768,
+        "height": 1024,
+        "isMobile": false
+      },
+      "routes": {
+        "/": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 768,
+            "innerWidth": 768,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "HomePage_Tablet_768px.png"
+        },
+        "/story": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 768,
+            "innerWidth": 768,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "StoryPage_Tablet_768px.png"
+        },
+        "/menu": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 768,
+            "innerWidth": 768,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "MenuPage_Tablet_768px.png"
+        },
+        "/visit": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 768,
+            "innerWidth": 768,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "VisitPage_Tablet_768px.png"
+        },
+        "/order": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 768,
+            "innerWidth": 768,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "OrderPage_Tablet_768px.png"
+        },
+        "/journal": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 768,
+            "innerWidth": 768,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "JournalIndexPage_Tablet_768px.png"
+        }
+      }
+    },
+    "Desktop_1280px": {
+      "viewport": {
+        "name": "Desktop_1280px",
+        "width": 1280,
+        "height": 800,
+        "isMobile": false
+      },
+      "routes": {
+        "/": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "HomePage_Desktop_1280px.png"
+        },
+        "/story": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "StoryPage_Desktop_1280px.png"
+        },
+        "/menu": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "MenuPage_Desktop_1280px.png"
+        },
+        "/visit": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "VisitPage_Desktop_1280px.png"
+        },
+        "/order": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "OrderPage_Desktop_1280px.png"
+        },
+        "/journal": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "JournalIndexPage_Desktop_1280px.png"
+        }
+      }
+    },
+    "Desktop_Large_1920px": {
+      "viewport": {
+        "name": "Desktop_Large_1920px",
+        "width": 1920,
+        "height": 1080,
+        "isMobile": false
+      },
+      "routes": {
+        "/": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "HomePage_Desktop_Large_1920px.png"
+        },
+        "/story": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "StoryPage_Desktop_Large_1920px.png"
+        },
+        "/menu": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "MenuPage_Desktop_Large_1920px.png"
+        },
+        "/visit": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "VisitPage_Desktop_Large_1920px.png"
+        },
+        "/order": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "OrderPage_Desktop_Large_1920px.png"
+        },
+        "/journal": {
+          "status": "PASS",
+          "overflowMetrics": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "hasHorizontalOverflow": false,
+            "overflowDelta": 0,
+            "offendingCount": 0,
+            "offendingElements": []
+          },
+          "screenshot": "JournalIndexPage_Desktop_Large_1920px.png"
+        }
+      }
+    }
+  },
+  "navbarAudit": {
+    "isStickyWorking": true,
+    "isTransparencyWorking": true,
+    "isMenuBtnAppeared": true,
+    "initialState": {
+      "top": 29,
+      "height": 92,
+      "backgroundColor": "rgba(255, 255, 255, 0.95)",
+      "menuBtnVisible": false,
+      "logoVisible": true
+    },
+    "scrolledState": {
+      "top": 0,
+      "height": 78,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "isTransparent": true,
+      "menuBtnVisible": true
+    }
+  },
+  "mediaAudit": {},
+  "accessibilityAudit": {
+    "totalInteractives": 35,
+    "smallTargets": 12,
+    "smallElementsSample": [
+      {
+        "tag": "A",
+        "text": "FIND THE FIRE\n↗",
+        "width": 91,
+        "height": 17
+      },
+      {
+        "tag": "A",
+        "text": "View all articles ↗",
+        "width": 128,
+        "height": 16
+      },
+      {
+        "tag": "A",
+        "text": "Directions from Sector 8/9 Rou",
+        "width": 259,
+        "height": 16
+      },
+      {
+        "tag": "A",
+        "text": "Brand Showcase",
+        "width": 92,
+        "height": 14
+      },
+      {
+        "tag": "A",
+        "text": "The 15-Year Story",
+        "width": 112,
+        "height": 14
+      }
+    ]
+  }
+}

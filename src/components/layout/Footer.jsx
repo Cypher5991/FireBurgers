@@ -33,6 +33,29 @@ export default function Footer() {
               <div>Booth No. 7, Inner Market, Sector 8B</div>
               <div>Chandigarh 160018, India</div>
               <div className="text-zinc-500 pt-1">Operated by {UMAMI_BRAND_INFO.entity}</div>
+              <div className="text-zinc-400 text-[11px] pt-1 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>FSSAI Lic. No: <strong className="text-zinc-200">{UMAMI_BRAND_INFO.fssaiLicense}</strong></span>
+              </div>
+            </div>
+
+            {/* Social & Contact Bar */}
+            <div className="flex items-center gap-3 pt-2 font-mono text-xs">
+              <a
+                href={UMAMI_BRAND_INFO.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-brand-ember hover:text-white transition text-zinc-300 border border-white/10"
+              >
+                <span>Instagram</span>
+                <span>↗</span>
+              </a>
+              <a
+                href={`tel:${UMAMI_BRAND_INFO.phone.replace(/\s+/g, '')}`}
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-brand-ember hover:text-white transition text-zinc-300 border border-white/10"
+              >
+                <span>{UMAMI_BRAND_INFO.phone}</span>
+              </a>
             </div>
           </div>
 
@@ -43,7 +66,7 @@ export default function Footer() {
               <p>
                 We are a counter kitchen, not a dining room. Order at the counter, watch the fire, take it with you. Parking is along the Inner Market row.
               </p>
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col gap-1.5">
                 <Link
                   to="/visit"
                   className="inline-flex items-center gap-1.5 text-xs text-brand-ember hover:underline font-bold font-mono"
@@ -51,6 +74,15 @@ export default function Footer() {
                   <span>Directions from Sector 8/9 Roundabout</span>
                   <span>↗</span>
                 </Link>
+                <a
+                  href={UMAMI_BRAND_INFO.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-brand-ember font-mono"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-brand-ember" />
+                  <span>Open in Google Maps ↗</span>
+                </a>
               </div>
             </div>
           </div>
@@ -74,7 +106,7 @@ export default function Footer() {
         {/* Bottom copyright & Entity notice */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
           <div>
-            © {new Date().getFullYear()} UMAMI. Operated by Nimantrit Foods. Booth No. 7, Inner Market, Sector 8B, Chandigarh 160018.
+            © {new Date().getFullYear()} UMAMI. Operated by {UMAMI_BRAND_INFO.entity}. Booth No. 7, Inner Market, Sector 8B, Chandigarh 160018.
           </div>
           <div className="text-zinc-400 flex items-center gap-4">
             <Link to="/privacy" className="hover:text-brand-ember">Privacy Policy</Link>
