@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame, Sparkles, Search, X, Clock, ArrowRight, Utensils, Compass } from 'lucide-react';
-import { UMAMI_MENU_SECTIONS, UMAMI_MENU_ITEMS, UMAMI_DIP_WALL, UMAMI_BRAND_INFO } from '../data/umamiMenuData';
+import { UMAMI_MENU_SECTIONS, UMAMI_DIP_WALL, UMAMI_BRAND_INFO } from '../data/umamiMenuData';
+import { useSanityMenu } from '../hooks/useSanityData';
 
 export default function MenuPage() {
+  const { items: menuItems } = useSanityMenu();
   const [selectedSection, setSelectedSection] = useState('all');
   const [dietaryFilter, setDietaryFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredItems = UMAMI_MENU_ITEMS.filter(item => {
+  const filteredItems = menuItems.filter(item => {
     const matchesSection = selectedSection === 'all' || item.sectionId === selectedSection;
     const matchesDietary = dietaryFilter === 'all' || item.dietary === dietaryFilter;
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

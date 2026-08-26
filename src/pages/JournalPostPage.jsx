@@ -2,10 +2,12 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { BookOpen, ArrowLeft, ArrowRight, Clock, Calendar, Sparkles, Share2, Compass, Utensils } from 'lucide-react';
 import { UMAMI_JOURNAL_POSTS } from '../data/umamiJournalData';
+import { useSanityJournal } from '../hooks/useSanityData';
 
 export default function JournalPostPage() {
   const { slug } = useParams();
-  const post = UMAMI_JOURNAL_POSTS.find(p => p.slug === slug);
+  const { posts } = useSanityJournal();
+  const post = posts.find(p => p.slug === slug) || UMAMI_JOURNAL_POSTS.find(p => p.slug === slug);
 
   if (!post) {
     return <Navigate to="/journal" replace />;

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, ArrowRight, Clock, Sparkles } from 'lucide-react';
 import { UMAMI_JOURNAL_POSTS } from '../data/umamiJournalData';
+import { useSanityJournal } from '../hooks/useSanityData';
 
 export default function JournalIndexPage() {
+  const { posts: journalPosts } = useSanityJournal();
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   // Filter published posts (Posts 1-5 for week 1 launch)
-  const publishedPosts = UMAMI_JOURNAL_POSTS.filter(p => p.status === 'published');
+  const publishedPosts = journalPosts.filter(p => p.status === 'published');
   const categories = ['All', 'Taste & Science', 'Culinary Craft', 'Local Chandigarh'];
 
   const filteredPosts = selectedCategory === 'All'
