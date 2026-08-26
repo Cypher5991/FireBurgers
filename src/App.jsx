@@ -27,29 +27,31 @@ export default function App() {
           {/* Global Minimalist Navbar */}
           <Navbar />
 
-          {/* Main Canonical Multi-Route Views */}
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/story" element={<StoryPage />} />
-              <Route path="/menu" element={<MenuPage />} />
-              <Route path="/order" element={<OrderPage />} />
-              <Route path="/visit" element={<VisitPage />} />
-              <Route path="/journal" element={<JournalIndexPage />} />
-              <Route path="/journal/:slug" element={<JournalPostPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/privacy" element={<LegalPage />} />
-              <Route path="/terms" element={<LegalPage />} />
-              
-              {/* Fallback routes */}
-              <Route path="/builder" element={<MenuPage />} />
-              <Route path="/sector-8" element={<VisitPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </main>
+          <div className="flex-grow flex flex-col overflow-x-hidden w-full">
+            {/* Main Canonical Multi-Route Views */}
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/story" element={<StoryPage />} />
+                <Route path="/menu" element={<MenuPage />} />
+                <Route path="/order" element={<OrderPage />} />
+                <Route path="/visit" element={<VisitPage />} />
+                <Route path="/journal" element={<JournalIndexPage />} />
+                <Route path="/journal/:slug" element={<JournalPostPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/privacy" element={<LegalPage />} />
+                <Route path="/terms" element={<LegalPage />} />
+                
+                {/* Fallback routes */}
+                <Route path="/builder" element={<MenuPage />} />
+                <Route path="/sector-8" element={<VisitPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </main>
 
-          {/* Global Deep Slate Footer with Canonical NAP */}
-          <Footer />
+            {/* Global Deep Slate Footer with Canonical NAP */}
+            <Footer />
+          </div>
         </div>
       </SmoothScrollProvider>
     </Router>
