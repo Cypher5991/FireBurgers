@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Flame, Sparkles, Search, X, Clock, ArrowRight, Utensils, Compass } from 'lucide-react';
+import { Flame, Sparkles, Search, X, Clock, ArrowRight, Utensils, Compass, ZoomIn, Eye, ShieldCheck, MapPin } from 'lucide-react';
 import { UMAMI_MENU_SECTIONS, UMAMI_DIP_WALL, UMAMI_BRAND_INFO } from '../data/umamiMenuData';
 import { useSanityMenu } from '../hooks/useSanityData';
 
@@ -9,6 +9,7 @@ export default function MenuPage() {
   const [selectedSection, setSelectedSection] = useState('all');
   const [dietaryFilter, setDietaryFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeModalItem, setActiveModalItem] = useState(null);
 
   const filteredItems = menuItems.filter(item => {
     const matchesSection = selectedSection === 'all' || item.sectionId === selectedSection;
@@ -198,33 +199,41 @@ export default function MenuPage() {
                     <div
                       key={item.id}
                       id={`item-${item.id}`}
-                      className="bg-white rounded-3xl overflow-hidden editorial-border shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                      onClick={() => setActiveModalItem(item)}
+                      className="bg-white rounded-3xl overflow-hidden editorial-border shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer group"
                     >
                       <div>
-                        {/* Image & Badges */}
-                        <div className="relative h-56 sm:h-60 overflow-hidden bg-zinc-100">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                        {/* Offset Framing for Clear Dish Visibility */}
+                        <div className="p-3 bg-brand-creme-3 border-b editorial-border-light relative overflow-hidden">
+                          <div className="relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-inner border border-brand-gold/20 bg-brand-creme-2">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+                              loading="lazy"
+                            />
+                            
+                            {/* Tap/Click to Expand Prompt Overlay */}
+                            <div className="absolute inset-0 bg-brand-vert-d/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] flex flex-col items-center justify-center text-brand-creme space-y-1 font-mono text-xs font-bold">
+                              <ZoomIn className="w-6 h-6 text-brand-ember animate-bounce" />
+                              <span>Click for Enlarged Popout View</span>
+                            </div>
 
-                          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
-                            <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full backdrop-blur-md shadow-md ${
-                              item.dietary === 'veg' 
-                                ? 'bg-[#2D5A27]/95 text-white border border-[#2D5A27]' 
-                                : 'bg-[#7A1C16]/95 text-white border border-[#7A1C16]'
-                            }`}>
-                              {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
-                            </span>
-
-                            {item.badge && (
-                              <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-ember text-white shadow-lg shadow-brand-ember/30">
-                                {item.badge}
+                            <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+                              <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full backdrop-blur-md shadow-md ${
+                                item.dietary === 'veg' 
+                                  ? 'bg-brand-veg text-white' 
+                                  : 'bg-brand-nonveg text-white'
+                              }`}>
+                                {item.dietary === 'veg' ? '🌿 Pure Veg' : '🥩 Non-Veg'}
                               </span>
-                            )}
+
+                              {item.badge && (
+                                <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full bg-brand-ember text-white shadow-lg shadow-brand-ember/30">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
 
@@ -234,12 +243,12 @@ export default function MenuPage() {
                             <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-ember mb-0.5">
                               {item.protein} · {item.tagline}
                             </div>
-                            <h3 className="font-syne font-bold text-xl text-brand-dark tracking-tight">
+                            <h3 className="font-sans font-bold text-xl text-brand-vert tracking-tight group-hover:text-brand-ember transition">
                               {item.name}
                             </h3>
                           </div>
 
-                          <p className="text-xs text-zinc-600 font-sans leading-relaxed">
+                          <p className="text-xs text-brand-char-soft font-sans leading-relaxed">
                             {item.description}
                           </p>
 
@@ -249,7 +258,7 @@ export default function MenuPage() {
                               {item.ingredients.map((ing, i) => (
                                 <span 
                                   key={i} 
-                                  className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-100 border border-black/5 text-zinc-700"
+                                  className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-brand-creme-3 border border-brand-gold/20 text-brand-vert"
                                 >
                                   {ing}
                                 </span>
@@ -259,9 +268,9 @@ export default function MenuPage() {
 
                           {/* Dip Recommendation */}
                           {item.pairWith && (
-                            <div className="pt-1 text-[11px] text-zinc-500 font-sans flex items-center gap-1.5">
+                            <div className="pt-1 text-[11px] text-brand-char-soft font-sans flex items-center gap-1.5">
                               <Sparkles className="w-3.5 h-3.5 text-brand-ember shrink-0" />
-                              <span>Pair with: <strong className="text-brand-dark">{item.pairWith}</strong></span>
+                              <span>Pair with: <strong className="text-brand-vert">{item.pairWith}</strong></span>
                             </div>
                           )}
                         </div>
@@ -269,9 +278,12 @@ export default function MenuPage() {
 
                       {/* Card Footer: Pre-launch Price Notice */}
                       <div className="p-5 sm:p-6 pt-0">
-                        <div className="p-3 rounded-2xl bg-zinc-50 border editorial-border-light flex items-center justify-between text-xs font-mono">
-                          <span className="text-zinc-500">Official Price</span>
-                          <span className="font-bold text-brand-ember">Reveals at Launch</span>
+                        <div className="p-3 rounded-2xl bg-brand-creme-2 border border-brand-gold/25 flex items-center justify-between text-xs font-mono">
+                          <span className="text-brand-char-soft">Official Price</span>
+                          <span className="font-bold text-brand-ember flex items-center gap-1">
+                            <span>Reveals 1 Oct</span>
+                            <Eye className="w-3.5 h-3.5" />
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -285,27 +297,123 @@ export default function MenuPage() {
       </div>
 
       {/* Pre-launch Bottom Callout */}
-      <div className="bg-brand-dark text-white p-6 sm:p-10 rounded-3xl border border-brand-ember/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="bg-brand-vert-d text-brand-creme p-6 sm:p-10 rounded-3xl border border-brand-gold/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-2 max-w-xl">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-ember">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-gold">
             COUNTER SERVICE · BOOTH NO. 7 SECTOR 8B
           </span>
-          <h3 className="font-syne font-black text-2xl sm:text-3xl text-white">
+          <h3 className="font-sans font-black text-2xl sm:text-3xl text-brand-creme">
             Opening 1 October 2026
           </h3>
-          <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+          <p className="text-xs sm:text-sm text-brand-creme/80 font-sans leading-relaxed">
             We are a counter kitchen with an open fire grill. Order at the counter, watch the fire, take it with you, or order for direct delivery.
           </p>
         </div>
 
         <Link
           to="/order"
-          className="px-8 py-4 rounded-2xl bg-brand-ember hover:bg-red-700 text-white font-syne font-bold text-sm shadow-xl shadow-brand-ember/30 transition flex items-center gap-2 shrink-0 min-h-[48px]"
+          className="px-8 py-4 rounded-2xl bg-brand-ember hover:bg-brand-ember-d text-white font-sans font-bold text-sm shadow-xl shadow-brand-ember/30 transition flex items-center gap-2 shrink-0 min-h-[48px]"
         >
           <span>Get Launch VIP Pass</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
+
+      {/* Lightbox Popout Modal for Enlarged Dish Picture */}
+      {activeModalItem && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setActiveModalItem(null)}
+        >
+          <div 
+            className="bg-brand-creme-2 text-brand-char rounded-3xl max-w-2xl w-full border editorial-border shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Close Button */}
+            <button
+              onClick={() => setActiveModalItem(null)}
+              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-brand-vert-d/90 text-brand-creme flex items-center justify-center hover:bg-brand-ember transition border border-brand-gold/40 shadow-lg min-h-[40px] min-w-[40px]"
+              aria-label="Close Enlarged View"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Scrollable Body */}
+            <div className="overflow-y-auto p-6 sm:p-8 space-y-6">
+              
+              {/* Full-Resolution High-Impact Image */}
+              <div className="relative rounded-2xl overflow-hidden bg-brand-creme-3 border border-brand-gold/30 shadow-xl max-h-[380px]">
+                <img
+                  src={activeModalItem.image}
+                  alt={activeModalItem.name}
+                  className="w-full h-full object-cover max-h-[380px] filter brightness-95"
+                />
+                <div className="absolute top-3 left-3 flex items-center gap-2">
+                  <span className={`text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full shadow-md ${
+                    activeModalItem.dietary === 'veg' ? 'bg-brand-veg text-white' : 'bg-brand-nonveg text-white'
+                  }`}>
+                    {activeModalItem.dietary === 'veg' ? '🌿 Pure Vegetarian' : '🥩 Non-Veg Selection'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Item Info */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold uppercase text-brand-ember tracking-widest">
+                    {activeModalItem.protein || 'Signature Dish'} · {activeModalItem.tagline || 'Japanese Fire Kitchen'}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-brand-gold">
+                    Opening 1 Oct 2026
+                  </span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-black font-sans text-brand-vert tracking-tight">
+                  {activeModalItem.name}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-brand-char leading-relaxed font-sans">
+                  {activeModalItem.description}
+                </p>
+
+                {activeModalItem.ingredients && (
+                  <div className="space-y-1 pt-2">
+                    <div className="text-xs font-mono font-bold text-brand-vert uppercase">Ingredients & Glazes:</div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {activeModalItem.ingredients.map((ing, i) => (
+                        <span key={i} className="text-xs font-mono px-2.5 py-1 rounded-lg bg-brand-creme-3 border border-brand-gold/25 text-brand-vert font-semibold">
+                          ✓ {ing}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {activeModalItem.pairWith && (
+                  <div className="p-3.5 rounded-xl bg-brand-creme-3 border border-brand-gold/25 font-mono text-xs text-brand-vert flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-brand-ember shrink-0" />
+                    <span>Chef's Pairing: <strong className="text-brand-ember">{activeModalItem.pairWith}</strong></span>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Button */}
+              <div className="pt-2">
+                <Link
+                  to="/order"
+                  onClick={() => setActiveModalItem(null)}
+                  className="w-full flex items-center justify-center gap-2 bg-brand-ember hover:bg-brand-ember-d text-white font-sans font-bold py-3.5 px-6 rounded-2xl shadow-xl shadow-brand-ember/30 transition text-sm min-h-[48px]"
+                >
+                  <Sparkles className="w-4 h-4 text-white" />
+                  <span>CLAIM PRE-LAUNCH VIP PASS</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

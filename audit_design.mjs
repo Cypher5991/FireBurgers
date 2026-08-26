@@ -148,14 +148,18 @@ async function runDesignAudit() {
       console.log(`  ❌ Decorative Accent Font: Great Vibes NOT detected (${typographyData.scriptFont}) (FAIL)`);
     }
 
-    // 3. Burger Hero Showcase Interactive Stage Audit
-    console.log('\n🍔 --- Auditing Flagship Burger Showcase Stage ---');
+    // 3. Burger Showcase & Hero Term Removal Audit
+    console.log('\n🍔 --- Auditing Flagship Burger Showcase Stage & Terminology ---');
     const showcaseData = await typoPage.evaluate(async () => {
       const buttons = [...document.querySelectorAll('button[data-burger-tab]')];
       const macroBtn = [...document.querySelectorAll('button')].find(b => b.textContent.includes('Grill Macro') || b.textContent.includes('Macro'));
-      const heroBtn = [...document.querySelectorAll('button')].find(b => b.textContent.includes('Hero Full'));
+      const fullViewBtn = [...document.querySelectorAll('button')].find(b => b.textContent.includes('Full View'));
       const mainImg = document.querySelector('img[alt*="UMAMI Japanese Burger"]');
       const initialImgSrc = mainImg?.src;
+
+      // Verify removal of user-facing 'Hero' terms
+      const bodyText = document.body.innerText;
+      const hasHeroProductTerm = bodyText.includes('THE HERO PRODUCT') || bodyText.includes('Hero Full');
 
       // Check that layer anatomy is absent
       const hasExplodedLayer = !!document.querySelector('#layer-slider, [class*="exploded"], [id*="exploded"]');
@@ -163,14 +167,15 @@ async function runDesignAudit() {
       return {
         tabCount: buttons.length,
         hasMacroToggle: !!macroBtn,
-        hasHeroToggle: !!heroBtn,
+        hasFullViewToggle: !!fullViewBtn,
+        hasHeroProductTerm,
         initialImgSrc,
         hasExplodedLayer,
       };
     });
 
     report.burgerShowcaseAudit = showcaseData;
-    report.summary.totalChecks += 3;
+    report.summary.totalChecks += 4;
 
     if (showcaseData.tabCount >= 5) {
       report.summary.passedChecks++;
@@ -180,12 +185,20 @@ async function runDesignAudit() {
       console.log(`  ❌ Burger Tabs missing (found ${showcaseData.tabCount}) (FAIL)`);
     }
 
-    if (showcaseData.hasMacroToggle) {
+    if (showcaseData.hasMacroToggle && showcaseData.hasFullViewToggle) {
       report.summary.passedChecks++;
-      console.log('  ✓ Dual-Angle / Macro Texture Switcher present and interactive (Pass)');
+      console.log(`  ✓ Dual-Angle Switcher ('Full View' & 'Grill Macro') present and interactive (Pass)`);
     } else {
       report.summary.failedChecks++;
-      console.log('  ❌ Macro Texture Switcher NOT found (FAIL)');
+      console.log(`  ❌ Dual-Angle Switcher missing or incorrectly named (FAIL)`);
+    }
+
+    if (!showcaseData.hasHeroProductTerm) {
+      report.summary.passedChecks++;
+      console.log(`  ✓ User-facing 'Hero' terms successfully removed & replaced with 'FLAGSHIP SELECTION' (Pass)`);
+    } else {
+      report.summary.failedChecks++;
+      console.log(`  ❌ User-facing 'Hero' terms still found on page (FAIL)`);
     }
 
     if (!showcaseData.hasExplodedLayer) {

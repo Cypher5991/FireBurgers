@@ -7,6 +7,7 @@ import KineticMarquee from '../components/home/KineticMarquee';
 import LazyVideoGif from '../components/common/LazyVideoGif';
 import BurgerShowcaseStage from '../components/home/BurgerShowcaseStage';
 import FlagshipDuoFeature from '../components/home/FlagshipDuoFeature';
+import MenuAutoCarousel from '../components/home/MenuAutoCarousel';
 
 export default function HomePage() {
   const featuredBurgers = UMAMI_MENU_ITEMS.filter(i => i.sectionId === 'burgers');
@@ -78,39 +79,9 @@ export default function HomePage() {
 
           </div>
 
-          {/* Right Hero Photography Card */}
+          {/* Right Hero Auto Carousel of Menu Items */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden editorial-border shadow-2xl bg-[#141416] group">
-              <img
-                src="/web/firebird.webp"
-                alt="UMAMI Japanese Fire-Grilled Burger on fresh Hokkaido milk bun"
-                className="w-full h-[380px] sm:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-
-              {/* Badges on Image */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-brand-dark/90 text-white border border-brand-ember/30 backdrop-blur-md">
-                  Firebird Signature
-                </span>
-                <span className="text-[11px] font-japanese font-bold text-brand-ember bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md">
-                  旨味
-                </span>
-              </div>
-
-              {/* Bottom Caption Card */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-brand-dark/95 text-white backdrop-blur-md border border-white/10 space-y-1">
-                <div className="text-[10px] font-mono uppercase text-brand-ember font-bold">
-                  The Fire Standard
-                </div>
-                <div className="font-syne font-bold text-sm text-white">
-                  Thick patty. Live flame char. Tangzhong milk bun.
-                </div>
-                <div className="text-xs text-zinc-400 font-sans">
-                  Not thin. Not pressed. Not an apology.
-                </div>
-              </div>
-            </div>
+            <MenuAutoCarousel />
           </div>
 
         </div>

@@ -56,7 +56,7 @@ const SIGNATURE_BURGERS = [
     name: 'The Magic Shroom',
     japanese: '魔法茸',
     kanji: '茸',
-    eyebrow: 'Pure Vegetarian Hero',
+    eyebrow: 'Pure Vegetarian Masterwork',
     scriptQuote: 'Herbed goat cheese stuffed portobello cap',
     dietary: 'veg',
     protein: 'Stuffed Portobello Cap',
@@ -93,7 +93,7 @@ export default function BurgerShowcaseStage() {
   const activeImg = (viewMode === 'macro' && current.macroImage) ? current.macroImage : current.heroImage;
 
   return (
-    <section className="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    <section id="burgers-showcase" className="relative py-6 sm:py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
       
       {/* Background Japanese Watermark Kanji */}
       <div 
@@ -103,30 +103,30 @@ export default function BurgerShowcaseStage() {
         {current.kanji}
       </div>
 
-      <div className="relative z-10 space-y-8 sm:space-y-12">
+      <div className="relative z-10 space-y-4 sm:space-y-6">
         
         {/* Section Header with Great Vibes Script Accent */}
-        <div className="text-center max-w-3xl mx-auto space-y-2">
+        <div className="text-center max-w-3xl mx-auto space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-vert text-brand-creme text-xs font-mono font-bold uppercase border border-brand-gold/30 shadow-sm">
             <Flame className="w-3.5 h-3.5 text-brand-ember" />
-            <span>THE HERO PRODUCT · 献立の主役</span>
+            <span>FLAGSHIP SELECTION · 献立の主役</span>
           </div>
           
           <h2 className="text-3xl sm:text-5xl font-black font-sans tracking-tight text-brand-vert">
             Fire-Grilled Burgers
           </h2>
 
-          <div className="font-script text-3xl sm:text-4xl text-brand-ember pt-1">
+          <div className="font-script text-3xl sm:text-4xl text-brand-ember pt-0.5">
             "Crafted with 5:00 AM Hokkaido milk buns and 300°C charcoal char"
           </div>
 
-          <p className="text-brand-char-soft text-xs sm:text-sm font-sans max-w-xl mx-auto pt-1">
+          <p className="text-brand-char-soft text-xs sm:text-sm font-sans max-w-xl mx-auto pt-0.5">
             Explore our 5 signature masterworks. Select any burger to inspect high-resolution presentation and grill-crust details.
           </p>
         </div>
 
         {/* 5-Item Interactive Stage Navigation Selector */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-none">
+        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-none">
           {SIGNATURE_BURGERS.map((burger, idx) => {
             const isActive = activeIndex === idx;
             return (
@@ -155,8 +155,8 @@ export default function BurgerShowcaseStage() {
           })}
         </div>
 
-        {/* Main Stage Presentation Card */}
-        <div className="bg-brand-creme-2 rounded-3xl p-6 sm:p-10 lg:p-12 border editorial-border shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Main Stage Presentation Card (Tighter Margin) */}
+        <div className="bg-brand-creme-2 rounded-3xl p-5 sm:p-8 lg:p-10 border editorial-border shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           
           {/* Left Col: High-Impact Photography Showcase (7 Cols) */}
           <div className="lg:col-span-7 space-y-4">
@@ -165,7 +165,7 @@ export default function BurgerShowcaseStage() {
               <img
                 src={activeImg}
                 alt={`${current.name} - UMAMI Japanese Burger`}
-                className="w-full h-[320px] sm:h-[460px] lg:h-[500px] object-cover transition-all duration-700 filter brightness-95 group-hover:scale-105"
+                className="w-full h-[320px] sm:h-[440px] lg:h-[480px] object-cover transition-all duration-700 filter brightness-95 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
@@ -192,18 +192,18 @@ export default function BurgerShowcaseStage() {
                 <div className="flex items-center gap-1.5 font-mono text-xs">
                   <button
                     onClick={() => setViewMode('hero')}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition min-h-[36px] ${
+                    className={`px-3.5 py-1.5 rounded-xl font-bold transition min-h-[36px] ${
                       viewMode === 'hero'
                         ? 'bg-brand-ember text-white shadow-sm'
                         : 'text-brand-creme/70 hover:text-white'
                     }`}
                   >
-                    Hero Full
+                    Full View
                   </button>
 
                   <button
                     onClick={() => setViewMode('macro')}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition min-h-[36px] ${
+                    className={`px-3.5 py-1.5 rounded-xl font-bold transition min-h-[36px] ${
                       viewMode === 'macro'
                         ? 'bg-brand-ember text-white shadow-sm'
                         : 'text-brand-creme/70 hover:text-white'
