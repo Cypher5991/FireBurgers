@@ -11,7 +11,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      setIsScrolled(window.scrollY > 25);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -45,100 +45,128 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Editorial Micro-Bar */}
-      <div className="bg-brand-dark text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 text-zinc-300 border-b border-white/10 font-mono w-full overflow-hidden">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 truncate">
-            <span className="w-2 h-2 rounded-full bg-brand-ember animate-ping shrink-0" />
-            <span className="text-brand-ember font-bold truncate">OPENING 1 OCT 2026</span>
-            <span className="hidden md:inline text-zinc-600">/</span>
-            <span className="hidden md:flex items-center gap-1 text-zinc-300 truncate">
-              5:00 AM HOKKAIDO BAKING · LIVE CHAR
-            </span>
-          </div>
+      {/* Top Editorial Micro-Bar (Shown only when at the top) */}
+      {!isScrolled && (
+        <div className="bg-brand-dark text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 text-zinc-300 border-b border-white/10 font-mono w-full overflow-hidden transition-all duration-300">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 truncate">
+              <span className="w-2 h-2 rounded-full bg-brand-ember animate-ping shrink-0" />
+              <span className="text-brand-ember font-bold truncate">OPENING 1 OCT 2026</span>
+              <span className="hidden md:inline text-zinc-600">/</span>
+              <span className="hidden md:flex items-center gap-1 text-zinc-300 truncate">
+                5:00 AM HOKKAIDO BAKING · LIVE CHAR
+              </span>
+            </div>
 
-          <div className="flex items-center gap-3 shrink-0 text-zinc-300">
-            <span className="hidden sm:flex items-center gap-1 text-zinc-300 text-[11px]">
-              <MapPin className="w-3.5 h-3.5 text-brand-ember" />
-              BOOTH 7, SEC 8B
-            </span>
-            <Link 
-              to="/visit" 
-              className="flex items-center gap-1 text-brand-ember hover:text-white transition font-bold text-[11px] sm:text-xs"
-            >
-              <span>FIND THE FIRE</span>
-              <span>↗</span>
-            </Link>
+            <div className="flex items-center gap-3 shrink-0 text-zinc-300">
+              <span className="hidden sm:flex items-center gap-1 text-zinc-300 text-[11px]">
+                <MapPin className="w-3.5 h-3.5 text-brand-ember" />
+                BOOTH 7, SEC 8B
+              </span>
+              <Link 
+                to="/visit" 
+                className="flex items-center gap-1 text-brand-ember hover:text-white transition font-bold text-[11px] sm:text-xs"
+              >
+                <span>FIND THE FIRE</span>
+                <span>↗</span>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Main Sticky Navbar with Left Animated Logo & Right Floating Actions */}
+      {/* Main Sticky Navbar
+          - Default View: Full brand lockup, inline desktop nav links, VIP button (Desktop), and hamburger (Mobile).
+          - On Scrolling: Minimal floating bar with ONLY the Left Logo and Right Hamburger on ALL devices (Desktop & Mobile).
+      */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-200 w-full ${
+        className={`sticky top-0 z-40 transition-all duration-300 w-full ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md border-b editorial-border-light shadow-md py-2'
+            ? 'bg-white/95 backdrop-blur-md border-b editorial-border-light shadow-md py-2 sm:py-2.5'
             : 'bg-white/95 backdrop-blur-sm py-2.5 sm:py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           
-          {/* Left: Floating Animated Brand Logo & Typography */}
+          {/* Left: Animated Brand Logo & Typography */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-h-[44px] shrink-0">
-            <AnimatedBrandLogo size="md" className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl shadow-md" />
+            <AnimatedBrandLogo 
+              size={isScrolled ? 'sm' : 'md'} 
+              className={`rounded-2xl shadow-md transition-all duration-300 ${
+                isScrolled ? 'w-10 h-10 sm:w-11 sm:h-11' : 'w-11 h-11 sm:w-14 sm:h-14'
+              }`} 
+            />
             <div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-syne font-black text-xl sm:text-2xl md:text-3xl tracking-tight text-brand-dark group-hover:text-brand-ember transition leading-none">
+                <span className={`font-syne font-black tracking-tight text-brand-dark group-hover:text-brand-ember transition-all leading-none ${
+                  isScrolled ? 'text-xl sm:text-2xl' : 'text-xl sm:text-2xl md:text-3xl'
+                }`}>
                   UMAMI
                 </span>
                 <span className="text-xs sm:text-sm font-japanese font-bold text-brand-ember">
                   旨味
                 </span>
-                <span className="hidden sm:inline-block text-[9px] font-mono uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-brand-dark text-white border border-brand-ember/30">
-                  SEC 8B · CHD
-                </span>
+                {!isScrolled && (
+                  <span className="hidden sm:inline-block text-[9px] font-mono uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-brand-dark text-white border border-brand-ember/30">
+                    SEC 8B · CHD
+                  </span>
+                )}
               </div>
-              <p className="text-[9px] text-zinc-500 tracking-wider uppercase font-mono hidden sm:block mt-0.5">
-                Japanese Fire-Grilled Burgers
-              </p>
+              {!isScrolled && (
+                <p className="text-[9px] text-zinc-500 tracking-wider uppercase font-mono hidden sm:block mt-0.5">
+                  Japanese Fire-Grilled Burgers
+                </p>
+              )}
             </div>
           </Link>
 
-          {/* Center-Right: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-5 text-xs font-mono font-bold text-brand-dark/80">
-            {navLinks.slice(1).map(link => {
-              const isActive = location.pathname === link.to;
-              return (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`transition flex items-center gap-1.5 py-2 px-3 rounded-xl min-h-[44px] ${
-                    isActive
-                      ? 'text-white bg-brand-ember shadow-sm font-extrabold'
-                      : 'hover:text-brand-ember text-brand-dark/80 hover:bg-red-50'
-                  }`}
-                >
-                  <span>{link.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
+          {/* Center-Right: Desktop Navigation Links (Visible ONLY in default top view) */}
+          {!isScrolled && (
+            <nav className="hidden lg:flex items-center gap-5 text-xs font-mono font-bold text-brand-dark/80 animate-fade-in">
+              {navLinks.slice(1).map(link => {
+                const isActive = location.pathname === link.to;
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className={`transition flex items-center gap-1.5 py-2 px-3 rounded-xl min-h-[44px] ${
+                      isActive
+                        ? 'text-white bg-brand-ember shadow-sm font-extrabold'
+                        : 'hover:text-brand-ember text-brand-dark/80 hover:bg-red-50'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          )}
 
-          {/* Right: Floating Trigger & Sidebar Toggle Button */}
+          {/* Right: Actions Area
+              - Default view: Desktop VIP Button + Mobile Hamburger.
+              - On Scroll: ONLY the Hamburger Button (Desktop & Mobile).
+          */}
           <div className="flex items-center gap-2">
-            {/* VIP Pass Button - Desktop & Tablet */}
-            <Link
-              to="/order"
-              className="hidden sm:flex items-center gap-2 bg-brand-ember hover:bg-red-700 text-white font-syne font-bold px-4 py-2.5 rounded-xl shadow-md shadow-brand-ember/25 hover:shadow-brand-ember/40 transition transform active:scale-98 min-h-[44px]"
-            >
-              <Sparkles className="w-4 h-4 text-white" />
-              <span className="text-xs font-bold tracking-wide">LAUNCH VIP PASS</span>
-            </Link>
+            {/* VIP Pass Button - Shown on Desktop only in default top view */}
+            {!isScrolled && (
+              <Link
+                to="/order"
+                className="hidden sm:flex items-center gap-2 bg-brand-ember hover:bg-red-700 text-white font-syne font-bold px-4 py-2.5 rounded-xl shadow-md shadow-brand-ember/25 hover:shadow-brand-ember/40 transition transform active:scale-98 min-h-[44px]"
+              >
+                <Sparkles className="w-4 h-4 text-white" />
+                <span className="text-xs font-bold tracking-wide">LAUNCH VIP PASS</span>
+              </Link>
+            )}
 
-            {/* Floating Right Sidebar Menu Toggle Button */}
+            {/* Side Menu Toggle Button:
+                - In default view: visible on mobile only (`lg:hidden`).
+                - On scrolling: visible on BOTH desktop and mobile (`flex`)!
+            */}
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="p-2 sm:p-2.5 rounded-2xl bg-brand-dark hover:bg-black text-white border border-white/10 shadow-lg min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 transition active:scale-95 group"
+              className={`p-2 sm:p-2.5 rounded-2xl bg-brand-dark hover:bg-black text-white border border-white/10 shadow-lg min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 transition-all duration-200 active:scale-95 group ${
+                isScrolled ? 'flex animate-fade-in' : 'flex lg:hidden'
+              }`}
               aria-label="Open Floating Navigation Sidebar"
             >
               <Menu className="w-5 h-5 text-brand-ember group-hover:text-white transition" />
