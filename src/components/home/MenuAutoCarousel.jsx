@@ -29,13 +29,13 @@ export default function MenuAutoCarousel({ onSelectImage }) {
 
   return (
     <div 
-      className="relative rounded-3xl overflow-hidden editorial-border shadow-2xl bg-brand-dark group select-none cursor-pointer"
+      className="relative rounded-3xl overflow-hidden editorial-border shadow-2xl bg-brand-dark group select-none cursor-pointer flex flex-col"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onClick={() => onSelectImage && onSelectImage(current)}
     >
       {/* High-Resolution Item Image with Cross-Fade */}
-      <div className="relative h-[360px] sm:h-[460px] w-full overflow-hidden bg-brand-creme-3">
+      <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden bg-brand-creme-3 shrink-0">
         {featuredItems.map((item, idx) => (
           <img
             key={item.id}
@@ -47,8 +47,8 @@ export default function MenuAutoCarousel({ onSelectImage }) {
           />
         ))}
 
-        {/* Ambient Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 z-20 pointer-events-none" />
+        {/* Ambient Gradient Overlay (Reduced height since banner is moved) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-20 pointer-events-none" />
 
         {/* Top Badges */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-30 pointer-events-none">
@@ -78,45 +78,42 @@ export default function MenuAutoCarousel({ onSelectImage }) {
         >
           <ChevronRight className="w-5 h-5 text-white" />
         </button>
+      </div>
 
-        {/* Bottom Caption Card & Slide Progress */}
-        <div className="absolute bottom-4 left-4 right-4 z-30 space-y-2">
-          
-          <div className="p-4 rounded-2xl bg-brand-vert-d/95 text-brand-creme backdrop-blur-md border border-brand-gold/30 space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono uppercase text-brand-gold font-bold tracking-widest">
-                {current.categoryName || 'Menu Selection'}
-              </span>
-              <span className="text-[10px] font-mono text-brand-ember font-bold">
-                {currentIndex + 1} / {featuredItems.length}
-              </span>
-            </div>
-            <div className="font-sans font-bold text-base text-brand-creme leading-tight">
-              {current.name}
-            </div>
-            <div className="text-xs text-brand-creme/70 font-sans line-clamp-1">
-              {current.tagline || current.description}
-            </div>
+      {/* Bottom Caption Card & Slide Progress (Normal Flow) */}
+      <div className="p-4 sm:p-5 bg-brand-vert-d text-brand-creme space-y-3 z-30">
+        <div className="space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-mono uppercase text-brand-gold font-bold tracking-widest">
+              {current.categoryName || 'Menu Selection'}
+            </span>
+            <span className="text-[10px] font-mono text-brand-ember font-bold">
+              {currentIndex + 1} / {featuredItems.length}
+            </span>
           </div>
-
-          {/* Progress Bars */}
-          <div className="flex items-center gap-1.5 px-1">
-            {featuredItems.map((_, idx) => (
-              <div
-                key={idx}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentIndex(idx);
-                }}
-                className={`h-1 rounded-full transition-all duration-500 cursor-pointer ${
-                  idx === currentIndex ? 'bg-brand-ember w-8' : 'bg-white/40 hover:bg-white/70 w-2'
-                }`}
-              />
-            ))}
+          <div className="font-sans font-bold text-base sm:text-lg text-brand-creme leading-tight">
+            {current.name}
           </div>
-
+          <div className="text-xs sm:text-sm text-brand-creme/70 font-sans line-clamp-1 sm:line-clamp-2">
+            {current.tagline || current.description}
+          </div>
         </div>
 
+        {/* Progress Bars */}
+        <div className="flex items-center gap-1.5 pt-1">
+          {featuredItems.map((_, idx) => (
+            <div
+              key={idx}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentIndex(idx);
+              }}
+              className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
+                idx === currentIndex ? 'bg-brand-ember w-8' : 'bg-white/20 hover:bg-white/50 w-2'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
