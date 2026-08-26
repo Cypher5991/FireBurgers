@@ -45,7 +45,11 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="sticky top-0 z-50 w-full flex flex-col transition-all duration-300 shadow-none">
+      {/* Spacer to prevent content from jumping under the fixed navbar */}
+      <div className="h-[92px] sm:h-[112px] w-full shrink-0" aria-hidden="true" />
+      
+      {/* Main Fixed Navbar Container */}
+      <div className="fixed top-0 left-0 right-0 z-50 w-full flex flex-col transition-all duration-300 shadow-none">
       {/* Top Editorial Micro-Bar (Smoothly collapses on scroll) */}
       <div 
         className={`bg-brand-dark text-[11px] sm:text-xs text-zinc-300 font-mono w-full overflow-hidden transition-all duration-500 ease-in-out ${
